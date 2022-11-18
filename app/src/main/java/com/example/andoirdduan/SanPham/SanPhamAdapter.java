@@ -80,6 +80,7 @@ public class SanPhamAdapter extends BaseAdapter {
                 if (st.getTenSP().toLowerCase().contains(text.toLowerCase())) {
                     listSP.add(st);
                 }
+                //ss
                 notifyDataSetChanged();
             }
         }

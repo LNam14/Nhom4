@@ -27,8 +27,8 @@ public class SanPhamActivity extends AppCompatActivity {
     EditText edMaSP, edTenSP, edGiaSP,edPhanLoai,edNhaCC,edMoTa;
     Button btnThem,btnDanhSach;
     ImageView imgSP;
-    ArrayList<SanPham> arraySanPham;
-    ListView lvDanhsach;
+    public static ArrayList<SanPham> arraySanPham;
+
     int REQUEST_CODE =1;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -46,10 +46,7 @@ public class SanPhamActivity extends AppCompatActivity {
         btnThem = (Button) findViewById(R.id.btnThemSP);
         btnDanhSach = (Button) findViewById(R.id.btnXemDS);
         imgSP= (ImageView) findViewById(R.id.imageView);
-        lvDanhsach = (ListView) findViewById(R.id.lvThemSP);
-        loadData();
-        SanPhamAdapter adapter = new SanPhamAdapter( SanPhamActivity.this, R.layout.row__listview, arraySanPham);
-        lvDanhsach.setAdapter(adapter);
+
         imgSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,13 +70,8 @@ public class SanPhamActivity extends AppCompatActivity {
         btnDanhSach.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadData();
-            }
-        } );
-        lvDanhsach.setOnItemClickListener( new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText( SanPhamActivity.this, "hi"+arraySanPham.get( position ).maSP, Toast.LENGTH_SHORT ).show();
+                Intent intent = new Intent(getApplicationContext(), DSSPActivity.class);
+                startActivity( intent );
             }
         } );
     }
@@ -101,18 +93,5 @@ public class SanPhamActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
     }
-    public void loadData(){
-        Cursor cursor =  LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham");
-        arraySanPham = new ArrayList<SanPham>();
-        while (cursor.moveToNext()) {
-            arraySanPham.add(new SanPham(
-                    cursor.getString(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getInt(5),
-                    cursor.getBlob(6)));
-        }
-    }
+
 }

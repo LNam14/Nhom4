@@ -9,8 +9,8 @@
         android:icon="@drawable/ic_baseline_search_24"
         android:title="Search" />
     <item
-        android:id="@+id/placeholder"
-        android:title="" />
+        android:id="@+id/insert"
+        android:title="Insert" />
     <item
         android:id="@+id/user"
         android:icon="@drawable/ic_baseline_person_24"

@@ -13,14 +13,7 @@
         android:theme="@style/Theme.AndoirdDuAn"
         tools:targetApi="31">
         <activity
-            android:name=".SanPham.SanPhamActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".SanPham.DanhsachSP"
+            android:name=".SanPham.DSSPActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

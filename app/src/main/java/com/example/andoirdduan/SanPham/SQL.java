@@ -44,26 +44,13 @@ public class SQL extends SQLiteOpenHelper {
         SQLiteStatement statement=db.compileStatement(sql);
         statement.clearBindings();
         statement.bindString(1,maSP);
-        statement.bindString(2,tenSP);
-        statement.bindString(3,phanLoai);
-        statement.bindString(4,nhaCC);
-        statement.bindString(5,moTa);
-        statement.bindLong(6,gia);
+        statement.bindString(2,phanLoai);
+        statement.bindString(3,nhaCC);
+        statement.bindString(4,tenSP);
+        statement.bindLong(5,gia);
+        statement.bindString(6,moTa);
         statement.bindBlob(7,hinh);
         statement.executeInsert();
     }
-    public void loadData(){
-        Cursor cursor =  LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham");
-        arraySanPham = new ArrayList<SanPham>();
-        while (cursor.moveToNext()) {
-            arraySanPham.add(new SanPham(
-                    cursor.getString(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getInt(5),
-                    cursor.getBlob(6)));
-        }
-    }
+
 }

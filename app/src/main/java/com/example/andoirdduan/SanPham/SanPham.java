@@ -8,7 +8,7 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(String maSP, String tenSP, String phanLoai, String nhaCC, String moTa, int gia, byte[] hinh) {
+    public SanPham(String maSP, String phanLoai, String nhaCC, String tenSP, int gia, String moTa, byte[] hinh) {
         this.tenSP = tenSP;
         this.phanLoai = phanLoai;
         this.nhaCC = nhaCC;

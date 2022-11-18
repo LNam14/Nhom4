@@ -7,43 +7,76 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.example.andoirdduan.R;
+import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
+import com.example.andoirdduan.SanPham.SanPhamAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class HomePageAdapter extends ArrayAdapter<SanPham> {
+public class HomePageAdapter extends BaseAdapter {
+    private HomePage context;
+    private int layout;
+    private List<SanPham> listSP;
+    List<SanPham> list;
 
-    HomePageAdapter(Context context, int resource, ArrayList<SanPham> item) {
-        super(context, resource, item);
+    public HomePageAdapter(HomePage context, int layout, List<SanPham> listSP) {
+        this.context = context;
+        this.layout = layout;
+        this.listSP = listSP;
+        list = new ArrayList<>();
+        list.addAll( listSP );
+    }
+
+    @Override
+    public int getCount() {
+        return listSP.size();
+    }
+
+    @Override
+    public SanPham getItem(int i) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+    public class ViewHolder {
+        TextView txtTenSP,tvType,txtPrice;
+        ImageView imgSP;
     }
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        View view=convertView;
-        if (view ==null) {
-            LayoutInflater inflater=LayoutInflater.from(getContext());
-            view=inflater.inflate(R.layout.cardview_activity, null);
+    public View getView(final int i, View view, ViewGroup viewGroup) {
+        final ViewHolder viewHolder;
+        if (view == null) {
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = LayoutInflater.from( context );
+            view = inflater.inflate( R.layout.cardview_activity, null );
+            viewHolder.txtTenSP = view.findViewById( R.id.tvNameShoes );
+            viewHolder.tvType = view.findViewById( R.id.tvType );
+            viewHolder.txtPrice = view.findViewById( R.id.tvPrice );
+            viewHolder.imgSP = view.findViewById( R.id.imgShoes );
+            view.setTag( viewHolder );
+        } else {
+            viewHolder = (ViewHolder) view.getTag();
         }
-        SanPham sanPham=getItem(position);
-        if (sanPham!=null) {
-            ImageView img = (ImageView) view.findViewById(R.id.imgShoes);
-            TextView tenSP = (TextView) view.findViewById(R.id.tvNameShoes);
-            TextView type = (TextView) view.findViewById(R.id.tvTypeShoes);
-            TextView giaTien = (TextView) view.findViewById(R.id.tvPrice);
-
-            Bitmap bitmap= BitmapFactory.decodeByteArray(sanPham.getHinh(), 0, sanPham.getHinh().length);
-            img.setImageBitmap(bitmap);
-            tenSP.setText(sanPham.getTenSP());
-            type.setText(sanPham.getPhanLoai());
-            giaTien.setText(String.valueOf(sanPham.getGia()));
-        }
+        final SanPham sp = listSP.get( i );
+        viewHolder.txtTenSP.setText( sp.getTenSP() );
+        viewHolder.tvType.setText( sp.getPhanLoai() );
+//        viewHolder.txtPrice.setText( sp.getGia() );
+        Bitmap bitmap = BitmapFactory.decodeByteArray( sp.getHinh(), 0, sp.getHinh().length );
+        viewHolder.imgSP.setImageBitmap( bitmap );
         return view;
     }
 }

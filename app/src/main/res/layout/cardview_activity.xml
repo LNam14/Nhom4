@@ -22,14 +22,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvTypeShoes"
+                android:id="@+id/tvNameShoes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:layout_gravity="left"/>
 
             <TextView
-                android:id="@+id/tvNameShoes"
+                android:id="@+id/tvType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -37,8 +37,8 @@
 
             <ImageView
                 android:id="@+id/imgShoes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 tools:srcCompat="@tools:sample/avatars" />
 <LinearLayout
     android:layout_width="wrap_content"

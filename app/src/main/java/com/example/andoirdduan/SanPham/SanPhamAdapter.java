@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,32 +16,73 @@ import androidx.annotation.NonNull;
 import com.example.andoirdduan.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class SanPhamAdapter extends ArrayAdapter<SanPham> {
+public class SanPhamAdapter extends BaseAdapter {
+    private DSSPActivity context;
+    private int layout;
+    private List<SanPham> listSP;
+    List<SanPham> list;
+    public SanPhamAdapter(DSSPActivity context, int layout, List<SanPham> listSP) {
+        this.context = context;
+        this.layout = layout;
+        this.listSP = listSP;
+        list = new ArrayList<>();
+        list.addAll(listSP);
+    }
 
-    SanPhamAdapter(Context context, int resource, ArrayList<SanPham> item) {
-        super(context, resource, item);
+    @Override
+    public int getCount() {
+        return listSP.size();
+    }
+
+    @Override
+    public SanPham getItem(int i) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+    public class ViewHolder {
+        TextView txtTenSP;
+        ImageView imgSP;
     }
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        View view=convertView;
-        if (view ==null)
-        {
-            LayoutInflater inflater=LayoutInflater.from(getContext());
+    public View getView(final int i, View view, ViewGroup viewGroup) {
+        final ViewHolder viewHolder ;
+        if (view ==null){
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater=LayoutInflater.from(context);
             view=inflater.inflate(R.layout.row__listview, null);
+            viewHolder.txtTenSP = view.findViewById( R.id.txtTenSP);
+            viewHolder.imgSP = view.findViewById(R.id.imgSanPham);
+            view.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) view.getTag();
         }
-        SanPham sanPham=getItem(position);
-        if (sanPham!=null)
-        {
-            ImageView imgHinhDaidien= (ImageView) view.findViewById(R.id.imgAnhDaiDien);
-            TextView txtTenSP= (TextView) view.findViewById(R.id.txtTen);
-
-            Bitmap bitmap= BitmapFactory.decodeByteArray(sanPham.hinh, 0, sanPham.hinh.length);
-            imgHinhDaidien.setImageBitmap(bitmap);
-            txtTenSP.setText(sanPham.getPhanLoai());
-        }
+        final SanPham sp = listSP.get(i);
+        viewHolder.txtTenSP.setText(sp.getTenSP());
+        Bitmap bitmap= BitmapFactory.decodeByteArray(sp.getHinh(), 0, sp.getHinh().length);
+        viewHolder.imgSP.setImageBitmap(bitmap);
         return view;
     }
+    public void Search(String text) {
+        list.clear();
+        if (text.length() == 0) {
+            listSP.addAll(list);
+        } else {
+            for (SanPham st : list) {
+                if (st.getTenSP().toLowerCase().contains(text.toLowerCase())) {
+                    listSP.add(st);
+                }
+                notifyDataSetChanged();
+            }
+        }
+    }
+
 }

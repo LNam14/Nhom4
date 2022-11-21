@@ -3,13 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:padding="10dp"
-    android:layout_height="wrap_content">
+    android:background="@color/teal_200"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,14 +27,22 @@
         android:orientation="horizontal">
 
         <LinearLayout
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <EditText
+                android:id="@+id/edMaSP_sua"
+                android:layout_width="160dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/edittext"
+                android:hint="Mã sản phẩm"
+                android:lines="1"
+                android:padding="5dp"
+                android:textSize="10dp" />
             <EditText
                 android:id="@+id/edTenSP_sua"
-                android:layout_width="140dp"
+                android:layout_width="160dp"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/edittext"
@@ -42,18 +52,19 @@
                 android:textSize="10dp" />
 
             <EditText
-                android:id="@+id/edNhaCC_sua"
-                android:layout_width="140dp"
+                android:id="@+id/edSoLuong_sua"
+                android:layout_width="160dp"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/edittext"
-                android:hint="Nhà cung cấp"
+                android:hint="Số lượng"
+                android:inputType="number"
                 android:lines="1"
                 android:padding="5dp"
                 android:textSize="10dp" />
             <EditText
                 android:id="@+id/edPhanLoai_sua"
-                android:layout_width="140dp"
+                android:layout_width="160dp"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/edittext"
@@ -64,7 +75,7 @@
 
             <EditText
                 android:id="@+id/edGiaTien_sua"
-                android:layout_width="140dp"
+                android:layout_width="160dp"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/edittext"
@@ -83,8 +94,8 @@
 
             <ImageView
                 android:id="@+id/imageView_sua"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_gravity="right|center"
                 android:layout_margin="5dp"
                 android:background="@drawable/edittext"
@@ -96,7 +107,7 @@
 
         <EditText
             android:id="@+id/edMota_sua"
-            android:layout_width="200dp"
+            android:layout_width="290dp"
             android:layout_height="60dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"

@@ -24,7 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class SanPhamActivity extends AppCompatActivity {
-    EditText edMaSP, edTenSP, edGiaSP,edPhanLoai,edNhaCC,edMoTa;
+    EditText edMaSP, edTenSP, edGiaSP,edPhanLoai,edSoLuong,edMoTa;
     Button btnThem,btnDanhSach;
     ImageView imgSP;
     public static ArrayList<SanPham> arraySanPham;
@@ -35,13 +35,11 @@ public class SanPhamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.sanpham_activity );
-//        db=new SQL(this,"ShopGiay.sqlite",null,1);
-//        db.TruyVan("Create Table If not Exists SanPham(ID Varchar Primary Key, theLoai Varchar, nhaCungCap Varchar,tenSP Varchar, giaTien Varchar, moTa Varchar, hinhAnh Blob)");
         edTenSP = (EditText) findViewById(R.id.edTenSP);
         edGiaSP = (EditText) findViewById(R.id.edGiaTien);
         edMaSP = (EditText) findViewById(R.id.edMaSP);
         edPhanLoai = (EditText) findViewById(R.id.edPhanLoai);
-        edNhaCC = (EditText) findViewById(R.id.edNhaCC);
+        edSoLuong = (EditText) findViewById(R.id.edSoLuong);
         edMoTa = (EditText) findViewById(R.id.edMota);
         btnThem = (Button) findViewById(R.id.btnThemSP);
         btnDanhSach = (Button) findViewById(R.id.btnXemDS);
@@ -57,14 +55,14 @@ public class SanPhamActivity extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String maSP = edMaSP.getText().toString();
-                String tenSP = edTenSP.getText().toString();
-                String phanLoai = edPhanLoai.getText().toString();
-                String nhaCC = edNhaCC.getText().toString();
-                String moTa = edMoTa.getText().toString();
+                String maSP = edMaSP.getText().toString().trim();
+                String tenSP = edTenSP.getText().toString().trim();
+                String phanLoai = edPhanLoai.getText().toString().trim();
+                int soLuong = Integer.parseInt( edSoLuong.getText().toString().trim() );
+                String moTa = edMoTa.getText().toString().trim();
                 int giaTien = Integer.parseInt( edGiaSP.getText().toString() );
-                LoadingScreenActivity.db.Insert(maSP,tenSP,phanLoai,nhaCC,moTa,giaTien,ConverttoArrayByte(imgSP));
-                Toast.makeText( SanPhamActivity.this,"Thêm thành công",Toast.LENGTH_SHORT).show();
+                LoadingScreenActivity.db.Insert(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte(imgSP));
+                Toast.makeText( SanPhamActivity.this,"Thêm thành công"+maSP,Toast.LENGTH_SHORT).show();
             }
         });
         btnDanhSach.setOnClickListener( new View.OnClickListener() {

@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.andoirdduan.Database.DataBase;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.SQL;
 
@@ -19,7 +20,7 @@ public class LoadingScreenActivity extends AppCompatActivity {
         setContentView( R.layout.loading_screen_activity);
 
         db = new SQL(this,"ShopGiay.sqlite",null,1);
-        db.TruyVan("Create Table If not Exists SanPham(ID Varchar Primary Key, theLoai Varchar, nhaCungCap Varchar,tenSP Varchar, giaTien Varchar, moTa Varchar, hinhAnh Blob)");
+        db.TruyVan("Create Table If not Exists SanPham(ID Text Primary Key, tenSP Text, theLoai Text,soLuong INTEGER, giaTien INTEGER, moTa Text, hinhAnh Blob)");
         add = findViewById(R.id.btnRegister_RegisterActivity);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -20,10 +20,6 @@ public class DataBase<TABLE_CREATE> extends SQLiteOpenHelper {
             return database.rawQuery(sql, null);
         }
 
-        public void onCreate() {
-
-        }
-
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
 

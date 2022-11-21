@@ -9,10 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -28,17 +29,13 @@ import com.example.andoirdduan.R;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DSSPActivity extends AppCompatActivity {
     SanPhamAdapter adapter;
     ListView listView;
-    ArrayList<SanPham> arraySanPham;
-    public static int animationitem;
-    String theLoai,tenSP,moTa,nhaCC;
-    int gia;
-    byte[] imgSP;
-    int position1;
-    ImageView imgSP1;
+    List<SanPham> listSP;
+    ImageView imgSP;
     int REQUEST_CODE=123;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -46,70 +43,82 @@ public class DSSPActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.dssp_activity );
         listView = (ListView) findViewById(R.id.lvSanPham);
-        final ImageView imageView = findViewById( R.id.imageView_sua );
+        ImageView imgSP = findViewById(R.id.imageView_sua);
         loadData();
-        listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                String maSP = arraySanPham.get(i).getTenSP();
-                position1 = i;
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                SanPham sp = listSP.get(i);
+                final String maSP = sp.getMaSP();
                 final AlertDialog.Builder builder = new AlertDialog.Builder( DSSPActivity.this);
                 builder.setTitle("Thông Báo");
                 builder.setMessage("Bạn có muốn xóa khóa học này không?");
-                builder.setNeutralButton("Có", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        LoadingScreenActivity.db.TruyVan("DELETE FROM SanPham WHERE tenSP ='" + maSP + "'");
-                        Toast.makeText( DSSPActivity.this, "Đã Xóa ", Toast.LENGTH_SHORT).show();
-                        loadData();
+
+                        LoadingScreenActivity.db.TruyVan("DELETE FROM SanPham WHERE ID='" + maSP + "'");
+                        Toast.makeText( DSSPActivity.this, "Đã Xóa "+maSP, Toast.LENGTH_SHORT).show();
+                        getDATA();
                     }
                 });
-                builder.setNegativeButton( "Sửa", new DialogInterface.OnClickListener() {
+                builder.setNeutralButton( "Sửa", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final Dialog dialog1 = new Dialog( DSSPActivity.this);
+                        final Dialog dialog1 = new Dialog( DSSPActivity.this, android.R.style.Theme_Material_Light_Panel);
                         dialog1.requestWindowFeature( Window.FEATURE_NO_TITLE);
                         dialog1.setContentView(R.layout.sanpham_sua);
                         dialog1.setCanceledOnTouchOutside(false);
                         dialog1.show();
 
+                        final EditText edMaSP =  dialog1.findViewById(R.id.edMaSP_sua);
                         final EditText edTenSP =  dialog1.findViewById(R.id.edTenSP_sua);
-                        final EditText edPhanLoai = dialog1.findViewById(R.id.edPhanLoai_sua);
+                        final EditText edSoLuong = dialog1.findViewById(R.id.edSoLuong_sua);
                         final EditText edMota = dialog1.findViewById(R.id.edMota_sua);
-                        final EditText edNhaCC = dialog1.findViewById(R.id.edNhaCC_sua);
+                        final EditText edPhanLoai = dialog1.findViewById(R.id.edPhanLoai_sua);
                         final EditText edGiaTien =  dialog1.findViewById(R.id.edGiaTien_sua);
+                        ImageView imgSP1 = dialog1.findViewById(R.id.imageView_sua);
 
 
                         Button btnXacNhan = dialog1.findViewById(R.id.btnThemSP_sua);
                         Button btnHuy = dialog1.findViewById(R.id.btnXemDS_sua);
+                        final String ma = listSP.get( i ).getMaSP();
+                        final String ten = listSP.get(i).getTenSP();
+                        final String mota = listSP.get(i).getMoTa();
+                        final int giaTien = listSP.get(i).getGia();
+                        final int soLuong = listSP.get(i).getSoLuong();
+                        final String phanLoai = listSP.get(i).getPhanLoai();
 
-                        final String ma = arraySanPham.get(i).getMaSP();
-                        final String ten = arraySanPham.get(i).getTenSP();
-                        final String mota = arraySanPham.get(i).getMoTa();
-                        final int giaTien = arraySanPham.get(i).getGia();
-                        final String nhaCC = arraySanPham.get(i).getNhaCC();
-                        final String phanLoai = arraySanPham.get(i).getNhaCC();
-
-
+                        edMaSP.setText( ma );
                         edTenSP.setText(ten);
                         edMota.setText(mota);
-                        edGiaTien.setText(giaTien);
-                        edNhaCC.setText(nhaCC);
+                        edGiaTien.setText(String.valueOf( giaTien ));
+                        edSoLuong.setText(String.valueOf( soLuong ));
                         edPhanLoai.setText(phanLoai);
 
+                        Bitmap bitmap= BitmapFactory.decodeByteArray( listSP.get(i).getHinh(), 0,  listSP.get(i).getHinh().length);
+                        imgSP1.setImageBitmap(bitmap);
+                        imgSP1.setOnClickListener( new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent =new Intent( MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(intent,REQUEST_CODE);
+                            }
+                        } );
                         btnXacNhan.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                final String MaGV = ma;
+                                String maSP = ma;
                                 String ten = edTenSP.getText().toString().trim();
                                 String mota = edMota.getText().toString().trim();
-                                int giaTien = Integer.parseInt( edGiaTien.getText().toString().trim() );
+                                String giaTien = edGiaTien.getText().toString().trim();
                                 String phanLoai = edPhanLoai.getText().toString().trim();
-                                String nhaCC = edNhaCC.getText().toString().trim();
+                                String soLuong = edSoLuong.getText().toString().trim();
 
-                                LoadingScreenActivity.db.TruyVanTraVe("UPDATE SanPham SET theLoai = '" + phanLoai + "',nhaCungCap = '" + nhaCC + "',tenSP = '" + ten + "',giaTien = '" + giaTien + "'," +
-                                        "moTa = '" + mota + "' WHERE maGV= '" + MaGV + "'");
-                                Toast.makeText( DSSPActivity.this, "Đã Sửa ", Toast.LENGTH_SHORT).show();getDATA();
+                                LoadingScreenActivity.db.TruyVan("UPDATE SanPham SET theLoai = '" + phanLoai + "',soLuong = '" + soLuong + "',tenSP = '" + ten + "',giaTien = '" + giaTien + "'," +
+                                        "moTa = '" + mota + "',hinhAnh = '" + ConverttoArrayByte(imgSP1) +"' WHERE ID = '" + maSP + "'");
+                                Toast.makeText( DSSPActivity.this, "Đã Sửa ", Toast.LENGTH_SHORT).show();
+                                getDATA();
                                 dialog1.dismiss();
                             }
                         });
@@ -121,13 +130,14 @@ public class DSSPActivity extends AppCompatActivity {
                         });
                     }
                 });
-                builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
                 });
                 builder.show();
+                return false;
             }
         });
     }
@@ -139,8 +149,7 @@ public class DSSPActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener( new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                adapter.Search( s );
-                adapter.notifyDataSetChanged();
+
                 return false;
             }
 
@@ -149,20 +158,20 @@ public class DSSPActivity extends AppCompatActivity {
                 if (s.equals( "" )){
                     loadData();
                 }else{
-                    Cursor cursor =  LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham Where tenSP = '" + s + "'");
-                    arraySanPham = new ArrayList<SanPham>();
+                    Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham where tenSP like '%" + s + "%'");
+                    listSP = new ArrayList<SanPham>();
                     while (cursor.moveToNext()) {
-                        arraySanPham.add(new SanPham(
+                        listSP.add(new SanPham(
                                 cursor.getString(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
-                                cursor.getString(3),
+                                cursor.getInt(3),
                                 cursor.getInt(4),
                                 cursor.getString(5),
                                 cursor.getBlob(6)));
                     }
 
-                    adapter = new SanPhamAdapter( DSSPActivity.this, R.layout.row__listview, arraySanPham);
+                    adapter = new SanPhamAdapter( DSSPActivity.this, R.layout.row__listview, listSP);
                     listView.setAdapter(adapter);
                 }
                 return false;
@@ -173,45 +182,46 @@ public class DSSPActivity extends AppCompatActivity {
 
     public void loadData(){
         Cursor cursor =  LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham");
-        arraySanPham = new ArrayList<SanPham>();
+        listSP = new ArrayList<SanPham>();
         while (cursor.moveToNext()) {
-            arraySanPham.add(new SanPham(
+            listSP.add(new SanPham(
                     cursor.getString(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getString(3),
+                    cursor.getInt(3),
                     cursor.getInt(4),
                     cursor.getString(5),
                     cursor.getBlob(6)));
         }
 
-        adapter = new SanPhamAdapter( DSSPActivity.this, R.layout.row__listview, arraySanPham);
+        adapter = new SanPhamAdapter( DSSPActivity.this, R.layout.row__listview, listSP);
         listView.setAdapter(adapter);
     }
     public void getDATA() {
         Cursor cursor =  LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham");
-        arraySanPham = new ArrayList<SanPham>();
+        listSP = new ArrayList<SanPham>();
         while (cursor.moveToNext()) {
-            String maSP = cursor.getString(0);
-            String tenSP = cursor.getString(1);
-            String dateBD = cursor.getString(2);
-            String dateKT = cursor.getString(3);
-            int gia = cursor.getInt(3);
-            String mota = cursor.getString(3);
-            byte[] hinh = cursor.getBlob(3);
-            arraySanPham.add(new SanPham(maSP, tenSP, dateBD, dateKT,gia,mota,hinh));
+            listSP.add(new SanPham(
+                    cursor.getString(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getInt(3),
+                    cursor.getInt(4),
+                    cursor.getString(5),
+                    cursor.getBlob(6)));
         }
-        adapter = new SanPhamAdapter( DSSPActivity.this, R.layout.row__listview, arraySanPham);
+        adapter = new SanPhamAdapter( DSSPActivity.this, R.layout.row__listview, listSP);
         listView.setAdapter(adapter);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode==REQUEST_CODE&&resultCode==RESULT_OK)
-        {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imgSP1.setImageBitmap(bitmap);
+        if (resultCode != RESULT_CANCELED) {
+            if (requestCode == REQUEST_CODE) {
+                Bitmap photo = (Bitmap) data.getExtras().get( "data" );
+                imgSP.setImageBitmap( photo );
+            }
         }
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult( requestCode, resultCode, data );
     }
     public byte[] ConverttoArrayByte(ImageView img)
     {

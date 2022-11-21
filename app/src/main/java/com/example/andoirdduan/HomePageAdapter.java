@@ -74,7 +74,7 @@ public class HomePageAdapter extends BaseAdapter {
         final SanPham sp = listSP.get( i );
         viewHolder.txtTenSP.setText( sp.getTenSP() );
         viewHolder.tvType.setText( sp.getPhanLoai() );
-//        viewHolder.txtPrice.setText( sp.getGia() );
+        viewHolder.txtPrice.setText( String.valueOf( sp.getGia() ) );
         Bitmap bitmap = BitmapFactory.decodeByteArray( sp.getHinh(), 0, sp.getHinh().length );
         viewHolder.imgSP.setImageBitmap( bitmap );
         return view;

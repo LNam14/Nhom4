@@ -1,22 +1,19 @@
-package com.example.andoirdduan;
+package com.example.andoirdduan.Home;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.andoirdduan.R;
-import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
-import com.example.andoirdduan.SanPham.SanPhamAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +68,12 @@ public class HomePageAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
+        viewHolder.imgSP.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.chuyenTrang();
+            }
+        } );
         final SanPham sp = listSP.get( i );
         viewHolder.txtTenSP.setText( sp.getTenSP() );
         viewHolder.tvType.setText( sp.getPhanLoai() );

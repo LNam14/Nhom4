@@ -1,7 +1,10 @@
-package com.example.andoirdduan;
+package com.example.andoirdduan.Home;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,9 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.example.andoirdduan.Login.LoadingScreenActivity;
-import com.example.andoirdduan.SanPham.SQL;
+import com.example.andoirdduan.NhanVien.NhanVienActivity;
+import com.example.andoirdduan.R;
+import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
 import com.example.andoirdduan.SanPham.SanPhamActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -24,6 +30,7 @@ import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
     SanPhamActivity sanPhamActivity;
+    TextView tvUserName;
     FloatingActionButton btnThem;
     Button C;
     ArrayList<SanPham> arraySanPham;
@@ -33,13 +40,12 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.homepage_activity );
+        setContentView( R.layout.homepage_activity );
         btnThem = findViewById( R.id.btnThem_HomePage );
-        C = findViewById(R.id.C);
         gridView = findViewById( R.id.gvSanPham );
         navigationView = findViewById( R.id.bottomNavigationView );
-
-
+        tvUserName = findViewById( R.id.tvUserName );
+        tvUserName.setText( "Họ tên" );
         loadData();
         navigationView.setOnNavigationItemSelectedListener( new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -59,7 +65,6 @@ public class HomePage extends AppCompatActivity {
                 return false;
             }
         });
-
         btnThem.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,12 +72,7 @@ public class HomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         } );
-        C.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        } );
     }
     public void loadData(){
         Cursor cursor =  LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham");
@@ -89,5 +89,9 @@ public class HomePage extends AppCompatActivity {
         }
         HomePageAdapter adapter = new HomePageAdapter(HomePage.this, R.layout.cardview_activity, arraySanPham);
         gridView.setAdapter(adapter);
+    }
+    public void chuyenTrang(){
+        Intent intent = new Intent(getBaseContext(), DSSPActivity.class );
+        startActivity( intent );
     }
 }

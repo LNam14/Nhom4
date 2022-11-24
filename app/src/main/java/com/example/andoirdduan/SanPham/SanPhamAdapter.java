@@ -1,6 +1,7 @@
 package com.example.andoirdduan.SanPham;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -10,9 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.andoirdduan.Home.HomePage;
 import com.example.andoirdduan.R;
 
 import java.util.ArrayList;
@@ -20,6 +23,7 @@ import java.util.List;
 
 public class SanPhamAdapter extends BaseAdapter {
     private DSSPActivity context;
+    public HomePage homePage;
     private int layout;
     private List<SanPham> listSP;
     List<SanPham> list;
@@ -69,6 +73,7 @@ public class SanPhamAdapter extends BaseAdapter {
         viewHolder.txtTenSP.setText(sp.getTenSP());
         Bitmap bitmap= BitmapFactory.decodeByteArray(sp.getHinh(), 0, sp.getHinh().length);
         viewHolder.imgSP.setImageBitmap(bitmap);
+
         return view;
     }
     public void Search(String text) {

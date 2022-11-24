@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/textView3"
             android:layout_marginTop="10dp"
@@ -16,8 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Welcome back" />
+
         <TextView
-            android:id="@+id/tvUserName"
+            android:id="@+id/tvUserName_userActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
@@ -25,19 +28,23 @@
             android:layout_marginLeft="10dp"
             android:text="Name"
             android:textSize="28sp" />
+
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
-            android:layout_height="195dp"
+            android:layout_height="216dp"
             app:srcCompat="@drawable/shoes_slide" />
+
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Categories"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:textSize="28dp"
             android:textStyle="bold" />
+
         <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -126,14 +133,19 @@
                     android:textColor="@color/black"/>
             </LinearLayout>
         </HorizontalScrollView>
+
         <GridView
-            android:id="@+id/gvSanPham"
+            android:id="@+id/gvSanPham_user"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="45dp"
+            android:layout_height="352dp"
             android:numColumns="2"
-            tools:listitem="@layout/cardview_activity"></GridView>
+            tools:listitem="@layout/cardview_activity">
+
+        </GridView>
+
+
     </LinearLayout>
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomMenu"
         android:layout_width="match_parent"
@@ -142,6 +154,7 @@
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="10dp"
         app:fabCradleVerticalOffset="10dp">
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -150,12 +163,17 @@
             app:menu="@menu/menu_bottom_nav"
             android:background="@drawable/trans"/>
     </com.google.android.material.bottomappbar.BottomAppBar>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnThem_HomePage"
-        android:src="@drawable/add_ic"
+        android:src="@drawable/giohang"
         app:backgroundTint="#FCD400"
-        app:layout_anchor="@id/bottomMenu">
+        app:layout_anchor="@id/bottomMenu"
+        tools:ignore="SpeakableTextPresentCheck">
+
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

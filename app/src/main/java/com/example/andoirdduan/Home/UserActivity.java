@@ -1,17 +1,16 @@
 package com.example.andoirdduan.Home;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.andoirdduan.GioHang.GioHangActivity;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.DSSPActivity;
@@ -22,45 +21,41 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class HomePage extends AppCompatActivity {
-    TextView tvUserName;
-    FloatingActionButton btnThem;
-    ArrayList<SanPham> arraySanPham;
-    GridView gridView;
+public class UserActivity extends AppCompatActivity {
+    FloatingActionButton gioHang;
+    GridView gvSanPham_user;
+    ArrayList<SanPham> arraySanPham_user;
     BottomNavigationView navigationView;
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView( R.layout.homepage_activity );
-        btnThem = findViewById( R.id.btnThem_HomePage );
-        gridView = findViewById( R.id.gvSanPham );
+        setContentView(R.layout.user_activity);
+        gioHang = findViewById(R.id.fab);
         navigationView = findViewById( R.id.bottomNavigationView );
-        tvUserName = findViewById( R.id.tvUserName);
-        tvUserName.setText( "Họ tên" );
+        gvSanPham_user = findViewById(R.id.gvSanPham_user);
         loadData();
         navigationView.setOnNavigationItemSelectedListener( new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        Intent home = new Intent(getBaseContext(), HomePage.class);
+                        Intent home = new Intent(getBaseContext(), UserActivity.class);
                         startActivity(home);
                         break;
                     case R.id.search:
                         break;
                     case R.id.insert:
-                        Intent insert = new Intent(getBaseContext(), SanPhamActivity.class);
+                        Intent insert = new Intent(getBaseContext(), GioHangActivity.class);
                         startActivity(insert);
                         break;
                 }
                 return false;
             }
         });
-        btnThem.setOnClickListener( new View.OnClickListener() {
+        gioHang.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SanPhamActivity.class);
+                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
                 startActivity(intent);
             }
         } );
@@ -68,9 +63,9 @@ public class HomePage extends AppCompatActivity {
     }
     public void loadData(){
         Cursor cursor =  LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham");
-        arraySanPham = new ArrayList<SanPham>();
+        arraySanPham_user = new ArrayList<SanPham>();
         while (cursor.moveToNext()) {
-            arraySanPham.add(new SanPham(
+            arraySanPham_user.add(new SanPham(
                     cursor.getString(0),
                     cursor.getString(1),
                     cursor.getString(2),
@@ -79,12 +74,13 @@ public class HomePage extends AppCompatActivity {
                     cursor.getString(5),
                     cursor.getBlob(6)));
         }
-//        HomePageAdapter adapter = new HomePageAdapter(HomePage.this, R.layout.cardview_activity, arraySanPham);
-        HomePageAdapter adapter = new HomePageAdapter(HomePage.this,R.layout.cardview_activity, arraySanPham);
-        gridView.setAdapter(adapter);
+        UserActivityAdapter adapter = new UserActivityAdapter(UserActivity.this,R.layout.cardview_activity, arraySanPham_user);
+        gvSanPham_user.setAdapter(adapter);
     }
     public void chuyenTrang(){
         Intent intent = new Intent(getBaseContext(), DSSPActivity.class );
-        startActivity( intent );
+        startActivity(intent);
     }
-}
+
+
+    }

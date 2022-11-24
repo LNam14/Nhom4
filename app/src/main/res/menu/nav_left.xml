@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Course">
+        <menu>
+            <item
+                android:id="@+id/sanpham"
+                android:title="Quản lý sản phẩm"></item>
+            <item
+                android:id="@+id/nhanvien"
+                android:title="Quản lý nhân viên"></item>
+            <item
+                android:id="@+id/ngonngu"
+                android:title="Ngôn ngữ"></item>
+            <item
+                android:id="@+id/sinhvien"
+                android:title="Sinh viên"></item>
+            <item
+                android:id="@+id/giaovien"
+                android:title="Vị trí"></item>
+            <item
+                android:id="@+id/thanhtoan"
+                android:icon="@drawable/ic_baseline_share_24"
+                android:title="Chia sẻ"></item>
+        </menu>
+
+    </item>
+    <item android:title="Thông Tin">
+        <menu>
+            <item
+                android:id="@+id/aboutapp"
+                android:title="Về"></item>
+            <item
+                android:id="@+id/lienhe"
+                android:title="Liên Hệ"></item>
+            <item
+                android:id="@+id/news"
+                android:title="Tin tức"></item>
+        </menu>
+
+
+    </item>
+</menu>

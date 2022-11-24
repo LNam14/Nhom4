@@ -24,32 +24,27 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class SanPhamActivity extends AppCompatActivity {
-    EditText edMaSP, edTenSP, edGiaSP,edPhanLoai,edNhaCC,edMoTa;
+    EditText edMaSP, edTenSP, edGiaSP,edPhanLoai,edSoLuong,edMoTa;
     Button btnThem,btnDanhSach;
     ImageView imgSP;
-    ArrayList<SanPham> arraySanPham;
-    ListView lvDanhsach;
+    public static ArrayList<SanPham> arraySanPham;
+
     int REQUEST_CODE =1;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.sanpham_activity );
-//        db=new SQL(this,"ShopGiay.sqlite",null,1);
-//        db.TruyVan("Create Table If not Exists SanPham(ID Varchar Primary Key, theLoai Varchar, nhaCungCap Varchar,tenSP Varchar, giaTien Varchar, moTa Varchar, hinhAnh Blob)");
         edTenSP = (EditText) findViewById(R.id.edTenSP);
         edGiaSP = (EditText) findViewById(R.id.edGiaTien);
         edMaSP = (EditText) findViewById(R.id.edMaSP);
         edPhanLoai = (EditText) findViewById(R.id.edPhanLoai);
-        edNhaCC = (EditText) findViewById(R.id.edNhaCC);
+        edSoLuong = (EditText) findViewById(R.id.edSoLuong);
         edMoTa = (EditText) findViewById(R.id.edMota);
         btnThem = (Button) findViewById(R.id.btnThemSP);
         btnDanhSach = (Button) findViewById(R.id.btnXemDS);
         imgSP= (ImageView) findViewById(R.id.imageView);
-        lvDanhsach = (ListView) findViewById(R.id.lvThemSP);
-        loadData();
-        SanPhamAdapter adapter = new SanPhamAdapter( SanPhamActivity.this, R.layout.row__listview, arraySanPham);
-        lvDanhsach.setAdapter(adapter);
+
         imgSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,26 +55,21 @@ public class SanPhamActivity extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String maSP = edMaSP.getText().toString();
-                String tenSP = edTenSP.getText().toString();
-                String phanLoai = edPhanLoai.getText().toString();
-                String nhaCC = edNhaCC.getText().toString();
-                String moTa = edMoTa.getText().toString();
+                String maSP = edMaSP.getText().toString().trim();
+                String tenSP = edTenSP.getText().toString().trim();
+                String phanLoai = edPhanLoai.getText().toString().trim();
+                int soLuong = Integer.parseInt( edSoLuong.getText().toString().trim() );
+                String moTa = edMoTa.getText().toString().trim();
                 int giaTien = Integer.parseInt( edGiaSP.getText().toString() );
-                LoadingScreenActivity.db.Insert(maSP,tenSP,phanLoai,nhaCC,moTa,giaTien,ConverttoArrayByte(imgSP));
-                Toast.makeText( SanPhamActivity.this,"Thêm thành công",Toast.LENGTH_SHORT).show();
+                LoadingScreenActivity.db.Insert(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte(imgSP));
+                Toast.makeText( SanPhamActivity.this,"Thêm thành công"+maSP,Toast.LENGTH_SHORT).show();
             }
         });
         btnDanhSach.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadData();
-            }
-        } );
-        lvDanhsach.setOnItemClickListener( new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText( SanPhamActivity.this, "hi"+arraySanPham.get( position ).maSP, Toast.LENGTH_SHORT ).show();
+                Intent intent = new Intent(getApplicationContext(), DSSPActivity.class);
+                startActivity( intent );
             }
         } );
     }
@@ -101,18 +91,5 @@ public class SanPhamActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
     }
-    public void loadData(){
-        Cursor cursor =  LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham");
-        arraySanPham = new ArrayList<SanPham>();
-        while (cursor.moveToNext()) {
-            arraySanPham.add(new SanPham(
-                    cursor.getString(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getInt(5),
-                    cursor.getBlob(6)));
-        }
-    }
+
 }

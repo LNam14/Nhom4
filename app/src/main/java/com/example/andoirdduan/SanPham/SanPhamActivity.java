@@ -44,7 +44,6 @@ public class SanPhamActivity extends AppCompatActivity {
         btnThem = (Button) findViewById(R.id.btnThemSP);
         btnDanhSach = (Button) findViewById(R.id.btnXemDS);
         imgSP= (ImageView) findViewById(R.id.imageView);
-
         imgSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

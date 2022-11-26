@@ -1,10 +1,7 @@
 package com.example.andoirdduan.Home;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,27 +9,22 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.example.andoirdduan.Login.LoadingScreenActivity;
-import com.example.andoirdduan.NhanVien.NhanVienActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
 import com.example.andoirdduan.SanPham.SanPhamActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
-    SanPhamActivity sanPhamActivity;
     TextView tvUserName;
     FloatingActionButton btnThem;
-    Button C;
     ArrayList<SanPham> arraySanPham;
     GridView gridView;
     BottomNavigationView navigationView;
@@ -44,7 +36,7 @@ public class HomePage extends AppCompatActivity {
         btnThem = findViewById( R.id.btnThem_HomePage );
         gridView = findViewById( R.id.gvSanPham );
         navigationView = findViewById( R.id.bottomNavigationView );
-        tvUserName = findViewById( R.id.tvUserName );
+        tvUserName = findViewById( R.id.tvUserName);
         tvUserName.setText( "Họ tên" );
         loadData();
         navigationView.setOnNavigationItemSelectedListener( new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -87,7 +79,8 @@ public class HomePage extends AppCompatActivity {
                     cursor.getString(5),
                     cursor.getBlob(6)));
         }
-        HomePageAdapter adapter = new HomePageAdapter(HomePage.this, R.layout.cardview_activity, arraySanPham);
+//        HomePageAdapter adapter = new HomePageAdapter(HomePage.this, R.layout.cardview_activity, arraySanPham);
+        HomePageAdapter adapter = new HomePageAdapter(HomePage.this,R.layout.cardview_activity, arraySanPham);
         gridView.setAdapter(adapter);
     }
     public void chuyenTrang(){

@@ -1,6 +1,7 @@
 package com.example.andoirdduan.Home;
 
 import android.content.Intent;
+<<<<<<< HEAD
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -26,11 +27,25 @@ public class UserActivity extends AppCompatActivity {
     GridView gvSanPham_user;
     ArrayList<SanPham> arraySanPham_user;
     BottomNavigationView navigationView;
+=======
+import android.os.Bundle;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.andoirdduan.GioHang.GioHangActivity;
+import com.example.andoirdduan.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+public class UserActivity extends AppCompatActivity {
+    FloatingActionButton gioHang;
+>>>>>>> origin/developer
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_activity);
         gioHang = findViewById(R.id.fab);
+<<<<<<< HEAD
         navigationView = findViewById( R.id.bottomNavigationView );
         gvSanPham_user = findViewById(R.id.gvSanPham_user);
         loadData();
@@ -84,3 +99,17 @@ public class UserActivity extends AppCompatActivity {
 
 
     }
+=======
+
+        gioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserActivity.this, GioHangActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }
+}
+>>>>>>> origin/developer

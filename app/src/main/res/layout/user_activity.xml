@@ -46,8 +46,11 @@
             android:textStyle="bold" />
 
         <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp">
+
             <LinearLayout
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
@@ -132,6 +135,80 @@
                     android:text="item1"
                     android:textColor="@color/black"/>
             </LinearLayout>
+
+
+<!--            &lt;!&ndash; using linear layout to store multiple view-->
+<!--                 inside a Horizontal Scroll View &ndash;&gt;-->
+<!--            <LinearLayout-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                &lt;!&ndash; multiple button views to show a-->
+<!--                      scrollable horizontal list &ndash;&gt;-->
+<!--                <Button-->
+<!--                    android:id="@+id/item1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:padding="4dp"-->
+<!--                    android:text="item1"-->
+<!--                    android:textColor="@color/black" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/item2"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:padding="4dp"-->
+<!--                    android:text="item3"-->
+<!--                    android:textColor="@color/black" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/item3"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:padding="4dp"-->
+<!--                    android:text="item3"-->
+<!--                    android:textColor="@color/black" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/item4"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:padding="4dp"-->
+<!--                    android:text="item4"-->
+<!--                    android:textColor="@color/black" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/item5"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:padding="4dp"-->
+<!--                    android:text="item5"-->
+<!--                    android:textColor="@color/black" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/item6"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:padding="4dp"-->
+<!--                    android:text="item6"-->
+<!--                    android:textColor="@color/black" />-->
+<!--            </LinearLayout>-->
+
+
         </HorizontalScrollView>
 
         <GridView

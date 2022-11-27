@@ -50,8 +50,8 @@ public class UserActivityAdapter extends BaseAdapter {
     }
 
     public class ViewHolder {
-        TextView txtTenSP,tvType,txtPrice,txtTenSP_gioHang,tvType_gioHang,txtPrice_gioHang,imgSP_gioHang;
-        ImageView imgSP;
+        TextView txtTenSP,tvType,txtPrice,txtTenSP_gioHang,tvType_gioHang,txtPrice_gioHang;
+        ImageView imgSP,imgSP_gioHang;
         Button btnAdd_GioHang;
     }
     @NonNull
@@ -67,7 +67,7 @@ public class UserActivityAdapter extends BaseAdapter {
             viewHolder.tvType = view.findViewById( R.id.tvType );
             viewHolder.txtPrice = view.findViewById( R.id.tvPrice );
             viewHolder.imgSP = view.findViewById( R.id.imgShoes );
-            viewHolder.btnAdd_GioHang = view.findViewById(R.id.btnAdd);
+
             view.setTag( viewHolder );
         } else {
             viewHolder =(ViewHolder) view.getTag();
@@ -79,31 +79,7 @@ public class UserActivityAdapter extends BaseAdapter {
             }
         } );
 
-//        final ViewHolder viewHolder1;
-//        if (view == null) {
-//            viewHolder1 = new ViewHolder();
-//            LayoutInflater inflater = LayoutInflater.from( context );
-//            view = inflater.inflate( R.layout.row_gio_hang, null );
-//            viewHolder1.txtTenSP_gioHang = view.findViewById( R.id.edTen );
-//            viewHolder1.tvType_gioHang = view.findViewById( R.id.edLoai );
-//            viewHolder1.txtPrice_gioHang = view.findViewById( R.id.edGia );
-//            viewHolder1.imgSP_gioHang = view.findViewById( R.id.imgSanPham_gioHang );
-//
-//            view.setTag( viewHolder );
-//        } else {
-//            viewHolder1 =(ViewHolder) view.getTag();
-//        }
 
-        viewHolder.btnAdd_GioHang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//               viewHolder1.txtTenSP_gioHang.setText(sp.getTenSP());
-//               viewHolder1.txtPrice_gioHang.setText(sp.getGia());
-//               viewHolder1.tvType_gioHang.setText(sp.getPhanLoai());
-//               viewHolder1.imgSP_gioHang.setText(sp.getHinh());
-
-            }
-        });
 
         viewHolder.txtTenSP.setText( sp.getTenSP() );
         viewHolder.tvType.setText( sp.getPhanLoai() );

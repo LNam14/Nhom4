@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.andoirdduan.Login.LoadingScreenActivity;
+import com.example.andoirdduan.Login.LoginActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
@@ -23,12 +26,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
-    TextView tvUserName;
+    TextView tvUser;
     FloatingActionButton btnThem;
     ArrayList<SanPham> arraySanPham;
     GridView gridView;
+    String strUsername = "";
     BottomNavigationView navigationView;
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +39,20 @@ public class HomePage extends AppCompatActivity {
         btnThem = findViewById( R.id.btnThem_HomePage );
         gridView = findViewById( R.id.gvSanPham );
         navigationView = findViewById( R.id.bottomNavigationView );
-        tvUserName = findViewById( R.id.tvUserName);
-        tvUserName.setText( "Họ tên" );
+        tvUser = findViewById( R.id.tvUserName);
+//        tvUserName.setText( "Họ tên" );
+        if(checkLoginRemember()<0){
+//            Intent intent = new Intent(HomePage.this, LoginActivity.class);
+//            startActivity(intent);
+            Toast.makeText(this,"Đăng nhập thành công",Toast.LENGTH_SHORT ).show();
+            System.out.println("USERNAME"+strUsername);
+            tvUser.setText("Hello, "+ strUsername);
+        }else if(checkLoginRemember()>0){
+            Toast.makeText(this,"Lưu mật khẫu thành công",Toast.LENGTH_SHORT ).show();
+            System.out.println("USERNAME"+strUsername);
+            tvUser.setText("Hello, "+ strUsername);
+
+        }
         loadData();
         navigationView.setOnNavigationItemSelectedListener( new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -82,6 +97,17 @@ public class HomePage extends AppCompatActivity {
 //        HomePageAdapter adapter = new HomePageAdapter(HomePage.this, R.layout.cardview_activity, arraySanPham);
         HomePageAdapter adapter = new HomePageAdapter(HomePage.this,R.layout.cardview_activity, arraySanPham);
         gridView.setAdapter(adapter);
+    }
+    public int checkLoginRemember(){
+        SharedPreferences sharedPreferences = getSharedPreferences("USER_FILE.txt",MODE_PRIVATE);
+        boolean chk = sharedPreferences.getBoolean("REMEMBER", false);
+        if(chk){
+            strUsername = sharedPreferences.getString("USERNAME","");
+
+            return 1;
+        }
+        return -1;
+
     }
     public void chuyenTrang(){
         Intent intent = new Intent(getBaseContext(), DSSPActivity.class );

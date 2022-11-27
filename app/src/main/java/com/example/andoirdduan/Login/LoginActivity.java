@@ -80,8 +80,8 @@ public class LoginActivity extends AppCompatActivity {
 //                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 //
 //                    }
-//                });
-
+//                })
+                //cmámcmá
             }
 
         });

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.andoirdduan.ChiTietSanPham.ChiTietSanPham;
 import com.example.andoirdduan.GioHang.GioHangActivity;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.Login.LoginActivity;
@@ -39,6 +40,7 @@ public class UserActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
         getSupportActionBar().setCustomView( R.layout.tittle );
         setContentView(R.layout.user_activity);
+
         gioHang = findViewById(R.id.fab);
         navigationView = findViewById(R.id.bottomNavigationView);
         gvSanPham_user = findViewById(R.id.gvSanPham_user);
@@ -111,10 +113,7 @@ public class UserActivity extends AppCompatActivity {
         return -1;
 
     }
-    public void chuyenTrang() {
-        Intent intent = new Intent(getBaseContext(), DSSPActivity.class);
-        startActivity(intent);
-    }
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

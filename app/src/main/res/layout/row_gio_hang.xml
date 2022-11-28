@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imgSanPham_gioHang"
-        android:layout_width="111dp"
-        android:layout_height="101dp"
+        android:layout_width="128dp"
+        android:layout_height="164dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="18dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="20dp"
-        android:text="TextView"
+        android:text="Tên sản phẩm"
         app:layout_constraintStart_toEndOf="@+id/imgSanPham_gioHang"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="4dp"
-        android:text="TextView"
+        android:text="Size"
         app:layout_constraintStart_toEndOf="@+id/imgSanPham_gioHang"
         app:layout_constraintTop_toBottomOf="@+id/edTen" />
 
@@ -41,17 +41,47 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="4dp"
-        android:text="TextView"
+        android:inputType="number"
+        android:text="Giá"
+        android:textColor="#FF0000"
         app:layout_constraintStart_toEndOf="@+id/imgSanPham_gioHang"
         app:layout_constraintTop_toBottomOf="@+id/edLoai" />
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/imgSanPham_gioHang"
+        app:layout_constraintTop_toBottomOf="@+id/edGia"
+        android:layout_marginStart="16dp"
+        tools:ignore="MissingConstraints">
+        <ImageButton
+            android:id="@+id/giam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/giam"/>
 
+        <TextView
+            android:id="@+id/soluong"
+            android:layout_width="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_height="20dp" />
+        <ImageButton
+            android:id="@+id/tang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/tang"/>
+    </RadioGroup>
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="52dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toEndOf="@+id/imgSanPham_gioHang"
-        app:layout_constraintTop_toBottomOf="@+id/edGia"
+        app:layout_constraintTop_toBottomOf="@+id/radio"
         app:srcCompat="@drawable/add_ic" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

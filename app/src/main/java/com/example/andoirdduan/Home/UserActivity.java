@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.andoirdduan.GioHang.GioHangActivity;
@@ -17,23 +19,12 @@ import com.example.andoirdduan.Login.LoginActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
-import com.example.andoirdduan.SanPham.SanPhamActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-
-
-import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.andoirdduan.GioHang.GioHangActivity;
-import com.example.andoirdduan.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class UserActivity extends AppCompatActivity {
     FloatingActionButton gioHang;
@@ -45,6 +36,8 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
+        getSupportActionBar().setCustomView( R.layout.tittle );
         setContentView(R.layout.user_activity);
         gioHang = findViewById(R.id.fab);
         navigationView = findViewById(R.id.bottomNavigationView);
@@ -122,6 +115,26 @@ public class UserActivity extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), DSSPActivity.class);
         startActivity(intent);
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate( R.menu.search, menu );
+//        SearchView searchView = (SearchView) menu.findItem( R.id.search ).getActionView();
+//        searchView.setOnQueryTextListener( new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                return false;
+//            }
+//        } );
+//        return super.onCreateOptionsMenu( menu );
+//    }
+
 }
 
 

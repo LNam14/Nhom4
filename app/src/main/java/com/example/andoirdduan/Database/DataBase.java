@@ -51,5 +51,19 @@ public class DataBase extends SQLiteOpenHelper {
         statement.bindBlob(7,hinh);
         statement.executeInsert();
     }
+    public void InsertGH(String maSP,String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh) {
+        SQLiteDatabase db=getWritableDatabase();
+        String sql= "Insert into GioHang values (?,?,?,?,?,?,?)";
+        SQLiteStatement statement=db.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindString(1,maSP);
+        statement.bindString(2,tenSP);
+        statement.bindString(3,phanLoai);
+        statement.bindLong(4,soLuong);
+        statement.bindLong(5,gia);
+        statement.bindString(6,moTa);
+        statement.bindBlob(7,hinh);
+        statement.executeInsert();
+    }
 
 }

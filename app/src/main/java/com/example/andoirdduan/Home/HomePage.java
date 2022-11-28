@@ -40,10 +40,7 @@ public class HomePage extends AppCompatActivity {
         gridView = findViewById( R.id.gvSanPham );
         navigationView = findViewById( R.id.bottomNavigationView );
         tvUser = findViewById( R.id.tvUserName);
-//        tvUserName.setText( "Họ tên" );
         if(checkLoginRemember()<0){
-//            Intent intent = new Intent(HomePage.this, LoginActivity.class);
-//            startActivity(intent);
             Toast.makeText(this,"Đăng nhập thành công",Toast.LENGTH_SHORT ).show();
             System.out.println("USERNAME"+strUsername);
             tvUser.setText("Hello, "+ strUsername);

@@ -21,6 +21,7 @@
         </activity>
         <activity
             android:name=".SanPham.DSSPActivity"
+            android:label="Danh sách sản phẩm"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -28,6 +29,7 @@
         </activity>
         <activity
             android:name=".SanPham.SanPhamActivity"
+            android:label="Sản phẩm"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -35,6 +37,7 @@
         </activity>
         <activity
             android:name=".GioHang.GioHangActivity"
+            android:label="Giỏ hàng"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"

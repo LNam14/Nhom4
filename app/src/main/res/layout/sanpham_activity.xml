@@ -62,7 +62,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/edittext"
-                android:hint="Phân loại"
+                android:hint="Thương Hiệu"
                 android:lines="1"
                 android:padding="5dp"
                 android:textSize="15dp" />

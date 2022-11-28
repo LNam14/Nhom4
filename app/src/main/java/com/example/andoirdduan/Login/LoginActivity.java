@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = MatKhau.getText().toString();
                 if (name.equals("") || pass.equals("")) {
                     Toast.makeText(LoginActivity.this, "Vui Lòng Điền Đủ Thông tin!!!", Toast.LENGTH_SHORT).show();
-                }else if(name.equals("nguyensama") && pass.equals("Nguyendz1")){
+                }else if(name.equals("admin") && pass.equals("123")){
                     rememberMe(name, pass, ckNhoMatKhau.isChecked());
                     Intent intent = new Intent(getApplicationContext(), HomePage.class);
                     startActivity(intent);

@@ -19,7 +19,7 @@ public class SQLSever extends SQLiteOpenHelper {
     private static final String NgaySinh = "ngaysinh";
     private static int version = 1;
 
-    private SQLiteDatabase db;
+    public SQLiteDatabase db;
     private Context context;
     private ContentValues values;
 

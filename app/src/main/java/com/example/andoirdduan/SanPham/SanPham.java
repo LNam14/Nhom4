@@ -1,6 +1,8 @@
 package com.example.andoirdduan.SanPham;
 
-public class SanPham {
+import java.io.Serializable;
+
+public class SanPham implements Serializable{
     String maSP,tenSP, phanLoai;
     int soLuong,Gia;
     String moTa;

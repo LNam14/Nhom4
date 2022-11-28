@@ -1,5 +1,6 @@
 package com.example.andoirdduan.Home;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.andoirdduan.ChiTietSanPham.ChiTietSanPham;
 import com.example.andoirdduan.DBUser.User;
 import com.example.andoirdduan.Database.SQLSever;
 import com.example.andoirdduan.GioHang.GioHang;
@@ -27,6 +29,7 @@ import com.example.andoirdduan.SanPham.SanPham;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +89,18 @@ public class UserActivityAdapter extends BaseAdapter {
         } else {
             viewHolder =(ViewHolder) view.getTag();
         }
+        viewHolder.imgSP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!v.isLongClickable()) {
+                    Intent intent1 = new Intent(context, ChiTietSanPham.class);
+                    intent1.putExtra("chitiet", sp);
+                    intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent1);
+                }
+
+            }
+        });
         viewHolder.btnAdd_GioHang.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {

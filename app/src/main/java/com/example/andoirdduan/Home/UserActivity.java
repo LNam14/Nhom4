@@ -72,9 +72,9 @@ public class UserActivity extends AppCompatActivity {
                         break;
                     case R.id.search:
                         break;
-                    case R.id.insert:
-                        Intent insert = new Intent(getBaseContext(), GioHangActivity.class);
-                        insert.putExtra("hoten", strUsername);
+                    case R.id.fab:
+                        Intent insert = new Intent(UserActivity.this, GioHangActivity.class);
+
                         startActivity(insert);
                         break;
                 }
@@ -85,6 +85,7 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
+                intent.putExtra("dulieu", strUsername);
                 startActivity(intent);
             }
         });

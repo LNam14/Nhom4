@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -66,6 +67,7 @@ public class GioHangAdapter extends BaseAdapter {
         TextView txtTenSP,tvType,txtPrice,txtSo,tvType_gioHang,txtPrice_gioHang;
         ImageView imgSP,imgSP_gioHang;
         ImageButton tang,giam;
+        CheckBox ckChonMua;
         Button btnMua;
         Spinner spinner;
     }
@@ -84,7 +86,7 @@ public class GioHangAdapter extends BaseAdapter {
             viewHolder.txtSo = view.findViewById( R.id. soluong);
             viewHolder.txtPrice = view.findViewById( R.id.edGia );
             viewHolder.imgSP = view.findViewById( R.id.img_GH );
-            viewHolder.btnMua = view.findViewById( R.id.btnMuaNgay );
+            viewHolder.ckChonMua = view.findViewById( R.id.ckChonMua );
             viewHolder.tang = view.findViewById( R.id.tang );
             viewHolder.giam = view.findViewById( R.id.giam );
             viewHolder.spinner = view.findViewById( R.id.spinner_size );
@@ -110,15 +112,15 @@ public class GioHangAdapter extends BaseAdapter {
                 viewHolder.txtSo.setText(""+ketqua);
             }
         } );
-        viewHolder.btnMua.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tenSP = listSP.get( i ).getTenSP();
-                LoadingScreenActivity.db.TruyVan("DELETE FROM GioHang WHERE tenSP='" + tenSP + "'");
-                Toast.makeText( context, "Mua thành công", Toast.LENGTH_SHORT ).show();
-                context.loadData();
-            }
-        } );
+//        viewHolder.btnMua.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String tenSP = listSP.get( i ).getTenSP();
+//                LoadingScreenActivity.db.TruyVan("DELETE FROM GioHang WHERE tenSP='" + tenSP + "'");
+//                Toast.makeText( context, "Mua thành công", Toast.LENGTH_SHORT ).show();
+//                context.loadData();
+//            }
+//        } );
         viewHolder.txtTenSP.setText( sp.getTenSP() );
         viewHolder.tvType.setText( String.valueOf( sp.getSoLuong() ) );
 

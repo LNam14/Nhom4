@@ -1,15 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context=".GioHang.GioHangActivity">
+
 
     <ListView
         android:id="@+id/lvGioHang"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/row_gio_hang" />
-</LinearLayout>
+        tools:listitem="@layout/row_giohang">
+
+    </ListView>
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/ckChonTatCa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:text="Tất cả" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tổng thanh toán :"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/tvTongTien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$0"
+            android:textColor="#F60404"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnMuaHang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="#FF0202"
+            android:text="Mua hàng" />
+    </LinearLayout>
+</RelativeLayout>

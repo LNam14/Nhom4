@@ -1,7 +1,10 @@
 package com.example.andoirdduan.GioHang;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import android.view.Menu;
@@ -31,6 +34,7 @@ public class GioHangActivity extends AppCompatActivity {
     SQLSeverGioHang sqlSeverGioHang ;
     ListView lvGioHang;
     ArrayList<GioHang> arraySanPham_gioHang;
+    private SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -38,15 +42,12 @@ public class GioHangActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView( R.layout.tittle_giohang );
         setContentView( R.layout.activity_gio_hang );
         lvGioHang = findViewById( R.id.lvGioHang );
-
-//        loadData();
-
-        sqlSeverGioHang.getArrayGioHang();
+        loadData();
         GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_gio_hang, arraySanPham_gioHang);
         lvGioHang.setAdapter(adapter);
     }
     public void loadData() {
-        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GIOHANG" );
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang" );
         arraySanPham_gioHang = new ArrayList<GioHang>();
         while (cursor.moveToNext()) {
             arraySanPham_gioHang.add( new GioHang(

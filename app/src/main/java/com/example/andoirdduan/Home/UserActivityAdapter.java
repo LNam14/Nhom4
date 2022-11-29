@@ -21,9 +21,11 @@ import androidx.annotation.NonNull;
 import com.example.andoirdduan.ChiTietSanPham.ChiTietSanPham;
 import com.example.andoirdduan.DBUser.User;
 import com.example.andoirdduan.Database.SQLSever;
+import com.example.andoirdduan.Database.SQLSeverGioHang;
 import com.example.andoirdduan.GioHang.GioHang;
 import com.example.andoirdduan.GioHang.GioHangActivity;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
+import com.example.andoirdduan.Login.RegisterActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.SanPham;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,7 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserActivityAdapter extends BaseAdapter {
-    SQLSever sqlSever;
     private UserActivity context;
     private int layout;
     private List<SanPham> listSP;
@@ -105,8 +106,6 @@ public class UserActivityAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                GioHang gh = new GioHang();
-                String ma = gh.getMaSP();
                 Bitmap bitmap = BitmapFactory.decodeByteArray( sp.getHinh(), 0, sp.getHinh().length );
                 viewHolder.imgSP.setImageBitmap( bitmap );
                 String maSP = list.get( i ).getMaSP();
@@ -115,13 +114,8 @@ public class UserActivityAdapter extends BaseAdapter {
                 int soLuong = list.get( i ).getSoLuong();
                 int giaTien = list.get( i ).getGia();
                 String moTa = list.get( i ).getMoTa();
-                if ( list1.size()<0) {
-                    LoadingScreenActivity.db.InsertGH(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte(viewHolder.imgSP));
-                    Toast.makeText( context, "Thêm thành công", Toast.LENGTH_SHORT ).show();
-                }else{
-                    LoadingScreenActivity.db.TruyVan("UPDATE GioHang SET soLuong = '" + (list1.get( i ).getSoLuong()+1) + "' WHERE ID = '" + maSP + "'");
-                    Toast.makeText( context, "Thêm thành công jiji"+list1.get( i ).getSoLuong(), Toast.LENGTH_SHORT ).show();
-                }
+                LoadingScreenActivity.db.InsertGH(maSP,tenSP, phanLoai, soLuong, giaTien,moTa,ConverttoArrayByte( viewHolder.imgSP ));
+                Toast.makeText( context, "Thêm thành công", Toast.LENGTH_SHORT ).show();
             }
         } );
         viewHolder.txtTenSP.setText( sp.getTenSP() );

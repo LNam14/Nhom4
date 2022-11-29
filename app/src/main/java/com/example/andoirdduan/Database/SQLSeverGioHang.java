@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.andoirdduan.DBUser.User;
 import com.example.andoirdduan.GioHang.GioHang;
+import com.example.andoirdduan.GioHang.GioHangActivity;
+import com.example.andoirdduan.GioHang.GioHangAdapter;
+import com.example.andoirdduan.R;
 
 import java.util.ArrayList;
 
@@ -111,29 +114,6 @@ public class SQLSeverGioHang extends SQLiteOpenHelper {
         db.close();
         return gioHang;
     }
-//    public boolean Changpass(String account, String newpass){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(Password,newpass);
-//        int a = db.update(Table_Name1,values,Account + "=?",new String[]{account});
-//        if(a != 0){
-//            return true;
-//        }else{
-//            return false;
-//        }
-//    }
-//    public int Update(Student student){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//
-//        values.put(NAME,student.getName());
-//
-//        return db.update(TABLE_NAME,values,ID +"=?",new String[] { String.valueOf(student.getId())});
-//
-//
-//    }
-
-
 }
 
 

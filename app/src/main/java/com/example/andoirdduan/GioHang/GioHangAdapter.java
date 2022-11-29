@@ -8,10 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,10 +63,10 @@ public class GioHangAdapter extends BaseAdapter {
     public class ViewHolder {
         TextView txtTenSP,tvType,txtPrice,txtSo,tvType_gioHang,txtPrice_gioHang;
         ImageView imgSP,imgSP_gioHang;
-        ImageButton btnMua,tang,giam;
-
+        ImageButton tang,giam;
+        Button btnMua;
+        Spinner spinner;
     }
-    @SuppressLint("ResourceType")
     @NonNull
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
@@ -74,15 +76,17 @@ public class GioHangAdapter extends BaseAdapter {
         if (view == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from( context );
-            view = inflater.inflate( R.layout.row_gio_hang, null );
-            viewHolder.txtTenSP = view.findViewById( R.id.edTen );
-            viewHolder.tvType = view.findViewById( R.id.edLoai );
-            viewHolder.txtSo = view.findViewById( R.id.soluong );
+            view = inflater.inflate( R.layout.row_giohang, null );
+            viewHolder.txtTenSP = view.findViewById( R.id.edTenSP_GH );
+            viewHolder.tvType = view.findViewById( R.id.edGiaSP_GH );
+            viewHolder.txtSo = view.findViewById( R.id. soluong);
             viewHolder.txtPrice = view.findViewById( R.id.edGia );
-            viewHolder.imgSP = view.findViewById( R.id.imgSanPham_gioHang );
-            viewHolder.btnMua = view.findViewById( R.id.imageButton );
+            viewHolder.imgSP = view.findViewById( R.id.img_GH );
+            viewHolder.btnMua = view.findViewById( R.id.btnMuaNgay );
             viewHolder.tang = view.findViewById( R.id.tang );
             viewHolder.giam = view.findViewById( R.id.giam );
+            viewHolder.spinner = view.findViewById( R.id.spinner_size );
+
 
             viewHolder.txtSo.setText(String.valueOf( so ));
             view.setTag( viewHolder );
@@ -112,7 +116,10 @@ public class GioHangAdapter extends BaseAdapter {
         } );
         viewHolder.txtTenSP.setText( sp.getTenSP() );
         viewHolder.tvType.setText( sp.getPhanLoai() );
-        viewHolder.txtPrice.setText(String.valueOf( sp.getSoLuong() ) );
+
+        String[] a = new String[]{"Size 37","Size 38","Size 39","Size 40","Size 41","Size 42","Size 43"};
+        ArrayAdapter<String> adapterspin = new ArrayAdapter<>( context, androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item, a );
+        viewHolder.spinner.setAdapter(adapterspin  );
         Bitmap bitmap = BitmapFactory.decodeByteArray( sp.getHinh(), 0, sp.getHinh().length );
         viewHolder.imgSP.setImageBitmap( bitmap );
         return view;

@@ -14,6 +14,7 @@ import android.widget.SearchView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.andoirdduan.Database.SQLSeverGioHang;
 import com.example.andoirdduan.Home.HomePage;
 import com.example.andoirdduan.Home.HomePageAdapter;
 import com.example.andoirdduan.Home.UserActivity;
@@ -27,7 +28,7 @@ import com.example.andoirdduan.SanPham.SanPhamAdapter;
 import java.util.ArrayList;
 
 public class GioHangActivity extends AppCompatActivity {
-
+    SQLSeverGioHang sqlSeverGioHang ;
     ListView lvGioHang;
     ArrayList<GioHang> arraySanPham_gioHang;
     @Override
@@ -39,11 +40,10 @@ public class GioHangActivity extends AppCompatActivity {
         lvGioHang = findViewById( R.id.lvGioHang );
 
         loadData();
-        GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_gio_hang, arraySanPham_gioHang);
-        lvGioHang.setAdapter(adapter);
+
     }
     public void loadData() {
-        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang" );
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GIOHANG" );
         arraySanPham_gioHang = new ArrayList<GioHang>();
         while (cursor.moveToNext()) {
             arraySanPham_gioHang.add( new GioHang(
@@ -55,7 +55,8 @@ public class GioHangActivity extends AppCompatActivity {
                     cursor.getString( 5 ),
                     cursor.getBlob( 6 ) ) );
         }
-
+        GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_gio_hang, arraySanPham_gioHang);
+        lvGioHang.setAdapter(adapter);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

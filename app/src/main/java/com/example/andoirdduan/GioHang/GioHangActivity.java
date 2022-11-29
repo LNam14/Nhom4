@@ -42,7 +42,8 @@ public class GioHangActivity extends AppCompatActivity {
 //        loadData();
 
         sqlSeverGioHang.getArrayGioHang();
-
+        GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_gio_hang, arraySanPham_gioHang);
+        lvGioHang.setAdapter(adapter);
     }
     public void loadData() {
         Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GIOHANG" );
@@ -57,8 +58,7 @@ public class GioHangActivity extends AppCompatActivity {
                     cursor.getString( 5 ),
                     cursor.getBlob( 6 ) ) );
         }
-        GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_gio_hang, arraySanPham_gioHang);
-        lvGioHang.setAdapter(adapter);
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

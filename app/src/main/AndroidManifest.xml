@@ -13,7 +13,14 @@
         android:theme="@style/Theme.AndoirdDuAn"
         tools:targetApi="31">
         <activity
-            android:name=".ChiTietSanPham"
+            android:name=".HoaDon.HoaDonActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ChiTietSanPham.ChiTietSanPham"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -28,32 +35,24 @@
         </activity>
         <activity
             android:name=".SanPham.DSSPActivity"
-            android:label="Danh sách sản phẩm"
-            android:exported="false">
+            android:exported="false"
+            android:label="Danh sách sản phẩm">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".SanPham.SanPhamActivity"
-            android:label="Sản phẩm"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ChiTietSanPham.ChiTietSanPham"
-            android:label="Chi Tiết Sản phẩm"
-            android:exported="false">
+            android:exported="false"
+            android:label="Sản phẩm">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".GioHang.GioHangActivity"
-            android:label="Giỏ hàng"
-            android:exported="false">
+            android:exported="false"
+            android:label="Giỏ hàng">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

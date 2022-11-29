@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.ActionBar;
@@ -33,6 +36,9 @@ import java.util.ArrayList;
 public class GioHangActivity extends AppCompatActivity {
     SQLSeverGioHang sqlSeverGioHang ;
     ListView lvGioHang;
+    CheckBox ckChonHet;
+    Button btnThanhToan;
+    TextView tvTongTien;
     String strUsername = "";
     ArrayList<GioHang> arraySanPham_gioHang;
     private SQLiteDatabase db;
@@ -43,14 +49,22 @@ public class GioHangActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView( R.layout.tittle_giohang );
         setContentView( R.layout.activity_gio_hang );
         lvGioHang = findViewById( R.id.lvGioHang );
+        ckChonHet = findViewById(R.id.ckChonTatCa);
+        btnThanhToan = findViewById(R.id.btnMuaHang);
+        tvTongTien = findViewById(R.id.tvTongTien);
+
+
+
         //Cai nay t code nè
-        Bundle bundle = getIntent().getExtras();
-        if(bundle !=  null){
-            strUsername = bundle.getString("hoten");
-            System.out.println("ten nguoi dung: "+ strUsername);
+        Bundle bundle1 = getIntent().getExtras();
+        if(bundle1 !=  null){
+            strUsername = bundle1.getString("dulieu");
+            Toast.makeText(this, "Name: " +strUsername, Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Chua dc", Toast.LENGTH_SHORT).show();
         }
         loadData();
-        GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_gio_hang, arraySanPham_gioHang);
+        GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_giohang, arraySanPham_gioHang);
         lvGioHang.setAdapter(adapter);
     }
     public void loadData() {

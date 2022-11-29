@@ -39,6 +39,7 @@ public class DSSPActivity extends AppCompatActivity {
     int REQUEST_CODE=123;
     @SuppressLint("MissingInflatedId")
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.dssp_activity );

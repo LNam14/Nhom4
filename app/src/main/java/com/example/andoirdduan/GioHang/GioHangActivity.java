@@ -81,6 +81,7 @@ public class GioHangActivity extends AppCompatActivity {
                     cursor.getString( 5 ),
                     cursor.getBlob( 6 ),
                     cursor.getString( 7 )) );
+            //hehe
         }
 
     }

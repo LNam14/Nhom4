@@ -53,9 +53,9 @@ public class DataBase extends SQLiteOpenHelper {
         statement.bindBlob(7,hinh);
         statement.executeInsert();
     }
-    public void InsertGH(String maSP,String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh) {
+    public void InsertGH(String maSP,String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh,String user) {
         SQLiteDatabase db=getWritableDatabase();
-        String sql= " Insert into GioHang values (?,?,?,?,?,?,?)";
+        String sql= " Insert into GioHang values (?,?,?,?,?,?,?,?)";
         SQLiteStatement statement=db.compileStatement(sql);
         statement.clearBindings();
         statement.bindString(1,maSP);
@@ -65,19 +65,37 @@ public class DataBase extends SQLiteOpenHelper {
         statement.bindLong(5,gia);
         statement.bindString(6,moTa);
         statement.bindBlob(7,hinh);
+        statement.bindString(8,user);
         statement.executeInsert();
     }
     public GioHang getDetail(String ma){
         Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang where ID ='" + ma + "'" );
         while (cursor.moveToNext()) {
            GioHang gh = new GioHang(
+                   cursor.getString( 0 ),
+                   cursor.getString( 1 ),
+                   cursor.getString( 2 ),
+                   cursor.getInt( 3 ),
+                   cursor.getInt( 4 ),
+                   cursor.getString( 5 ),
+                   cursor.getBlob( 6 ),
+                   cursor.getString( 7 ));
+            return gh;
+        }
+        return null;
+    }
+    public GioHang getUser(String user){
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang where user ='" + user + "'" );
+        while (cursor.moveToNext()) {
+            GioHang gh = new GioHang(
                     cursor.getString( 0 ),
                     cursor.getString( 1 ),
                     cursor.getString( 2 ),
                     cursor.getInt( 3 ),
                     cursor.getInt( 4 ),
                     cursor.getString( 5 ),
-                    cursor.getBlob( 6 ) );
+                    cursor.getBlob( 6 ),
+                    cursor.getString( 7 ));
             return gh;
         }
         return null;

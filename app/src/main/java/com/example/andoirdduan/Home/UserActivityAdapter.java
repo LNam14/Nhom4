@@ -115,8 +115,9 @@ public class UserActivityAdapter extends BaseAdapter {
                 int giaTien = list.get( i ).getGia();
                 String moTa = list.get( i ).getMoTa();
                 GioHang gh = LoadingScreenActivity.db.getDetail( maSP );
-                if(gh==null){
-                    LoadingScreenActivity.db.InsertGH(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte( viewHolder.imgSP ));
+                GioHang gh1 = LoadingScreenActivity.db.getUser( context.strUsername );
+                if(gh==null||gh1==null){
+                    LoadingScreenActivity.db.InsertGH(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte( viewHolder.imgSP ),context.strUsername);
                     Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang" );
                     list1 = new ArrayList<GioHang>();
                     while (cursor.moveToNext()) {
@@ -127,7 +128,8 @@ public class UserActivityAdapter extends BaseAdapter {
                                 cursor.getInt( 3 ),
                                 cursor.getInt( 4 ),
                                 cursor.getString( 5 ),
-                                cursor.getBlob( 6 ) ) );
+                                cursor.getBlob( 6 ),
+                                cursor.getString( 7 )) );
                     }
                     Toast.makeText(context, "Them Thanh Cong", Toast.LENGTH_SHORT).show();
                 }else{
@@ -142,7 +144,8 @@ public class UserActivityAdapter extends BaseAdapter {
                                 cursor.getInt( 3 ),
                                 cursor.getInt( 4 ),
                                 cursor.getString( 5 ),
-                                cursor.getBlob( 6 ) ) );
+                                cursor.getBlob( 6 ),
+                                cursor.getString( 7 )) );
                     }
                 }
             }

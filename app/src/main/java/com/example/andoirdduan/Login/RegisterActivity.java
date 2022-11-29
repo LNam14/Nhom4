@@ -47,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Vui Lòng Điền Đủ Thông tin!!!", Toast.LENGTH_SHORT).show();
                 }else{
                     ArrayList<User> users= sqlSever.getArrayUser();
+                    System.out.println("UserArray"+users);
                         boolean ketqua = true;
 //                        for(User x : users){
 //                            if(x.getAccount().equals(acc)){

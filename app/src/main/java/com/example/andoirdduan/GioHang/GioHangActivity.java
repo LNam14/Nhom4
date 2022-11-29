@@ -33,6 +33,7 @@ import java.util.ArrayList;
 public class GioHangActivity extends AppCompatActivity {
     SQLSeverGioHang sqlSeverGioHang ;
     ListView lvGioHang;
+    String strUsername = "";
     ArrayList<GioHang> arraySanPham_gioHang;
     private SQLiteDatabase db;
     @Override
@@ -42,6 +43,12 @@ public class GioHangActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView( R.layout.tittle_giohang );
         setContentView( R.layout.activity_gio_hang );
         lvGioHang = findViewById( R.id.lvGioHang );
+        //Cai nay t code nè
+        Bundle bundle = getIntent().getExtras();
+        if(bundle !=  null){
+            strUsername = bundle.getString("hoten");
+            System.out.println("ten nguoi dung: "+ strUsername);
+        }
         loadData();
         GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_gio_hang, arraySanPham_gioHang);
         lvGioHang.setAdapter(adapter);

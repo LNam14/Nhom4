@@ -74,6 +74,7 @@ public class UserActivity extends AppCompatActivity {
                         break;
                     case R.id.insert:
                         Intent insert = new Intent(getBaseContext(), GioHangActivity.class);
+                        insert.putExtra("hoten", strUsername);
                         startActivity(insert);
                         break;
                 }

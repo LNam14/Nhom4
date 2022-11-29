@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class SQLSeverGioHang extends SQLiteOpenHelper {
     private static final String DatabaseName = "GIOHANG";
-    private static final String Table_Name2 = "GioHang";
+    private static final String Table_Name2 = "GioHang1";
     private static final String ID = "id";
     private static final String TenSP = "tensp";
     private static final String TheLoai = "theloai";

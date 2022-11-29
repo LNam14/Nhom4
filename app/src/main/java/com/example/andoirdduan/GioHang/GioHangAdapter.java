@@ -36,6 +36,8 @@ public class GioHangAdapter extends BaseAdapter {
     private int layout;
     private List<GioHang> listSP;
     List<GioHang> list;
+    GioHang gh = new GioHang();
+    int ketqua = 0;
     public GioHangAdapter(GioHangActivity context, int layout, List<GioHang> listSP) {
         this.context = context;
         this.layout = layout;
@@ -86,7 +88,7 @@ public class GioHangAdapter extends BaseAdapter {
             viewHolder.tang = view.findViewById( R.id.tang );
             viewHolder.giam = view.findViewById( R.id.giam );
             viewHolder.spinner = view.findViewById( R.id.spinner_size );
-
+            ketqua = list.get( i ).getSoLuong();
 
             viewHolder.txtSo.setText(String.valueOf( so ));
             view.setTag( viewHolder );
@@ -96,13 +98,16 @@ public class GioHangAdapter extends BaseAdapter {
         viewHolder.tang.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewHolder.txtSo.setText(String.valueOf( so+1 ));
+                ketqua +=1;
+                viewHolder.txtSo.setText(""+ketqua);
             }
         } );
+
         viewHolder.giam.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewHolder.txtSo.setText(String.valueOf( so-1 ));
+                ketqua -= 1;
+                viewHolder.txtSo.setText(""+ketqua);
             }
         } );
         viewHolder.btnMua.setOnClickListener( new View.OnClickListener() {
@@ -115,11 +120,11 @@ public class GioHangAdapter extends BaseAdapter {
             }
         } );
         viewHolder.txtTenSP.setText( sp.getTenSP() );
-        viewHolder.tvType.setText( sp.getPhanLoai() );
+        viewHolder.tvType.setText( String.valueOf( sp.getSoLuong() ) );
 
         String[] a = new String[]{"Size 37","Size 38","Size 39","Size 40","Size 41","Size 42","Size 43"};
         ArrayAdapter<String> adapterspin = new ArrayAdapter<>( context, androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item, a );
-        viewHolder.spinner.setAdapter(adapterspin  );
+        viewHolder.spinner.setAdapter(adapterspin );
         Bitmap bitmap = BitmapFactory.decodeByteArray( sp.getHinh(), 0, sp.getHinh().length );
         viewHolder.imgSP.setImageBitmap( bitmap );
         return view;

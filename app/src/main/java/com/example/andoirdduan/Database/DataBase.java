@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+import com.example.andoirdduan.GioHang.GioHang;
+import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.SanPham.SanPham;
 
 import java.util.ArrayList;
@@ -53,7 +55,7 @@ public class DataBase extends SQLiteOpenHelper {
     }
     public void InsertGH(String maSP,String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh) {
         SQLiteDatabase db=getWritableDatabase();
-        String sql= "Insert into GioHang values (?,?,?,?,?,?,?)";
+        String sql= " Insert into GioHang values (?,?,?,?,?,?,?)";
         SQLiteStatement statement=db.compileStatement(sql);
         statement.clearBindings();
         statement.bindString(1,maSP);
@@ -64,6 +66,21 @@ public class DataBase extends SQLiteOpenHelper {
         statement.bindString(6,moTa);
         statement.bindBlob(7,hinh);
         statement.executeInsert();
+    }
+    public GioHang getDetail(String ma){
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang where ID ='" + ma + "'" );
+        while (cursor.moveToNext()) {
+           GioHang gh = new GioHang(
+                    cursor.getString( 0 ),
+                    cursor.getString( 1 ),
+                    cursor.getString( 2 ),
+                    cursor.getInt( 3 ),
+                    cursor.getInt( 4 ),
+                    cursor.getString( 5 ),
+                    cursor.getBlob( 6 ) );
+            return gh;
+        }
+        return null;
     }
 
 }

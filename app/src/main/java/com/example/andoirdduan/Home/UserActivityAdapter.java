@@ -25,7 +25,6 @@ import com.example.andoirdduan.Database.SQLSeverGioHang;
 import com.example.andoirdduan.GioHang.GioHang;
 import com.example.andoirdduan.GioHang.GioHangActivity;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
-import com.example.andoirdduan.Login.RegisterActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.SanPham;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,6 +35,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserActivityAdapter extends BaseAdapter {
+    SQLSeverGioHang sqlSeverGioHang;
+    SQLSever sqlSever;
     private UserActivity context;
     private int layout;
     private List<SanPham> listSP;
@@ -106,6 +107,7 @@ public class UserActivityAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
+
                 Bitmap bitmap = BitmapFactory.decodeByteArray( sp.getHinh(), 0, sp.getHinh().length );
                 viewHolder.imgSP.setImageBitmap( bitmap );
                 String maSP = list.get( i ).getMaSP();
@@ -114,8 +116,9 @@ public class UserActivityAdapter extends BaseAdapter {
                 int soLuong = list.get( i ).getSoLuong();
                 int giaTien = list.get( i ).getGia();
                 String moTa = list.get( i ).getMoTa();
-                LoadingScreenActivity.db.InsertGH(maSP,tenSP, phanLoai, soLuong, giaTien,moTa,ConverttoArrayByte( viewHolder.imgSP ));
-                Toast.makeText( context, "Thêm thành công", Toast.LENGTH_SHORT ).show();
+                GioHang gh = new GioHang(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte(viewHolder.imgSP));
+                sqlSeverGioHang.AddGioHang(gh);
+                Toast.makeText(context, "Them Thanh Cong", Toast.LENGTH_SHORT).show();
             }
         } );
         viewHolder.txtTenSP.setText( sp.getTenSP() );

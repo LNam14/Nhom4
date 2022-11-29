@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                 }else if(name.equals("admin") && pass.equals("123")){
                     rememberMe(name, pass, ckNhoMatKhau.isChecked());
                     Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                    intent.putExtra("hoten", TenTaiKhoang.getText().toString());
                     startActivity(intent);
                 } else {
                     User s = sqlSever.getUser(name);
@@ -112,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
 
         public void Login (User s){
             Intent intent = new Intent(LoginActivity.this, UserActivity.class);
-            intent.putExtra(EXTRA_USER, s.getAccount());
+            intent.putExtra("hoten", TenTaiKhoang.getText().toString());
             startActivity(intent);
             finish();
     }

@@ -40,10 +40,14 @@ public class HomePage extends AppCompatActivity {
         gridView = findViewById( R.id.gvSanPham );
         navigationView = findViewById( R.id.bottomNavigationView );
         tvUser = findViewById( R.id.tvUserName);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle !=  null){
+            strUsername = bundle.getString("hoten");
+            tvUser.setText("Hello, "+ strUsername);
+        }
         if(checkLoginRemember()<0){
             Toast.makeText(this,"Đăng nhập thành công",Toast.LENGTH_SHORT ).show();
-            System.out.println("USERNAME"+strUsername);
-            tvUser.setText("Hello, "+ strUsername);
+
         }else if(checkLoginRemember()>0){
             Toast.makeText(this,"Lưu mật khẫu thành công",Toast.LENGTH_SHORT ).show();
             System.out.println("USERNAME"+strUsername);

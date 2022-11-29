@@ -39,7 +39,9 @@ public class GioHangActivity extends AppCompatActivity {
         setContentView( R.layout.activity_gio_hang );
         lvGioHang = findViewById( R.id.lvGioHang );
 
-        loadData();
+//        loadData();
+
+        sqlSeverGioHang.getArrayGioHang();
 
     }
     public void loadData() {

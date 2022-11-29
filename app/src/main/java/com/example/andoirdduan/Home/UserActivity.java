@@ -45,12 +45,16 @@ public class UserActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.bottomNavigationView);
         gvSanPham_user = findViewById(R.id.gvSanPham_user);
         tvUser = findViewById(R.id.tvUserName_userActivity);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle !=  null){
+            strUsername = bundle.getString("hoten");
+            tvUser.setText("Hello, "+ strUsername);
+        }
         if(checkLoginRemember()<0){
 //            Intent intent = new Intent(UserActivity.this, LoginActivity.class);
 //            startActivity(intent);
             Toast.makeText(this,"Đăng nhập thành công",Toast.LENGTH_SHORT ).show();
-            System.out.println("USERNAME"+strUsername);
-            tvUser.setText("Hello, "+ strUsername);
+
         }else if(checkLoginRemember()>0){
             Toast.makeText(this,"Lưu mật khẫu thành công",Toast.LENGTH_SHORT ).show();
             System.out.println("USERNAME"+strUsername);
@@ -105,8 +109,8 @@ public class UserActivity extends AppCompatActivity {
     public int checkLoginRemember(){
         SharedPreferences sharedPreferences = getSharedPreferences("USER_FILE.txt",MODE_PRIVATE);
         boolean chk = sharedPreferences.getBoolean("REMEMBER", false);
-        if(chk){
-            strUsername = sharedPreferences.getString("USERNAME","");
+        if(chk) {
+            strUsername = sharedPreferences.getString("USERNAME", "");
 
             return 1;
         }

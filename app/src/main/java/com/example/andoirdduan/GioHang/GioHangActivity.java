@@ -67,6 +67,7 @@ public class GioHangActivity extends AppCompatActivity {
         GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_giohang, arraySanPham_gioHang);
         lvGioHang.setAdapter(adapter);
     }
+    //new one
     public void loadData() {
         Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang" );
         arraySanPham_gioHang = new ArrayList<GioHang>();

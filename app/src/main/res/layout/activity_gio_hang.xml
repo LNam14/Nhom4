@@ -15,7 +15,6 @@
         tools:listitem="@layout/row_giohang">
 
     </ListView>
-
     <LinearLayout
         android:background="@color/white"
         android:layout_width="match_parent"

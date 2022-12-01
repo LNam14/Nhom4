@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="276dp"
-        android:text="Tài khoảng"
+        android:text="Tài khoản"
         android:textColor="#ffff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

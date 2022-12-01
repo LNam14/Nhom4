@@ -24,7 +24,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.andoirdduan.Login.LoadingScreenActivity;
+import com.example.andoirdduan.LoadingScreenActivity;
 import com.example.andoirdduan.R;
 
 import java.io.ByteArrayOutputStream;

@@ -13,11 +13,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.andoirdduan.DBUser.User;
 import com.example.andoirdduan.Home.HomePage;
 import com.example.andoirdduan.Home.UserActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.Database.SQLSever;
+import com.example.andoirdduan.User;
 
 public class LoginActivity extends AppCompatActivity {
     Button DangNhap;

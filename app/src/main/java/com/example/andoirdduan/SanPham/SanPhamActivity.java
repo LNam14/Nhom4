@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.andoirdduan.LoadingScreenActivity;
+import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
 
 import java.io.ByteArrayOutputStream;

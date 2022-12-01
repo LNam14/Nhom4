@@ -9,7 +9,7 @@ public class GioHang {
     public GioHang() {
     }
 
-    public GioHang(String maSP,String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh,String user) {
+    public GioHang(String maSP,String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh, String user) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
@@ -17,7 +17,7 @@ public class GioHang {
         this.Gia = gia;
         this.moTa = moTa;
         this.hinh = hinh;
-        this.user = user;
+        this.user =user;
     }
 
     public String getUser() {

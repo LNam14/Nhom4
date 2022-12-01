@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
 

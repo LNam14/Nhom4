@@ -1,214 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:id="@+id/img_ngaysinhButton"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_color">
-
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="20dp"
-        android:text="Tên đăng nhập"
-        android:textColor="#ffff"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
-    <EditText
-        android:id="@+id/edNgaySinh_RegisterActivity"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/border3"
-        android:backgroundTint="#FAF6F6"
-        android:drawableLeft="@drawable/ic_ngaysinh"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:paddingStart="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="12dp"
-        android:text="Họ và tên"
-        android:textColor="#ffff"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edMail_RegisterActivity" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="12dp"
-        android:text="Ngày sinh"
-        android:textColor="#ffff"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edTen_RegisterActivity" />
-
-    <EditText
-        android:id="@+id/edTen_RegisterActivity"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/border3"
-        android:backgroundTint="#FAF6F6"
-        android:drawableLeft="@drawable/size1"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:paddingStart="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="12dp"
-        android:text="Password"
-        android:textColor="#ffff"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edAccount_RegisterActivity" />
-
-    <EditText
-        android:id="@+id/edMail_RegisterActivity"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/border3"
-        android:backgroundTint="#FAF6F6"
-        android:drawableLeft="@drawable/size3"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:paddingStart="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="12dp"
-        android:text="Email"
-        android:textColor="#ffff"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edPassword_RegisterActivity" />
-
-    <EditText
-        android:id="@+id/edPassword_RegisterActivity"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/border3"
-        android:backgroundTint="#FAF9F9"
-        android:drawableLeft="@drawable/size2"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:paddingStart="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-    <Button
-        android:id="@+id/btnRegister_RegisterActivity"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="100dp"
-        android:backgroundTint="#DDFFFFFF"
-        android:fontFamily="sans-serif-black"
-        android:text="Register"
-        android:textColor="#EB7A23"
-        app:cornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edNgaySinh_RegisterActivity" />
-
+    android:background="#FCFDFF">
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="100dp"
-
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        app:cardCornerRadius="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="4dp"
+        app:cardCornerRadius="90dp">
 
         <ImageView
-            android:id="@+id/cardview_avatar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/icon_user"
+            android:background="@drawable/logo_app"
             android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
-
-
-    <EditText
-        android:id="@+id/edAccount_RegisterActivity"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/border3"
-        android:backgroundTint="#FDFCFC"
-        android:drawableLeft="@drawable/size1"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:paddingStart="10dp"
-        android:textColor="@color/black"
-        android:textColorHighlight="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/tvLogin_RegisterActivity"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:background="?attr/selectableItemBackground"
-        android:fontFamily="sans-serif-black"
-        android:text="Already have an account? Sign in"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister_RegisterActivity" />
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="monospace"
+            android:text="Email"
+            android:textColor="#424040"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edMail_RegisterActivity"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:fontFamily="monospace"
+            android:drawableLeft="@drawable/size1"
+            android:layout_margin="10dp"
+            android:drawablePadding="10dp"
+            android:elevation="7dp"
+            android:inputType="textPersonName"
+            android:paddingStart="10dp"
+            android:textColor="#424040"
+            android:textIsSelectable="true"
+            android:textSize="17sp"
+            android:background="@drawable/edit_text_login" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="monospace"
+            android:text="Họ và tên"
+            android:textColor="#424040"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edTen_RegisterActivity"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:fontFamily="monospace"
+            android:drawableLeft="@drawable/size1"
+            android:layout_margin="10dp"
+            android:drawablePadding="10dp"
+            android:elevation="7dp"
+            android:inputType="textPersonName"
+            android:paddingStart="10dp"
+            android:textColor="#424040"
+            android:textIsSelectable="true"
+            android:textSize="17sp"
+            android:background="@drawable/edit_text_login" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="monospace"
+            android:text="Ngày sinh"
+            android:textColor="#424040"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edNgaySinh_RegisterActivity"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:fontFamily="monospace"
+            android:drawableLeft="@drawable/size1"
+            android:layout_margin="10dp"
+            android:drawablePadding="10dp"
+            android:elevation="10dp"
+            android:inputType="textPersonName"
+            android:paddingStart="7dp"
+            android:textColor="#424040"
+            android:textIsSelectable="true"
+            android:textSize="17sp"
+            android:background="@drawable/edit_text_login" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="monospace"
+            android:text="Username"
+            android:textColor="#424040"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edAccount_RegisterActivity"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_login"
+            android:drawableLeft="@drawable/size1"
+            android:drawablePadding="10dp"
+            android:elevation="7dp"
+            android:fontFamily="monospace"
+            android:inputType="textPersonName"
+            android:paddingStart="10dp"
+            android:textColor="#424040"
+            android:textIsSelectable="true"
+            android:textSize="17sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:layout_marginLeft="10dp"
+            android:text="Password"
+            android:textColor="#424040"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edPassword_RegisterActivity"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:drawableLeft="@drawable/size2"
+            android:fontFamily="monospace"
+            android:layout_margin="10dp"
+            android:drawablePadding="10dp"
+            android:elevation="7dp"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:textColor="#424040"
+            android:textIsSelectable="true"
+            android:textSize="17sp"
+            android:background="@drawable/edit_text_login" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnRegister_RegisterActivity"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:fontFamily="monospace"
+        android:backgroundTint="#F5865B"
+        android:text="Register"
+        android:textColor="#fff"
+        app:cornerRadius="10dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom">
+        <TextView
+            android:id="@+id/tvLogin_RegisterActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="monospace"
+            android:text="Already have an account? Sign in"
+            android:textColor="#424040" />
+    </RelativeLayout>
+</LinearLayout>

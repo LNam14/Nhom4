@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -77,7 +76,7 @@ public class HomePageAdapter extends BaseAdapter {
         } );
         final SanPham sp = listSP.get( i );
         viewHolder.txtTenSP.setText( sp.getTenSP() );
-        viewHolder.tvType.setText( sp.getPhanLoai() );
+        viewHolder.tvType.setText( sp.getThuongHieu() );
         viewHolder.txtPrice.setText( String.valueOf( sp.getGia() ) );
         Bitmap bitmap = BitmapFactory.decodeByteArray( sp.getHinh(), 0, sp.getHinh().length );
         viewHolder.imgSP.setImageBitmap( bitmap );

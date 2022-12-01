@@ -87,7 +87,7 @@ public class DSSPActivity extends AppCompatActivity {
                         final String mota = listSP.get(i).getMoTa();
                         final int giaTien = listSP.get(i).getGia();
                         final int soLuong = listSP.get(i).getSoLuong();
-                        final String phanLoai = listSP.get(i).getPhanLoai();
+                        final String phanLoai = listSP.get(i).getThuongHieu();
 
                         edMaSP.setText( ma );
                         edTenSP.setText(ten);
@@ -168,7 +168,8 @@ public class DSSPActivity extends AppCompatActivity {
                                 cursor.getInt(3),
                                 cursor.getInt(4),
                                 cursor.getString(5),
-                                cursor.getBlob(6)));
+                                cursor.getBlob(6),
+                                cursor.getInt( 7 )));
                     }
 
                     adapter = new SanPhamAdapter( DSSPActivity.this, R.layout.row__listview, listSP);
@@ -191,7 +192,8 @@ public class DSSPActivity extends AppCompatActivity {
                     cursor.getInt(3),
                     cursor.getInt(4),
                     cursor.getString(5),
-                    cursor.getBlob(6)));
+                    cursor.getBlob(6),
+                    cursor.getInt( 7 )));
         }
 
         adapter = new SanPhamAdapter( DSSPActivity.this, R.layout.row__listview, listSP);
@@ -208,7 +210,8 @@ public class DSSPActivity extends AppCompatActivity {
                     cursor.getInt(3),
                     cursor.getInt(4),
                     cursor.getString(5),
-                    cursor.getBlob(6)));
+                    cursor.getBlob(6),
+                    cursor.getInt( 7 )));
         }
         adapter = new SanPhamAdapter( DSSPActivity.this, R.layout.row__listview, listSP);
         listView.setAdapter(adapter);

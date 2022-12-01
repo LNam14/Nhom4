@@ -19,8 +19,9 @@ public class LoadingScreenActivity extends AppCompatActivity {
         setContentView( R.layout.loading_screen_activity);
 
         db = new DataBase(this,"ShopGiay.sqlite",null,1);
-        db.TruyVan("Create Table If not Exists SanPham(ID Text Primary Key, tenSP Text, theLoai Text,soLuong INTEGER, giaTien INTEGER, moTa Text, hinhAnh Blob)");
-        db.TruyVan("Create Table If not Exists GioHang(ID Text Primary Key, tenSP Text, theLoai Text,soLuong INTEGER, giaTien INTEGER, moTa Text, hinhAnh Blob)");
+        db.TruyVan("Create Table If not Exists SanPham(ID Text Primary Key, tenSP Text, theLoai Text,soLuong INTEGER, giaTien INTEGER, moTa Text, hinhAnh Blob,daBan INTEGER)");
+        db.TruyVan("Create Table If not Exists GioHang(ID Text , tenSP Text, theLoai Text,soLuong INTEGER, giaTien INTEGER, moTa Text, hinhAnh Blob, user Text)");
+        db.TruyVan("Create Table If not Exists TongTien(tien Integer )");
         add = findViewById(R.id.btnRegister_RegisterActivity);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

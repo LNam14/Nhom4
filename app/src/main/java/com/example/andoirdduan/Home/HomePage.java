@@ -32,6 +32,7 @@ public class HomePage extends AppCompatActivity {
     GridView gridView;
     String strUsername = "";
     BottomNavigationView navigationView;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +94,8 @@ public class HomePage extends AppCompatActivity {
                     cursor.getInt(3),
                     cursor.getInt(4),
                     cursor.getString(5),
-                    cursor.getBlob(6)));
+                    cursor.getBlob(6),
+                    cursor.getInt( 7 )));
         }
 //        HomePageAdapter adapter = new HomePageAdapter(HomePage.this, R.layout.cardview_activity, arraySanPham);
         HomePageAdapter adapter = new HomePageAdapter(HomePage.this,R.layout.cardview_activity, arraySanPham);
@@ -114,4 +116,5 @@ public class HomePage extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), DSSPActivity.class );
         startActivity( intent );
     }
+
 }

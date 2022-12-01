@@ -3,22 +3,31 @@ package com.example.andoirdduan.SanPham;
 import java.io.Serializable;
 
 public class SanPham implements Serializable{
-    String maSP,tenSP, phanLoai;
+    String maSP,tenSP, thuongHieu;
     int soLuong,Gia;
     String moTa;
     byte[] hinh;
-
+    int daBan;
     public SanPham() {
     }
 
-    public SanPham(String maSP, String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh) {
+    public SanPham(String maSP, String tenSP, String thuongHieu, int soLuong, int gia, String moTa, byte[] hinh,int daBan) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
-        this.phanLoai = phanLoai;
+        this.thuongHieu = thuongHieu;
         this.Gia = gia;
         this.moTa = moTa;
         this.hinh = hinh;
+        this.daBan = daBan;
+    }
+
+    public int getDaBan() {
+        return daBan;
+    }
+
+    public void setDaBan(int daBan) {
+        this.daBan = daBan;
     }
 
     public String getMaSP() {
@@ -37,12 +46,12 @@ public class SanPham implements Serializable{
         this.tenSP = tenSP;
     }
 
-    public String getPhanLoai() {
-        return phanLoai;
+    public String getThuongHieu() {
+        return thuongHieu;
     }
 
-    public void setPhanLoai(String phanLoai) {
-        this.phanLoai = phanLoai;
+    public void setThuongHieu(String thuongHieu) {
+        this.thuongHieu = thuongHieu;
     }
 
     public int getSoLuong() {

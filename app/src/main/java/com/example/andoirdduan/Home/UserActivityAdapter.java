@@ -1,16 +1,17 @@
 package com.example.andoirdduan.Home;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,23 +20,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.andoirdduan.ChiTietSanPham.ChiTietSanPham;
-import com.example.andoirdduan.DBUser.User;
 import com.example.andoirdduan.Database.SQLSever;
 import com.example.andoirdduan.Database.SQLSeverGioHang;
 import com.example.andoirdduan.GioHang.GioHang;
 import com.example.andoirdduan.GioHang.GioHangActivity;
+import com.example.andoirdduan.GioHang.GioHangAdapter;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.SanPham;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserActivityAdapter extends BaseAdapter {
     SQLSeverGioHang sqlSeverGioHang;
+    GioHangAdapter gioHangActivity;
     SQLSever sqlSever;
     private UserActivity context;
     private int layout;
@@ -110,46 +110,25 @@ public class UserActivityAdapter extends BaseAdapter {
                 viewHolder.imgSP.setImageBitmap( bitmap );
                 String maSP = list.get( i ).getMaSP();
                 String tenSP = list.get( i ).getTenSP();
-                String phanLoai = list.get( i ).getPhanLoai();
-                int soLuong = list.get( i ).getSoLuong();
+                String phanLoai = list.get( i ).getThuongHieu();
+                int soLuong = 1;
                 int giaTien = list.get( i ).getGia();
                 String moTa = list.get( i ).getMoTa();
                 GioHang gh = LoadingScreenActivity.db.getDetail( maSP );
-                if(gh==null){
-                    LoadingScreenActivity.db.InsertGH(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte( viewHolder.imgSP ));
-                    Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang" );
-                    list1 = new ArrayList<GioHang>();
-                    while (cursor.moveToNext()) {
-                        list1.add( new GioHang(
-                                cursor.getString( 0 ),
-                                cursor.getString( 1 ),
-                                cursor.getString( 2 ),
-                                cursor.getInt( 3 ),
-                                cursor.getInt( 4 ),
-                                cursor.getString( 5 ),
-                                cursor.getBlob( 6 ) ) );
-                    }
+                GioHang gh1 = LoadingScreenActivity.db.getUser( context.strUsername );
+                if(gh==null||gh1==null){
+                    LoadingScreenActivity.db.InsertGH(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte( viewHolder.imgSP ),context.strUsername);
+                    loadData();
                     Toast.makeText(context, "Them Thanh Cong", Toast.LENGTH_SHORT).show();
                 }else{
-                    LoadingScreenActivity.db.TruyVan("UPDATE GioHang SET soLuong = '" + (gh.getSoLuong()+1) + "' WHERE ID = '" + maSP + "'");
-                    Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang" );
-                    list1 = new ArrayList<GioHang>();
-                    while (cursor.moveToNext()) {
-                        list1.add( new GioHang(
-                                cursor.getString( 0 ),
-                                cursor.getString( 1 ),
-                                cursor.getString( 2 ),
-                                cursor.getInt( 3 ),
-                                cursor.getInt( 4 ),
-                                cursor.getString( 5 ),
-                                cursor.getBlob( 6 ) ) );
-                    }
+                    LoadingScreenActivity.db.TruyVan("UPDATE GioHang SET soLuong = '" + (gh.getSoLuong()+1) + "' WHERE ID = '" + maSP + "' AND user='"+context.strUsername+"'");
+                    loadData();
                 }
             }
         } );
-        viewHolder.txtTenSP.setText( sp.getTenSP() );
-        viewHolder.tvType.setText( sp.getPhanLoai() );
-        viewHolder.txtPrice.setText( String.valueOf( sp.getGia() ) );
+        viewHolder.txtTenSP.setText( "Tên sản phẩm: "+sp.getTenSP() );
+        viewHolder.tvType.setText( "Hãng: "+sp.getThuongHieu() );
+        viewHolder.txtPrice.setText( "Giá: "+ sp.getGia()+"$");
         Bitmap bitmap = BitmapFactory.decodeByteArray( sp.getHinh(), 0, sp.getHinh().length );
         viewHolder.imgSP.setImageBitmap( bitmap );
         return view;
@@ -162,5 +141,20 @@ public class UserActivityAdapter extends BaseAdapter {
         ByteArrayOutputStream stream=new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
+    }
+    public void loadData(){
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang" );
+        list1 = new ArrayList<GioHang>();
+        while (cursor.moveToNext()) {
+            list1.add( new GioHang(
+                    cursor.getString( 0 ),
+                    cursor.getString( 1 ),
+                    cursor.getString( 2 ),
+                    cursor.getInt( 3 ),
+                    cursor.getInt( 4 ),
+                    cursor.getString( 5 ),
+                    cursor.getBlob( 6 ),
+                    cursor.getString( 7 )) );
+        }
     }
 }

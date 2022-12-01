@@ -5,11 +5,11 @@ public class GioHang {
     int soLuong,Gia;
     String moTa;
     byte[] hinh;
-    String user;
+
     public GioHang() {
     }
 
-    public GioHang(String maSP,String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh,String user) {
+    public GioHang(String maSP,String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
@@ -17,15 +17,6 @@ public class GioHang {
         this.Gia = gia;
         this.moTa = moTa;
         this.hinh = hinh;
-        this.user = user;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 
     public String getMaSP() {

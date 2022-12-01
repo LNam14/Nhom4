@@ -57,7 +57,8 @@ public class SanPhamActivity extends AppCompatActivity {
                 int soLuong = Integer.parseInt( edSoLuong.getText().toString().trim() );
                 String moTa = edMoTa.getText().toString().trim();
                 int giaTien = Integer.parseInt( edGiaSP.getText().toString() );
-                LoadingScreenActivity.db.Insert(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte(imgSP));
+                int daBan = 0;
+                LoadingScreenActivity.db.Insert(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte(imgSP),daBan);
                 Toast.makeText( SanPhamActivity.this,"Thêm thành công"+maSP,Toast.LENGTH_SHORT).show();
             }
         });

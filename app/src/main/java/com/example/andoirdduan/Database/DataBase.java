@@ -39,9 +39,9 @@ public class DataBase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-    public void Insert(String maSP, String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh) {
+    public void Insert(String maSP, String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh, int daBan) {
         SQLiteDatabase db=getWritableDatabase();
-        String sql= "Insert into SanPham values (?,?,?,?,?,?,?)";
+        String sql= "Insert into SanPham values (?,?,?,?,?,?,?,?)";
         SQLiteStatement statement=db.compileStatement(sql);
         statement.clearBindings();
         statement.bindString(1,maSP);
@@ -51,6 +51,7 @@ public class DataBase extends SQLiteOpenHelper {
         statement.bindLong(5,gia);
         statement.bindString(6,moTa);
         statement.bindBlob(7,hinh);
+        statement.bindLong(8,daBan);
         statement.executeInsert();
     }
     public void InsertGH(String maSP,String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh,String user) {
@@ -66,6 +67,14 @@ public class DataBase extends SQLiteOpenHelper {
         statement.bindString(6,moTa);
         statement.bindBlob(7,hinh);
         statement.bindString(8,user);
+        statement.executeInsert();
+    }
+    public void InsertT(int gia) {
+        SQLiteDatabase db=getWritableDatabase();
+        String sql= " Insert into TongTien values (?)";
+        SQLiteStatement statement=db.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindLong(1,gia);
         statement.executeInsert();
     }
     public GioHang getDetail(String ma){
@@ -85,7 +94,7 @@ public class DataBase extends SQLiteOpenHelper {
         return null;
     }
     public GioHang getUser(String user){
-        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang where user ='" + user + "'" );
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang where user ='" + user + "'");
         while (cursor.moveToNext()) {
             GioHang gh = new GioHang(
                     cursor.getString( 0 ),

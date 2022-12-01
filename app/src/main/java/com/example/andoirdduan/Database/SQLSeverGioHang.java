@@ -5,11 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.andoirdduan.DBUser.User;
 import com.example.andoirdduan.GioHang.GioHang;
-import com.example.andoirdduan.GioHang.GioHangActivity;
-import com.example.andoirdduan.GioHang.GioHangAdapter;
-import com.example.andoirdduan.R;
 
 import java.util.ArrayList;
 
@@ -60,7 +56,7 @@ public class SQLSeverGioHang extends SQLiteOpenHelper {
         values = new ContentValues();
         values.put(ID, gioHang.getMaSP());
         values.put(TenSP, gioHang.getTenSP());
-        values.put(TheLoai, gioHang.getPhanLoai());
+        values.put(TheLoai, gioHang.getThuongHieu());
         values.put(soLuong, gioHang.getSoLuong());
         values.put(MoTa, gioHang.getMoTa());
         values.put(HinhAnh, gioHang.getHinh());

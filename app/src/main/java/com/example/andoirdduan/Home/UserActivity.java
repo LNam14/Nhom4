@@ -24,6 +24,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ public class UserActivity extends AppCompatActivity {
     ArrayList<SanPham> arraySanPham_user;
     BottomNavigationView navigationView;
     String strUsername = "";
+    String nhoMk = "mua";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +106,8 @@ public class UserActivity extends AppCompatActivity {
                     cursor.getInt(3),
                     cursor.getInt(4),
                     cursor.getString(5),
-                    cursor.getBlob(6)));
+                    cursor.getBlob(6),
+                    cursor.getInt( 7 )));
         }
         UserActivityAdapter adapter = new UserActivityAdapter(UserActivity.this, R.layout.cardview_activity, arraySanPham_user);
         gvSanPham_user.setAdapter(adapter);
@@ -119,27 +123,6 @@ public class UserActivity extends AppCompatActivity {
         return -1;
 
     }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate( R.menu.search, menu );
-//        SearchView searchView = (SearchView) menu.findItem( R.id.search ).getActionView();
-//        searchView.setOnQueryTextListener( new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                return false;
-//            }
-//        } );
-//        return super.onCreateOptionsMenu( menu );
-//    }
-
 }
 
 

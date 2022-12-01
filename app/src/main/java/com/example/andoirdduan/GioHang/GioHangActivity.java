@@ -1,22 +1,27 @@
 package com.example.andoirdduan.GioHang;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,14 +39,12 @@ import com.example.andoirdduan.SanPham.SanPhamAdapter;
 import java.util.ArrayList;
 
 public class GioHangActivity extends AppCompatActivity {
-    SQLSeverGioHang sqlSeverGioHang ;
     ListView lvGioHang;
-    CheckBox ckChonHet;
-    Button btnThanhToan;
-    TextView tvTongTien;
     String strUsername = "";
     ArrayList<GioHang> arraySanPham_gioHang;
     private SQLiteDatabase db;
+    String nhoMk = "mua";
+    TextView tvTongTien;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -49,13 +52,8 @@ public class GioHangActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView( R.layout.tittle_giohang );
         setContentView( R.layout.activity_gio_hang );
         lvGioHang = findViewById( R.id.lvGioHang );
-        ckChonHet = findViewById(R.id.ckChonTatCa);
-        btnThanhToan = findViewById(R.id.btnMuaHang);
-        tvTongTien = findViewById(R.id.tvTongTien);
+        tvTongTien =findViewById( R.id.tvTongTien );
 
-
-
-        //Cai nay t code nè
         Bundle bundle1 = getIntent().getExtras();
         if(bundle1 !=  null){
             strUsername = bundle1.getString("dulieu");
@@ -66,10 +64,11 @@ public class GioHangActivity extends AppCompatActivity {
         loadData();
         GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_giohang, arraySanPham_gioHang);
         lvGioHang.setAdapter(adapter);
+
+
     }
-    //new one
     public void loadData() {
-        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang" );
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang where user ='" + strUsername + "'" );
         arraySanPham_gioHang = new ArrayList<GioHang>();
         while (cursor.moveToNext()) {
             arraySanPham_gioHang.add( new GioHang(
@@ -81,13 +80,14 @@ public class GioHangActivity extends AppCompatActivity {
                     cursor.getString( 5 ),
                     cursor.getBlob( 6 ),
                     cursor.getString( 7 )) );
-            //hehe
         }
-
+        GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_giohang, arraySanPham_gioHang);
+        lvGioHang.setAdapter(adapter);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate( R.menu.back, menu );
+        getMenuInflater().inflate( R.menu.done, menu );
         Button back = (Button) menu.findItem( R.id.back ).getActionView();
         back.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -97,5 +97,15 @@ public class GioHangActivity extends AppCompatActivity {
             }
         } );
         return super.onCreateOptionsMenu( menu );
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences(nhoMk,MODE_PRIVATE);
+        String tien = sharedPreferences.getString("Username", "");
+        boolean save = sharedPreferences.getBoolean("Save", false);
+        if(save ==true){
+            tvTongTien.setText(tien);
+        }
     }
 }

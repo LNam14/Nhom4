@@ -3,226 +3,131 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
+        android:animateLayoutChanges="true"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome back" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="monospace"
+            android:text="Welcome back"
+            android:textColor="#424040"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvUserName_userActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
+            android:fontFamily="monospace"
             android:text="Name"
-            android:textSize="28sp" />
-
-        <ImageView
-            android:id="@+id/imageView3"
+            android:textColor="#424040"
+            android:textSize="33dp"
+            android:textStyle="bold" />
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="216dp"
-            app:srcCompat="@drawable/shoes_slide" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="234dp"
+                app:srcCompat="@drawable/shoes_slide" />
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Categories"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:textSize="28dp"
+            android:fontFamily="monospace"
+            android:text="Categories"
+            android:textColor="#424040"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <HorizontalScrollView
-
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp">
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <Button
-                    android:id="@+id/Size37"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/white"
-                    android:padding="4dp"
-                    android:layout_margin="2dp"
-                    android:textSize="12dp"
-                    android:text="item1"
-                    android:textColor="@color/black" />
-                <Button
-                    android:id="@+id/Co"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/white"
-                    android:padding="4dp"
-                    android:layout_margin="2dp"
-                    android:textSize="12dp"
-                    android:text="item1"
-                    android:textColor="@color/black" />
-                <Button
-                    android:id="@+id/L"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/white"
-                    android:padding="4dp"
-                    android:layout_margin="2dp"
-                    android:textSize="12dp"
-                    android:text="item1"
-                    android:textColor="@color/black"  />
 
                 <Button
-                    android:id="@+id/Hah"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/white"
-                    android:padding="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="12dp"
-                    android:text="item1"
-                    android:textColor="@color/black"  />
+                    android:backgroundTint="#FF5722"
+                    android:padding="2dp"
+                    android:text="ADIDAS"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
                 <Button
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/white"
-                    android:padding="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="12dp"
-                    android:text="item1"
-                    android:textColor="@color/black"/>
+                    android:backgroundTint="#00BCD4"
+                    android:padding="2dp"
+                    android:text="Nike"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
                 <Button
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/white"
-                    android:padding="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="12dp"
-                    android:text="item1"
-                    android:textColor="@color/black"/>
+                    android:backgroundTint="#4CAF50"
+                    android:padding="2dp"
+                    android:text="Converse"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
                 <Button
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/white"
-                    android:padding="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="12dp"
-                    android:text="item1"
-                    android:textColor="@color/black"/>
+                    android:backgroundTint="#FF9800"
+                    android:padding="2dp"
+                    android:text="Supreme"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
                 <Button
-                    android:id="@+id/ge"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/white"
-                    android:padding="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:textSize="12dp"
-                    android:text="item1"
-                    android:textColor="@color/black"/>
+                    android:backgroundTint="#E91E63"
+                    android:padding="2dp"
+                    android:text="Balenciaga"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
             </LinearLayout>
-
-
-<!--            &lt;!&ndash; using linear layout to store multiple view-->
-<!--                 inside a Horizontal Scroll View &ndash;&gt;-->
-<!--            <LinearLayout-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal">-->
-
-<!--                &lt;!&ndash; multiple button views to show a-->
-<!--                      scrollable horizontal list &ndash;&gt;-->
-<!--                <Button-->
-<!--                    android:id="@+id/item1"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="100dp"-->
-<!--                    android:layout_margin="10dp"-->
-<!--                    android:backgroundTint="@color/white"-->
-<!--                    android:padding="4dp"-->
-<!--                    android:text="item1"-->
-<!--                    android:textColor="@color/black" />-->
-
-<!--                <Button-->
-<!--                    android:id="@+id/item2"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="100dp"-->
-<!--                    android:layout_margin="10dp"-->
-<!--                    android:backgroundTint="@color/white"-->
-<!--                    android:padding="4dp"-->
-<!--                    android:text="item3"-->
-<!--                    android:textColor="@color/black" />-->
-
-<!--                <Button-->
-<!--                    android:id="@+id/item3"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="100dp"-->
-<!--                    android:layout_margin="10dp"-->
-<!--                    android:backgroundTint="@color/white"-->
-<!--                    android:padding="4dp"-->
-<!--                    android:text="item3"-->
-<!--                    android:textColor="@color/black" />-->
-
-<!--                <Button-->
-<!--                    android:id="@+id/item4"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="100dp"-->
-<!--                    android:layout_margin="10dp"-->
-<!--                    android:backgroundTint="@color/white"-->
-<!--                    android:padding="4dp"-->
-<!--                    android:text="item4"-->
-<!--                    android:textColor="@color/black" />-->
-
-<!--                <Button-->
-<!--                    android:id="@+id/item5"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="100dp"-->
-<!--                    android:layout_margin="10dp"-->
-<!--                    android:backgroundTint="@color/white"-->
-<!--                    android:padding="4dp"-->
-<!--                    android:text="item5"-->
-<!--                    android:textColor="@color/black" />-->
-
-<!--                <Button-->
-<!--                    android:id="@+id/item6"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="100dp"-->
-<!--                    android:layout_margin="10dp"-->
-<!--                    android:backgroundTint="@color/white"-->
-<!--                    android:padding="4dp"-->
-<!--                    android:text="item6"-->
-<!--                    android:textColor="@color/black" />-->
-<!--            </LinearLayout>-->
-
-
         </HorizontalScrollView>
-
         <GridView
+            android:scrollbarStyle="insideOverlay"
+            android:background="#fff"
+            android:fadeScrollbars="false"
             android:id="@+id/gvSanPham_user"
             android:layout_width="match_parent"
-            android:layout_height="352dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="55dp"
             android:numColumns="2"
             tools:listitem="@layout/cardview_activity">
-
         </GridView>
-
-
     </LinearLayout>
-
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomMenu"
         android:layout_width="match_parent"
@@ -238,7 +143,7 @@
             android:id="@+id/bottomNavigationView"
             android:layout_marginRight="16dp"
             app:menu="@menu/menu_bottom_nav"
-            android:background="@drawable/trans"/>
+            android:background="#F5865B"/>
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -247,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/giohang"
-        app:backgroundTint="#FCD400"
+        app:backgroundTint="#FFC107"
         app:layout_anchor="@id/bottomMenu"
         tools:ignore="SpeakableTextPresentCheck">
 

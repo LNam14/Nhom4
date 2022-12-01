@@ -151,7 +151,6 @@ public class GioHangAdapter extends BaseAdapter {
                     context.tvTongTien.setText( "" + tongTien );
                 } else {
                         context.tvTongTien.setText( "" + 0);
-                        //.
                 }
             }
         } );

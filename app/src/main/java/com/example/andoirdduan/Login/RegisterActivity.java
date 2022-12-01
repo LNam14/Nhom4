@@ -10,9 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.andoirdduan.DBUser.User;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.Database.SQLSever;
+import com.example.andoirdduan.User;
 
 import java.util.ArrayList;
 

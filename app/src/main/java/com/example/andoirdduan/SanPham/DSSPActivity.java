@@ -39,12 +39,14 @@ public class DSSPActivity extends AppCompatActivity {
     int REQUEST_CODE=123;
     @SuppressLint("MissingInflatedId")
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.dssp_activity );
         listView = (ListView) findViewById(R.id.lvSanPham);
         ImageView imgSP = findViewById(R.id.imageView_sua);
         loadData();
+        //cc
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {

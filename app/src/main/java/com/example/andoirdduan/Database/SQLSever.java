@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.andoirdduan.DBUser.User;
+import com.example.andoirdduan.User;
 
 import java.util.ArrayList;
 

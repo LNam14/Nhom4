@@ -1,6 +1,7 @@
-package com.example.andoirdduan.DBUser;
+package com.example.andoirdduan;
 
-public class User {
+public class
+User {
     private String Account, Gmail, Password, Ten, NgaySinh;
 
     public User() {

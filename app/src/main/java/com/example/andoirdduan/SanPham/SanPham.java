@@ -1,5 +1,8 @@
 package com.example.andoirdduan.SanPham;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+
 import java.io.Serializable;
 
 public class SanPham implements Serializable{

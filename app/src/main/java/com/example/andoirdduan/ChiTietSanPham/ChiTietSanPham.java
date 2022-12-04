@@ -34,6 +34,8 @@ public class ChiTietSanPham extends AppCompatActivity {
         soluong = findViewById(R.id.txtSoLuong);
         thuonghieu = findViewById( R.id.txtThuongHieu );
         initData();
+
+
     }
 
     public void initData(){

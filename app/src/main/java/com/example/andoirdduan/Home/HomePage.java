@@ -66,7 +66,7 @@ public class HomePage extends AppCompatActivity {
                         break;
                     case R.id.search:
                         break;
-                    case R.id.insert:
+                    case R.id.fab:
                         Intent insert = new Intent(getBaseContext(), SanPhamActivity.class);
                         startActivity(insert);
                         break;

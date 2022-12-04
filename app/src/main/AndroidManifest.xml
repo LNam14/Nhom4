@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,7 +16,21 @@
         android:theme="@style/Theme.AndoirdDuAn"
         tools:targetApi="31">
         <activity
-            android:name=".DiaChiNhanHangActivity"
+            android:name=".UserManager.NapTienActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UserManager.UserManagerActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DiaChiNhanHang.DiaChiNhanHangActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -29,19 +45,18 @@
         </activity>
         <activity
             android:name=".ChiTietSanPham.ChiTietSanPham"
-            android:label="Chi tiết sản phẩm"
-            android:exported="false">
+            android:exported="false"
+            android:label="Chi tiết sản phẩm">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-        <activity
-            android:name=".NhanVien.NhanVienActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+        </activity> <!-- <activity -->
+        <!-- android:name=".NhanVien.NhanVienActivity" -->
+        <!-- android:exported="false"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.app.lib_name" -->
+        <!-- android:value="" /> -->
+        <!-- </activity> -->
         <activity
             android:name=".SanPham.DSSPActivity"
             android:exported="false"

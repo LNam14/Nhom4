@@ -17,6 +17,7 @@ public class SQLSever extends SQLiteOpenHelper {
     private static final String Password = "password";
     private static final String Ten = "ten";
     private static final String NgaySinh = "ngaysinh";
+    private static final String Vi = "vi";
     private static int version = 1;
 
     public SQLiteDatabase db;
@@ -35,6 +36,7 @@ public class SQLSever extends SQLiteOpenHelper {
                 Email + " TEXT, " +
                 Password + " TEXT, " +
                 Ten + " TEXT, " +
+                Vi + " INTEGER, " +
                 NgaySinh + " TEXT)";
         db.execSQL(Create_Table_user);
 
@@ -53,6 +55,7 @@ public class SQLSever extends SQLiteOpenHelper {
         values.put(Email, user.getGmail());
         values.put(Password, user.getPassword());
         values.put(Ten, user.getTen());
+        values.put(Vi,user.getVi());
         values.put(NgaySinh, user.getNgaySinh());
 
         db.insert(Table_Name1, null, values);
@@ -71,7 +74,8 @@ public class SQLSever extends SQLiteOpenHelper {
                 s.setGmail(cursor.getString(1));
                 s.setPassword(cursor.getString(2));
                 s.setTen(cursor.getString(3));
-                s.setNgaySinh(cursor.getString(4));
+                s.setVi(cursor.getInt(4));
+                s.setNgaySinh(cursor.getString(5));
                 list.add(s);
             }while (cursor.moveToNext());
         }else{
@@ -83,7 +87,7 @@ public class SQLSever extends SQLiteOpenHelper {
     }
     public User getUser(String account){
         db = this.getWritableDatabase();
-        Cursor cursor = db.query(Table_Name1, new String[]{Account, Email, Password, Ten, NgaySinh},
+        Cursor cursor = db.query(Table_Name1, new String[]{Account, Email, Password, Ten,Vi, NgaySinh},
                 Account + "=?", new String[]{account}, null, null, null,null);
         User s = new User();
         if(cursor.moveToFirst()){
@@ -91,7 +95,8 @@ public class SQLSever extends SQLiteOpenHelper {
             s.setGmail(cursor.getString(1));
             s.setPassword(cursor.getString(2));
             s.setTen(cursor.getString(3));
-            s.setNgaySinh(cursor.getString(4));
+            s.setVi(cursor.getInt(4));
+            s.setNgaySinh(cursor.getString(5));
         }else{
             s = null;
         }
@@ -99,27 +104,20 @@ public class SQLSever extends SQLiteOpenHelper {
         db.close();
         return s;
     }
-    public boolean Changpass(String account, String newpass){
-        SQLiteDatabase db = this.getWritableDatabase();
+
+
+    public int updateNap(String account, String s ) {
+        db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Password,newpass);
-        int a = db.update(Table_Name1,values,Account + "=?",new String[]{account});
-        if(a != 0){
-            return true;
-        }else{
-            return false;
+        values.put("vi", s);
+        int result = db.update(Table_Name1, values, "account=?", new
+                String[]{account});
+        if (result == 0) {
+            return -1;
         }
+        return 1;
     }
-//    public int Update(Student student){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//
-//        values.put(NAME,student.getName());
-//
-//        return db.update(TABLE_NAME,values,ID +"=?",new String[] { String.valueOf(student.getId())});
-//
-//
-//    }
+
 
 
 }

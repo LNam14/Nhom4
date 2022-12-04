@@ -101,6 +101,8 @@ public class GioHangAdapter extends BaseAdapter {
             tongTien = list.get( i ).getGia();
             viewHolder.txtSo.setText( String.valueOf( so ) );
             view.setTag( viewHolder );
+
+
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }

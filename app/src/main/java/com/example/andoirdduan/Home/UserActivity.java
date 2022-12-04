@@ -20,6 +20,7 @@ import com.example.andoirdduan.Login.LoginActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
+import com.example.andoirdduan.UserManager.UserManagerActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -77,8 +78,12 @@ public class UserActivity extends AppCompatActivity {
                         break;
                     case R.id.fab:
                         Intent insert = new Intent(UserActivity.this, GioHangActivity.class);
-
                         startActivity(insert);
+                        break;
+                    case R.id.user:
+                        Intent user = new Intent(getBaseContext(), UserManagerActivity.class);
+                        user.putExtra("name_user", strUsername);
+                        startActivity(user);
                         break;
                 }
                 return false;

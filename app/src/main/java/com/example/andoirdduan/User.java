@@ -3,16 +3,26 @@ package com.example.andoirdduan;
 public class
 User {
     private String Account, Gmail, Password, Ten, NgaySinh;
+    private int Vi;
 
     public User() {
     }
 
-    public User(String account, String gmail, String password, String ten, String ngaySinh) {
+    public User(String account, String gmail, String password, String ten, String ngaySinh, int vi) {
         Account = account;
         Gmail = gmail;
         Password = password;
         Ten = ten;
         NgaySinh = ngaySinh;
+        Vi= vi;
+    }
+
+    public int getVi() {
+        return Vi;
+    }
+
+    public void setVi(int vi) {
+        Vi = vi;
     }
 
     public String getAccount() {

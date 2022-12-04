@@ -20,7 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnDangKi,imageButtonNgaySinh;
     EditText edTaiKhoang,edMatKhau,edEmail,edTen,edNgaySinh;
     TextView login;
-
+    int vi = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +43,15 @@ public class RegisterActivity extends AppCompatActivity {
                 final String mk1= edMatKhau.getText().toString();
                 final String ten= edTen.getText().toString();
                 final String ngaysinh= edNgaySinh.getText().toString();
+
                 if(Gmail.equals("")|| mk1.equals("") || acc.equals("") || ten.equals("") || ngaysinh.equals("")){
                     Toast.makeText(RegisterActivity.this, "Vui Lòng Điền Đủ Thông tin!!!", Toast.LENGTH_SHORT).show();
                 }else{
                     ArrayList<User> users= sqlSever.getArrayUser();
                     System.out.println("UserArray"+users);
                         boolean ketqua = true;
-//                        for(User x : users){
-//                            if(x.getAccount().equals(acc)){
-//                                ketqua = false;
-//                            }
-//                        }
                         if(ketqua == true){
-                            User s = new User(acc, Gmail, mk1, ten, ngaysinh);
+                            User s = new User(acc, Gmail, mk1, ten, ngaysinh,vi);
                             sqlSever.AddUser(s);
                             if(s!=null){
                                 Toast.makeText(RegisterActivity.this, "Đăng Ký Thành Công ^.^", Toast.LENGTH_SHORT).show();

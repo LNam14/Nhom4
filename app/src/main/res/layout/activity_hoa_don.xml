@@ -6,47 +6,39 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context=".GioHang.GioHangActivity">
-
-
-    <ListView
-        android:id="@+id/lvSanPhamThanhToan"
-        android:layout_width="match_parent"
-        android:layout_height="659dp"
-        android:layout_below="@+id/ine1"
-        android:layout_marginTop="0dp"
-        tools:listitem="@layout/hoa_don_row_activity" />
-
     <LinearLayout
-        android:id="@+id/ine1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/boder1"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/btnTheMDC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Chọn địa chỉ"
+                    android:src="@android:drawable/ic_menu_add" />
+                <ListView
+                    android:id="@+id/lvDCHD"
+                    tools:listitem="@layout/row_diachi"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"/>
+       </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvDiaChi"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:text="Nhập vào địa chỉ"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/btnDiaChi"
-            android:layout_width="wrap_content"
+        <ListView
+            android:id="@+id/lvSanPhamThanhToan"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text=">"
-            android:textSize="25dp" />
-
+            android:layout_below="@+id/ine1"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="0dp"
+            tools:listitem="@layout/hoa_don_row_activity" />
     </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

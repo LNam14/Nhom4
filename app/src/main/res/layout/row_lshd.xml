@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtMaHD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="Mã hóa đơn"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtHoTen_HD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="Họ và tên"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/txtSDT_HD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="SDT"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/txtTHX_HD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="Tỉnh/Huyện/Xã"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/txtSoNha_HD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="Số nhà"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/txtTongTien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="Tổng tiền"
+        android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="horizontal">
+
+        <ListView
+            android:id="@+id/lv_rowlshd"
+            tools:listitem="@layout/hoa_don_row_activity"
+            android:layout_width="match_parent"
+            android:layout_height="1000dp"/>
+    </LinearLayout>
+
+</LinearLayout>

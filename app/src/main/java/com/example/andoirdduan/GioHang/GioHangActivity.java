@@ -1,5 +1,6 @@
 package com.example.andoirdduan.GioHang;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -25,7 +28,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.andoirdduan.ChiTietSanPham.ChiTietSanPham;
 import com.example.andoirdduan.Database.SQLSeverGioHang;
+import com.example.andoirdduan.HoaDon.HoaDonActivity;
 import com.example.andoirdduan.Home.HomePage;
 import com.example.andoirdduan.Home.HomePageAdapter;
 import com.example.andoirdduan.Home.UserActivity;
@@ -37,6 +42,7 @@ import com.example.andoirdduan.SanPham.SanPham;
 import com.example.andoirdduan.SanPham.SanPhamAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GioHangActivity extends AppCompatActivity {
     ListView lvGioHang;
@@ -45,15 +51,36 @@ public class GioHangActivity extends AppCompatActivity {
     private SQLiteDatabase db;
     String nhoMk = "mua";
     TextView tvTongTien;
+    Button btnMuaHang;
+    int i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
         getSupportActionBar().setCustomView( R.layout.tittle_giohang );
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageView btnBack = findViewById( R.id.btnBack );
+        btnBack.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GioHangActivity.this, UserActivity.class);
+                startActivity( intent );
+            }
+        } );
+
         setContentView( R.layout.activity_gio_hang );
         lvGioHang = findViewById( R.id.lvGioHang );
         tvTongTien =findViewById( R.id.tvTongTien );
-
+        btnMuaHang = findViewById( R.id.btnMuaHang );
+        btnMuaHang.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), HoaDonActivity.class );
+                intent.putExtra("dulieu", strUsername);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity( intent );
+            }
+        } );
+        getDoanhThu();
         Bundle bundle1 = getIntent().getExtras();
         if(bundle1 !=  null){
             strUsername = bundle1.getString("dulieu");
@@ -75,28 +102,15 @@ public class GioHangActivity extends AppCompatActivity {
                     cursor.getString( 0 ),
                     cursor.getString( 1 ),
                     cursor.getString( 2 ),
-                    cursor.getInt( 3 ),
+                    cursor.getString( 3 ),
                     cursor.getInt( 4 ),
-                    cursor.getString( 5 ),
-                    cursor.getBlob( 6 ),
-                    cursor.getString( 7 )) );
+                    cursor.getInt( 5 ),
+                    cursor.getString( 6 ),
+                    cursor.getBlob( 7 ),
+                    cursor.getString( 8 )) );
         }
         GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_giohang, arraySanPham_gioHang);
         lvGioHang.setAdapter(adapter);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate( R.menu.back, menu );
-        getMenuInflater().inflate( R.menu.done, menu );
-        Button back = (Button) menu.findItem( R.id.back ).getActionView();
-        back.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(GioHangActivity.this, UserActivity.class );
-                startActivity( intent );
-            }
-        } );
-        return super.onCreateOptionsMenu( menu );
     }
     @Override
     protected void onResume() {
@@ -107,5 +121,15 @@ public class GioHangActivity extends AppCompatActivity {
         if(save ==true){
             tvTongTien.setText(tien);
         }
+    }
+    public double getDoanhThu(){
+        int doanhThu = 0;
+        Cursor data = LoadingScreenActivity.db.TruyVanTraVe( "SELECT SUM(soLuong*giaTien) FROM GioHang" );
+        while (data.moveToNext()) {
+            int tongTien = data.getInt( 0);
+            doanhThu += tongTien ;
+        }
+        tvTongTien.setText(doanhThu+"$");
+        return doanhThu;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.andoirdduan.GioHang;
 
 public class GioHang {
-    String maSP,tenSP, thuongHieu;
+    String maSP,tenSP, thuongHieu,size;
     int soLuong,Gia;
     String moTa;
     byte[] hinh;
@@ -9,15 +9,28 @@ public class GioHang {
     public GioHang() {
     }
 
-    public GioHang(String maSP,String tenSP, String phanLoai, int soLuong, int gia, String moTa, byte[] hinh,String user) {
+    public GioHang(String maSP,String tenSP, String thuongHieu, String size, int soLuong, int gia, String moTa, byte[] hinh, String user) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
-        this.thuongHieu = phanLoai;
+        this.thuongHieu = thuongHieu;
+        this.size = size;
         this.Gia = gia;
         this.moTa = moTa;
         this.hinh = hinh;
-        this.user = user;
+        this.user =user;
+    }
+
+    public void setThuongHieu(String thuongHieu) {
+        this.thuongHieu = thuongHieu;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 
     public String getUser() {
@@ -46,10 +59,6 @@ public class GioHang {
 
     public String getThuongHieu() {
         return thuongHieu;
-    }
-
-    public void setPhanLoai(String phanLoai) {
-        this.thuongHieu = phanLoai;
     }
 
     public int getSoLuong() {

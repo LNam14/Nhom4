@@ -32,11 +32,11 @@ public class UserManagerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_manager);
-        Name= findViewById(R.id.edNameUser);
-        Quyen=findViewById(R.id.edQuyen);
-        NapThe=findViewById(R.id.btnNap);
-        DangXuat=findViewById(R.id.btnDangXuat);
-        Vi=findViewById(R.id.edViTien);
+        Name = findViewById(R.id.edNameUser);
+        Quyen = findViewById(R.id.edQuyen);
+        NapThe = findViewById(R.id.btnNap);
+        DangXuat = findViewById(R.id.btnDangXuat);
+        Vi = findViewById(R.id.edViTien);
         final SQLSever sqlSever = new SQLSever(this);
         Bundle bundle1 = getIntent().getExtras();
         account = bundle1.getString("name_user");

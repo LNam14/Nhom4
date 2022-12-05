@@ -16,6 +16,20 @@
         android:theme="@style/Theme.AndoirdDuAn"
         tools:targetApi="31">
         <activity
+            android:name=".CTHD.LichSuHoaDon"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ChiTietHoaDon.CTHoaDon"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".UserManager.NapTienActivity"
             android:exported="false">
             <meta-data
@@ -50,13 +64,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- <activity -->
-        <!-- android:name=".NhanVien.NhanVienActivity" -->
-        <!-- android:exported="false"> -->
-        <!-- <meta-data -->
-        <!-- android:name="android.app.lib_name" -->
-        <!-- android:value="" /> -->
-        <!-- </activity> -->
+        </activity>
         <activity
             android:name=".SanPham.DSSPActivity"
             android:exported="false"

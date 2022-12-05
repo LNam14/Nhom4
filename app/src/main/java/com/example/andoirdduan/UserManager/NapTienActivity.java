@@ -30,18 +30,14 @@ public class NapTienActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nap_tien);
         Tien = findViewById(R.id.edTienNap);
         btnNapTien = findViewById(R.id.btnNapTien);
+
         sqlSever = new SQLSever(this);
         Bundle bundle1 = getIntent().getExtras();
         account = bundle1.getString("name_user");
         tien = bundle1.getInt("Tien");
         Toast.makeText(this, "Tien: " +tien, Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
     }
+
     public void Nap(View view) {
         int tien2 = Integer.parseInt(Tien.getText().toString());
         tienNap = tien + tien2;
@@ -50,11 +46,9 @@ public class NapTienActivity extends AppCompatActivity {
             if (sqlSever.updateNap(account, String.valueOf(tienNap)) > 0) {
             Toast.makeText(getApplicationContext(), "Lưu thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), UserManagerActivity.class);
+                intent.putExtra("name_user", account);
+                intent.putExtra("Tien", tien);
                 startActivity(intent);
         }
     }
-
-
-
-
 }

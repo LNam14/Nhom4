@@ -116,7 +116,6 @@
             </LinearLayout>
         </HorizontalScrollView>
         <GridView
-            android:scrollbarStyle="insideOverlay"
             android:background="#fff"
             android:fadeScrollbars="false"
             android:id="@+id/gvSanPham_user"

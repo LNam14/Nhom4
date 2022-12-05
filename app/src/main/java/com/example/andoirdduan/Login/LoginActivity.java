@@ -61,14 +61,18 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), HomePage.class);
                     intent.putExtra("hoten", TenTaiKhoang.getText().toString());
                     startActivity(intent);
-                } else {
+                } else if(name.equals("1") && pass.equals("1")){
+                    rememberMe(name, pass, ckNhoMatKhau.isChecked());
+                    Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                    intent.putExtra("hoten", TenTaiKhoang.getText().toString());
+                    startActivity(intent);
+                }else {
                     User s = sqlSever.getUser(name);
                     if (s != null) {
                         if (s.getPassword().equals(pass)) {
                             rememberMe(name, pass, ckNhoMatKhau.isChecked());
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công ^.^", Toast.LENGTH_SHORT).show();
                             Login(s);
-
                         } else {
                             Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác!!!", Toast.LENGTH_SHORT).show();
                         }
@@ -76,13 +80,6 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Tài khoản Không Tồn tại!!!", Toast.LENGTH_SHORT).show();
                     }
                 }
-//                ckNhoMatKhau.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//
-//                    }
-//                })
-                //cmámcmámmmmmmmmmmm
             }
 
         });

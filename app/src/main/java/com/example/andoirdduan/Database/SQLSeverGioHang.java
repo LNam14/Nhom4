@@ -76,7 +76,7 @@ public class SQLSeverGioHang extends SQLiteOpenHelper {
                 GioHang gioHang = new GioHang();
                 gioHang.setMaSP(cursor.getString(0));
                 gioHang.setTenSP(cursor.getString(1));
-                gioHang.setPhanLoai(cursor.getString(2));
+                gioHang.setThuongHieu(cursor.getString(2));
                 gioHang.setSoLuong(cursor.getInt(3));
                 gioHang.setMoTa(cursor.getString(4));
                 gioHang.setHinh(cursor.getBlob(5));
@@ -98,7 +98,7 @@ public class SQLSeverGioHang extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             gioHang.setMaSP(cursor.getString(0));
             gioHang.setTenSP(cursor.getString(1));
-            gioHang.setPhanLoai(cursor.getString(2));
+            gioHang.setThuongHieu(cursor.getString(2));
             gioHang.setSoLuong(cursor.getInt(3));
             gioHang.setMoTa(cursor.getString(4));
             gioHang.setHinh(cursor.getBlob(5));

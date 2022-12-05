@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/txtHoTen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="Họ và tên"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/txtSDT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="SDT"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/txtTHX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="Tỉnh/Huyện/Xã"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/txtSoNha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="Số nhà"
+        android:textSize="20sp" />
+</LinearLayout>

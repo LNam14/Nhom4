@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +22,8 @@ import androidx.annotation.NonNull;
 
 import com.example.andoirdduan.ChiTietSanPham.ChiTietSanPham;
 import com.example.andoirdduan.Database.SQLSever;
-import com.example.andoirdduan.Database.SQLSeverGioHang;
 import com.example.andoirdduan.GioHang.GioHang;
 import com.example.andoirdduan.GioHang.GioHangActivity;
-import com.example.andoirdduan.GioHang.GioHangAdapter;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.SanPham;
@@ -34,8 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserActivityAdapter extends BaseAdapter {
-    SQLSeverGioHang sqlSeverGioHang;
-    GioHangAdapter gioHangActivity;
     SQLSever sqlSever;
     private UserActivity context;
     private int layout;
@@ -91,12 +88,15 @@ public class UserActivityAdapter extends BaseAdapter {
         } else {
             viewHolder =(ViewHolder) view.getTag();
         }
+
         viewHolder.imgSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!v.isLongClickable()) {
+
                     Intent intent1 = new Intent(context, ChiTietSanPham.class);
                     intent1.putExtra("chitiet", sp);
+                    intent1.putExtra("dulieu", context.strUsername);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent1);
                 }
@@ -111,15 +111,19 @@ public class UserActivityAdapter extends BaseAdapter {
                 String maSP = list.get( i ).getMaSP();
                 String tenSP = list.get( i ).getTenSP();
                 String phanLoai = list.get( i ).getThuongHieu();
+                String size = "Size 37";
                 int soLuong = 1;
                 int giaTien = list.get( i ).getGia();
                 String moTa = list.get( i ).getMoTa();
+                GioHang s = LoadingScreenActivity.db.getDetail( size );
                 GioHang gh = LoadingScreenActivity.db.getDetail( maSP );
                 GioHang gh1 = LoadingScreenActivity.db.getUser( context.strUsername );
-                if(gh==null||gh1==null){
-                    LoadingScreenActivity.db.InsertGH(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte( viewHolder.imgSP ),context.strUsername);
+                if(gh==null||gh1==null||s==null){
+                    LoadingScreenActivity.db.InsertGH(maSP,tenSP,phanLoai,size,soLuong,giaTien,moTa,ConverttoArrayByte( viewHolder.imgSP ),context.strUsername);
                     loadData();
                     Toast.makeText(context, "Them Thanh Cong", Toast.LENGTH_SHORT).show();
+                    int tongTien = soLuong* giaTien;
+                    System.out.println("tien"+tongTien);
                 }else{
                     LoadingScreenActivity.db.TruyVan("UPDATE GioHang SET soLuong = '" + (gh.getSoLuong()+1) + "' WHERE ID = '" + maSP + "' AND user='"+context.strUsername+"'");
                     loadData();
@@ -150,11 +154,13 @@ public class UserActivityAdapter extends BaseAdapter {
                     cursor.getString( 0 ),
                     cursor.getString( 1 ),
                     cursor.getString( 2 ),
-                    cursor.getInt( 3 ),
+                    cursor.getString( 3 ),
                     cursor.getInt( 4 ),
-                    cursor.getString( 5 ),
-                    cursor.getBlob( 6 ),
-                    cursor.getString( 7 )) );
+                    cursor.getInt( 5 ),
+                    cursor.getString( 6 ),
+                    cursor.getBlob( 7 ),
+                    cursor.getString( 8 )) );
         }
     }
+
 }

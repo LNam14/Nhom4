@@ -19,7 +19,7 @@ import java.util.List;
 
 public class LichSuHoaDon extends AppCompatActivity {
     ListView listView;
-    List<DiaChi> listDC;
+    List<LichSu> listDC;
     List<GioHang> list;
 
     @Override
@@ -34,15 +34,16 @@ public class LichSuHoaDon extends AppCompatActivity {
     }
 
     public void loadData1() {
-        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from DiaChi" );
-        listDC = new ArrayList<DiaChi>();
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from HoaDon1" );
+        listDC = new ArrayList<LichSu>();
         while (cursor.moveToNext()) {
-            listDC.add( new DiaChi(
-                    cursor.getString( 0 ),
-                    cursor.getInt( 1 ),
-                    cursor.getString( 2 ),
+            listDC.add( new LichSu(
+                    cursor.getInt( 0 ),
+                    cursor.getString( 1 ),
+                    cursor.getInt( 2 ),
                     cursor.getString( 3 ),
-                    cursor.getString( 4 ) ) );
+                    cursor.getString( 4 ),
+                    cursor.getInt( 5 )));
         }
     }
 

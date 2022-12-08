@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="20dp"
+    tools:context=".CTHD.CTHD"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txtMaHD"
+        android:id="@+id/txtMaHD_CT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines="1"
@@ -15,35 +16,35 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/txtHoTen_HD"
+        android:id="@+id/txtHoTen_CT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines="1"
         android:text="Họ và tên"
         android:textSize="20sp" />
     <TextView
-        android:id="@+id/txtSDT_HD"
+        android:id="@+id/txtSDT_CT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines="1"
         android:text="SDT"
         android:textSize="20sp" />
     <TextView
-        android:id="@+id/txtTHX_HD"
+        android:id="@+id/txtTHX_CT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines="1"
         android:text="Tỉnh/Huyện/Xã"
         android:textSize="20sp" />
     <TextView
-        android:id="@+id/txtSoNha_HD"
+        android:id="@+id/txtSoNha_CT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines="1"
         android:text="Số nhà"
         android:textSize="20sp" />
     <TextView
-        android:id="@+id/txtTongTien"
+        android:id="@+id/txtTongTien_CT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines="1"
@@ -58,10 +59,10 @@
         android:orientation="horizontal">
 
         <ListView
-            android:id="@+id/lv_rowlshd"
+            android:id="@+id/lv_rowlshd_CT"
             tools:listitem="@layout/hoa_don_row_activity"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="10000dp"/>
     </LinearLayout>
 
 </LinearLayout>

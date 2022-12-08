@@ -1,9 +1,12 @@
 package com.example.andoirdduan.CTHD;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.andoirdduan.ChiTietSanPham.ChiTietSanPham;
 import com.example.andoirdduan.Database.SQLSever;
 import com.example.andoirdduan.DiaChiNhanHang.DiaChi;
 import com.example.andoirdduan.GioHang.GioHang;
@@ -19,6 +23,7 @@ import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.SanPham;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +32,9 @@ public class DiaChiAdapter_LS extends BaseAdapter {
     public LichSuHoaDon context;
     private int layout;
     List<GioHang> listGH;
-    private List<DiaChi> listSP;
-    List<DiaChi> list;
-    public DiaChiAdapter_LS(LichSuHoaDon context, int layout, List<DiaChi> listSP) {
+    private List<LichSu> listSP;
+    List<LichSu> list;
+    public DiaChiAdapter_LS(LichSuHoaDon context, int layout, List<LichSu> listSP) {
         this.context = context;
         this.layout = layout;
         this.listSP = listSP;
@@ -54,14 +59,14 @@ public class DiaChiAdapter_LS extends BaseAdapter {
     }
 
     public class ViewHolder {
-        TextView txtHoTen,txtSDT,txtTHX,txtSoNha;
+        TextView txtHoTen,txtSDT,txtTHX,txtSoNha,txtMaHD,txtTongTien;
         ListView imageView;
     }
     @NonNull
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         final ViewHolder viewHolder;
-        final DiaChi sp = listSP.get( i );
+        final LichSu ls = listSP.get( i );
         if (view == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from( context );
@@ -71,14 +76,28 @@ public class DiaChiAdapter_LS extends BaseAdapter {
             viewHolder.txtTHX = view.findViewById( R.id.txtTHX_HD );
             viewHolder.txtSoNha = view.findViewById( R.id.txtSoNha_HD );
             viewHolder.imageView = view.findViewById( R.id.lv_rowlshd );
+            viewHolder.txtMaHD = view.findViewById( R.id.txtMaHD );
+            viewHolder.txtTongTien = view.findViewById( R.id.txtTongTien );
             view.setTag( viewHolder );
         } else {
             viewHolder =(ViewHolder) view.getTag();
         }
-        viewHolder.txtHoTen.setText( "Tên: "+sp.getHoTen() );
-        viewHolder.txtSDT.setText( "SDT: "+sp.getSdt() );
-        viewHolder.txtTHX.setText( "Tỉnh: "+sp.getTHX() );
-        viewHolder.txtSoNha.setText( "Số nhà: "+ sp.getSoNha());
+        viewHolder.imageView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent1 = new Intent(context, CTHD.class);
+                intent1.putExtra("chitiet", ls );
+                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent1);
+            }
+        } );
+
+        viewHolder.txtMaHD.setText("Mã hóa đơn: "+ls.getMaHD());
+        viewHolder.txtHoTen.setText( "Tên: "+ls.getHoTen() );
+        viewHolder.txtSDT.setText( "SDT: +84"+ls.getSDT() );
+        viewHolder.txtTHX.setText( "Tỉnh: "+ls.getDiaChi() );
+        viewHolder.txtSoNha.setText( "Số nhà: "+ ls.getSoNha());
+        viewHolder.txtTongTien.setText( "Tổng tiền :"+ls.getTongTien() );
         loadData();
         HoaDonAdapter_LS adapter = new HoaDonAdapter_LS( DiaChiAdapter_LS.this,R.layout.hoa_don_row_activity, listGH);
         viewHolder.imageView.setAdapter(adapter);

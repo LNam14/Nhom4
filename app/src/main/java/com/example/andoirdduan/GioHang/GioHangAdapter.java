@@ -98,9 +98,6 @@ public class GioHangAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 ketqua += 1;
-                String maSP = listSP.get( i ).getMaSP();
-                LoadingScreenActivity.db.TruyVan( "UPDATE GioHang SET soLuong = '" + ketqua + "' WHERE ID = '" + maSP + "' AND user='" + context.strUsername + "'" );
-                context.loadData();
                 viewHolder.txtSo.setText( "" + ketqua );
                 context.getDoanhThu();
             }
@@ -109,9 +106,6 @@ public class GioHangAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 ketqua -= 1;
-                String maSP = listSP.get( i ).getMaSP();
-                LoadingScreenActivity.db.TruyVan( "UPDATE GioHang SET soLuong = '" + ketqua + "' WHERE ID = '" + maSP + "' AND user='" + context.strUsername + "'" );
-                context.loadData();
                 viewHolder.txtSo.setText( "" + ketqua );
                 context.getDoanhThu();
 
@@ -129,8 +123,7 @@ public class GioHangAdapter extends BaseAdapter {
             }
         } );
         List<String> listSize = new ArrayList<>();
-        listSize.add(0, "Vui lòng chọn size");
-        listSize.add("Size 37");
+        listSize.add(0,"Size 37");
         listSize.add("Size 38");
         listSize.add("Size 39");
         listSize.add("Size 40");

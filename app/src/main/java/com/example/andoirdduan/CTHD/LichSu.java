@@ -1,7 +1,12 @@
 package com.example.andoirdduan.CTHD;
 
-public class LichSu {
-    String maHD,hoTen,diaChi,soNha,tenSP;
+import android.service.autofill.Sanitizer;
+
+import java.io.Serializable;
+
+public class LichSu implements Serializable {
+    int maHD;
+    String hoTen,diaChi,soNha,tenSP;
     int SDT;
     int donGia,soLuong,tongTien;
     byte [] imgSP;
@@ -9,18 +14,13 @@ public class LichSu {
     public LichSu() {
     }
 
-    public LichSu(String maHD, String hoTen, int SDT, String diaChi, String soNha, String tenSP, int donGia, int soLuong, int tongTien, byte[] imgSP, String user) {
+    public LichSu(int maHD, String hoTen, int SDT, String diaChi, String soNha, int tongTien) {
         this.maHD = maHD;
         this.hoTen = hoTen;
         this.SDT = SDT;
         this.diaChi = diaChi;
         this.soNha = soNha;
-        this.tenSP = tenSP;
-        this.donGia = donGia;
-        this.soLuong = soLuong;
         this.tongTien = tongTien;
-        this.imgSP = imgSP;
-        this.user = user;
     }
 
     public String getUser() {
@@ -31,11 +31,11 @@ public class LichSu {
         this.user = user;
     }
 
-    public String getMaHD() {
+    public int getMaHD() {
         return maHD;
     }
 
-    public void setMaHD(String maHD) {
+    public void setMaHD(int maHD) {
         this.maHD = maHD;
     }
 

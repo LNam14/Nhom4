@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.andoirdduan.CTHD.LichSu;
 import com.example.andoirdduan.CTHD.LichSuHoaDon;
 import com.example.andoirdduan.ChiTietHoaDon.CTHoaDon;
 import com.example.andoirdduan.Database.SQLSever;
@@ -38,6 +39,7 @@ public class HoaDonActivity extends AppCompatActivity {
     String strUsername = "";
     ArrayList<GioHang> arraySanPham_gioHang;
     ArrayList<DiaChi> list;
+    ArrayList<LichSu> listHD;
     DiaChi dc = new DiaChi();
     ImageButton btnTheMDC;
     Button btnMuaHangHoaDon;
@@ -64,18 +66,14 @@ public class HoaDonActivity extends AppCompatActivity {
                 User s = sqlSever.getUser(strUsername);
                 Tien = s.getVi();
                 tienConLai = Tien - doanhThu;
-//                String tenSP = gh.getTenSP();
-//                String size = gh.getSize();
-//                int soLuong = gh.getSoLuong();
-//                int donGia = gh.getGia();
-//                String hoTen = dc.getHoTen();
-//                int sdt = dc.getSdt();
-
                 if(Tien>doanhThu){
                     if (sqlSever.updateNap(strUsername, String.valueOf(tienConLai)) > 0) {
-                        Toast.makeText(getApplicationContext(), "Mua thành công", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), LichSuHoaDon.class );
-                        startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "Mua thành công", Toast.LENGTH_SHORT).show();
+                            LoadingScreenActivity.db.InsertHD1(dc.getHoTen(),dc.getSdt(),dc.getTHX(),dc.getSoNha(),doanhThu);
+                            loadDataHD();
+                            Intent intent = new Intent(getApplicationContext(), LichSuHoaDon.class );
+                            startActivity(intent);
+
                     }
                     Toast.makeText( HoaDonActivity.this, "đủ tiền" ,Toast.LENGTH_SHORT ).show();
                 }else{
@@ -120,18 +118,7 @@ public class HoaDonActivity extends AppCompatActivity {
         HoaDonAdapter adapter = new HoaDonAdapter( HoaDonActivity.this,R.layout.hoa_don_row_activity, arraySanPham_gioHang);
         lvSanPhamThanhToan.setAdapter(adapter);
     }
-    public void loadDataDC() {
-        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from DiaChi1" );
-        list = new ArrayList<DiaChi>();
-        while (cursor.moveToNext()) {
-            list.add( new DiaChi(
-                    cursor.getString( 0 ),
-                    cursor.getInt( 1 ),
-                    cursor.getString( 2 ),
-                    cursor.getString( 3 ),
-                    cursor.getString( 4 )) );
-        }
-    }
+
     public double getDoanhThu(){
 
         Cursor data = LoadingScreenActivity.db.TruyVanTraVe( "SELECT SUM(soLuong*giaTien) FROM GioHang" );
@@ -155,5 +142,18 @@ public class HoaDonActivity extends AppCompatActivity {
         }
         DiaChiAdapter adapter = new DiaChiAdapter( HoaDonActivity.this,R.layout.row_giohang, list);
         lvDCHD.setAdapter(adapter);
+    }
+    public void loadDataHD() {
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from HoaDon1" );
+        listHD = new ArrayList<LichSu>();
+        while (cursor.moveToNext()) {
+            listHD.add( new LichSu(
+                    cursor.getInt( 0 ),
+                    cursor.getString( 1 ),
+                    cursor.getInt( 2 ),
+                    cursor.getString( 3 ),
+                    cursor.getString( 4 ),
+                    cursor.getInt( 5 )));
+        }
     }
 }

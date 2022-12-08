@@ -93,7 +93,6 @@ public class UserActivityAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if(!v.isLongClickable()) {
-
                     Intent intent1 = new Intent(context, ChiTietSanPham.class);
                     intent1.putExtra("chitiet", sp);
                     intent1.putExtra("dulieu", context.strUsername);
@@ -118,7 +117,7 @@ public class UserActivityAdapter extends BaseAdapter {
                 GioHang s = LoadingScreenActivity.db.getDetail( size );
                 GioHang gh = LoadingScreenActivity.db.getDetail( maSP );
                 GioHang gh1 = LoadingScreenActivity.db.getUser( context.strUsername );
-                if(gh==null||gh1==null||s==null){
+                if(gh==null||gh1==null){
                     LoadingScreenActivity.db.InsertGH(maSP,tenSP,phanLoai,size,soLuong,giaTien,moTa,ConverttoArrayByte( viewHolder.imgSP ),context.strUsername);
                     loadData();
                     Toast.makeText(context, "Them Thanh Cong", Toast.LENGTH_SHORT).show();

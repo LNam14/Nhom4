@@ -30,7 +30,7 @@ public class LoadingScreenActivity extends AppCompatActivity {
         db.TruyVan("Create Table If not Exists HoaDon(ID Integer Primary Key Autoincrement, tenSP Text, date Text, tenKH text, soLuong INTEGER, donGia INTEGER, tongTien INTEGER, hinhAnh Blob)");
         db.TruyVan("Create Table If not Exists DiaChi(hoTen Text, sdt Integer, THX Text, soNha Text, user Text)");
         db.TruyVan("Create Table If not Exists DiaChi1(hoTen Text, sdt Integer, THX Text, soNha Text, user Text)");
-        db.TruyVan("Create Table If not Exists LichSu(ID Text Primary Key, hoTen Text, sdt INTEGER, diaChi Text,soNha Text,tenSP Text, donGia INTEGER,soLuong INTEGER,tongTien INTERGER,hinhAnh Blob,user Text)");
+        db.TruyVan("Create Table If not Exists HoaDon1(ID Integer Primary Key Autoincrement, hoTen Text, sdt INTEGER, diaChi Text,soNha Text, tongTien INTEGER)");
         add = findViewById(R.id.btnRegister_RegisterActivity);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

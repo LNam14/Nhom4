@@ -85,12 +85,11 @@ public class GioHangAdapter extends BaseAdapter {
             viewHolder.giam = view.findViewById( R.id.giam );
             spinner = view.findViewById( R.id.spinner_size );
             viewHolder.imgXoa = view.findViewById( R.id.imgXoa );
-            ketqua = list.get( i ).getSoLuong();
-            tongTien = list.get( i ).getGia();
+
             viewHolder.txtSo.setText( String.valueOf( so ) );
             view.setTag( viewHolder );
 
-
+            ketqua = list.get( i ).getSoLuong();
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
@@ -98,17 +97,22 @@ public class GioHangAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 ketqua += 1;
-                viewHolder.txtSo.setText( "" + ketqua );
+                String maSP = list.get( i ).getTenSP();
+                LoadingScreenActivity.db.TruyVan( "Update GioHang set soLuong = '" + ketqua + "' WHERE tenSP = '" + maSP + "'" );
                 context.getDoanhThu();
+                context.loadData();
+                viewHolder.txtSo.setText( "" + ketqua );
             }
         } );
         viewHolder.giam.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ketqua -= 1;
-                viewHolder.txtSo.setText( "" + ketqua );
+                String maSP = list.get( i ).getTenSP();
+                LoadingScreenActivity.db.TruyVan( "Update GioHang set soLuong = '" + ketqua + "' WHERE tenSP = '" + maSP + "'" );
                 context.getDoanhThu();
-
+                context.loadData();
+                viewHolder.txtSo.setText( "" + ketqua );
             }
         } );
         viewHolder.imgXoa.setOnClickListener( new View.OnClickListener() {
@@ -133,8 +137,8 @@ public class GioHangAdapter extends BaseAdapter {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, listSize);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-        viewHolder.txtTenSP.setText( "Tên sản phẩm: " + sp.getTenSP() );
-        viewHolder.tvType.setText( "Giá: " + sp.getGia() + "$" );
+        viewHolder.txtTenSP.setText( sp.getTenSP() );
+        viewHolder.tvType.setText( sp.getGia() + "$" );
         viewHolder.txtSo.setText( String.valueOf( sp.getSoLuong() ) );
         Bitmap bitmap = BitmapFactory.decodeByteArray( sp.getHinh(), 0, sp.getHinh().length );
         viewHolder.imgSP.setImageBitmap( bitmap );

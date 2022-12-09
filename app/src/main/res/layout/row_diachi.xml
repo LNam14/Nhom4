@@ -4,32 +4,45 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     android:orientation="vertical">
-    <TextView
-        android:id="@+id/txtHoTen"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lines="1"
-        android:text="Họ và tên"
-        android:textSize="20sp" />
-    <TextView
-        android:id="@+id/txtSDT"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="1"
-        android:text="SDT"
-        android:textSize="20sp" />
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/txtHoTen"
+            android:textColor="@color/black_font"
+            android:padding="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Họ và tên"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/black_font"
+            android:padding="2dp"
+            android:id="@+id/txtSDT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SDT"
+            android:textSize="18sp" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/txtTHX"
         android:layout_width="match_parent"
+        android:padding="2dp"
+        android:textColor="@color/black_font"
         android:layout_height="wrap_content"
         android:lines="1"
         android:text="Tỉnh/Huyện/Xã"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
     <TextView
         android:id="@+id/txtSoNha"
+        android:padding="2dp"
         android:layout_width="match_parent"
+        android:textColor="@color/black_font"
         android:layout_height="wrap_content"
         android:lines="1"
         android:text="Số nhà"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 </LinearLayout>

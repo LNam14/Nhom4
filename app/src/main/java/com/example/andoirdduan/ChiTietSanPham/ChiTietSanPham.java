@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChiTietSanPham extends AppCompatActivity {
-    TextView tensp, giasp, mota, soluong,thuonghieu;
+    TextView tensp, giasp, mota, soluong,thuonghieu,txtDaBan;
     Button btnThem;
     ImageView imgSanPham;
     Spinner spinner;
@@ -43,6 +43,7 @@ public class ChiTietSanPham extends AppCompatActivity {
         imgSanPham = findViewById(R.id.img_chitiet);
         soluong = findViewById(R.id.txtSoLuong);
         thuonghieu = findViewById( R.id.txtThuongHieu );
+        txtDaBan = findViewById( R.id.txtDaBan );
         initData();
         Bundle bundle1 = getIntent().getExtras();
         if(bundle1 !=  null){
@@ -79,16 +80,16 @@ public class ChiTietSanPham extends AppCompatActivity {
     }
     public void initData(){
         SanPham sanPham = (SanPham) getIntent().getSerializableExtra("chitiet");
-        tensp.setText("Tên sản phẩm: "+sanPham.getTenSP());
-        mota.setText("Mô tả: "+sanPham.getMoTa());
-        thuonghieu.setText("Thương hiệu: "+sanPham.getThuongHieu());
-        giasp.setText("Giá: "+sanPham.getGia()+"$");
+        tensp.setText(sanPham.getTenSP());
+        mota.setText(sanPham.getMoTa());
+        thuonghieu.setText(sanPham.getThuongHieu());
+        giasp.setText(sanPham.getGia()+"$");
+        txtDaBan.setText( "Đã bán "+sanPham.getDaBan() );
         Bitmap bitmap = BitmapFactory.decodeByteArray( sanPham.getHinh(), 0, sanPham.getHinh().length );
         imgSanPham.setImageBitmap( bitmap );
        soluong.setText( sanPham.getSoLuong()+" sản phẩm có sẵn");
     }
-    public byte[] ConverttoArrayByte(ImageView img)
-    {
+    public byte[] ConverttoArrayByte(ImageView img) {
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
         Bitmap bitmap=bitmapDrawable.getBitmap();
 

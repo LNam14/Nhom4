@@ -27,10 +27,12 @@ public class LoadingScreenActivity extends AppCompatActivity {
         db = new DataBase(this,"ShopGiay.sqlite",null,1);
         db.TruyVan("Create Table If not Exists SanPham(ID Text Primary Key, tenSP Text, theLoai Text,soLuong INTEGER, giaTien INTEGER, moTa Text, hinhAnh Blob,daBan INTEGER)");
         db.TruyVan("Create Table If not Exists GioHang(ID Text , tenSP Text, theLoai Text,size Text,soLuong INTEGER, giaTien INTEGER, moTa Text, hinhAnh Blob, user Text)");
-        db.TruyVan("Create Table If not Exists HoaDon(ID Integer Primary Key Autoincrement, tenSP Text, date Text, tenKH text, soLuong INTEGER, donGia INTEGER, tongTien INTEGER, hinhAnh Blob)");
+        db.TruyVan("Create Table If not Exists GioHang1(ID Text , tenSP Text, theLoai Text,size Text,soLuong INTEGER, giaTien INTEGER, moTa Text, hinhAnh Blob, user Text)");
         db.TruyVan("Create Table If not Exists DiaChi(hoTen Text, sdt Integer, THX Text, soNha Text, user Text)");
         db.TruyVan("Create Table If not Exists DiaChi1(hoTen Text, sdt Integer, THX Text, soNha Text, user Text)");
-        db.TruyVan("Create Table If not Exists HoaDon1(ID Integer Primary Key Autoincrement, hoTen Text, sdt INTEGER, diaChi Text,soNha Text, tongTien INTEGER)");
+        db.TruyVan("Create Table If not Exists NapTien(user Text, date Text, money INTEGER)");
+        db.TruyVan("Create Table If not Exists RutTien(user Text, date Text, money INTEGER)");
+        db.TruyVan("Create Table If not Exists HoaDon(ID Integer Primary Key Autoincrement, hoTen Text, sdt INTEGER, diaChi Text,soNha Text, tongTien INTEGER, user Text)");
         add = findViewById(R.id.btnRegister_RegisterActivity);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

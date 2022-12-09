@@ -18,6 +18,7 @@ import com.example.andoirdduan.ChiTietSanPham.ChiTietSanPham;
 import com.example.andoirdduan.Database.SQLSever;
 import com.example.andoirdduan.DiaChiNhanHang.DiaChi;
 import com.example.andoirdduan.GioHang.GioHang;
+import com.example.andoirdduan.GioHang.GioHang1;
 import com.example.andoirdduan.HoaDon.HoaDonActivity;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
@@ -31,7 +32,7 @@ public class DiaChiAdapter_LS extends BaseAdapter {
     SQLSever sqlSever;
     public LichSuHoaDon context;
     private int layout;
-    List<GioHang> listGH;
+    List<GioHang1> listGH;
     private List<LichSu> listSP;
     List<LichSu> list;
     public DiaChiAdapter_LS(LichSuHoaDon context, int layout, List<LichSu> listSP) {
@@ -105,10 +106,10 @@ public class DiaChiAdapter_LS extends BaseAdapter {
     }
 
     public void loadData() {
-        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang" );
-        listGH = new ArrayList<GioHang>();
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang1 where user = '"+ context.strUsername+ "'" );
+        listGH = new ArrayList<GioHang1>();
         while (cursor.moveToNext()) {
-            listGH.add( new GioHang(
+            listGH.add( new GioHang1(
                     cursor.getString( 0 ),
                     cursor.getString( 1 ),
                     cursor.getString( 2 ),

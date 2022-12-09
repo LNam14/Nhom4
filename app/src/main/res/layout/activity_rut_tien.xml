@@ -10,7 +10,7 @@
     tools:context=".UserManager.NapTienActivity">
 
     <EditText
-        android:id="@+id/edTienNap"
+        android:id="@+id/edTienRut"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Nhập vào số tiền"
@@ -22,16 +22,16 @@
         android:inputType="number" />
 
     <Button
-        android:id="@+id/btnNapTien"
+        android:id="@+id/btnRutTien"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="10dp"
         android:onClick="Nap"
         android:backgroundTint="#F5865B"
         app:cornerRadius="10dp"
-        android:text="Nạp tiền" />
+        android:text="Rút tiền" />
     <ListView
-        android:id="@+id/listViewNapTien"
+        android:id="@+id/listViewRutTien"
         tools:listitem="@layout/row_naptien"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

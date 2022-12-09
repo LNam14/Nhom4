@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="horizontal"
-    android:padding="5dp"
+    android:padding="2dp"
     android:layout_height="match_parent">
         <ImageView
             android:layout_marginTop="20dp"
@@ -18,31 +18,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageButton
-                    android:id="@+id/imgXoa"
-                    android:background="#fff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/recycle_bin" />
-            </RelativeLayout>
-
             <TextView
+                android:padding="2dp"
                 android:id="@+id/edTenSP_GH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tên sản phẩm"
-                android:fontFamily="monospace"
                 android:textColor="#424040"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="20sp"/>
 
             <TextView
+                android:padding="2dp"
                 android:id="@+id/edGiaSP_GH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,6 +41,7 @@
 
             <Spinner
                 android:id="@+id/spinner_size"
+                android:paddingRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <RadioGroup
@@ -81,6 +69,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/tang"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageButton
+                        android:id="@+id/imgXoa"
+                        android:background="#fff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/recycle_bin" />
+                </RelativeLayout>
             </RadioGroup>
         </LinearLayout>
 </LinearLayout>

@@ -8,6 +8,7 @@
     tools:context=".SanPham.DSSPActivity">
     <ListView
         android:layout_margin="10dp"
+        tools:listitem="@layout/row__listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/lvSanPham" />

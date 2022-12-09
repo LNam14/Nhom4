@@ -81,10 +81,10 @@ public class HoaDonAdapter extends BaseAdapter {
         } else {
             viewHolder =(ViewHolder) view.getTag();
         }
-        viewHolder.txtTenSP.setText( "Tên sản phẩm: "+sp.getTenSP() );
-        viewHolder.tvSize.setText( "Size: "+sp.getSize() );
-        viewHolder.txtSoLuong.setText( "x: "+sp.getSoLuong() );
-        viewHolder.txtPrice.setText( "Giá: "+ sp.getGia()* sp.getSoLuong()+"$");
+        viewHolder.txtTenSP.setText( sp.getTenSP() );
+        viewHolder.tvSize.setText(sp.getSize() );
+        viewHolder.txtSoLuong.setText( "x"+sp.getSoLuong() );
+        viewHolder.txtPrice.setText( sp.getGia()* sp.getSoLuong()+"$");
         Bitmap bitmap = BitmapFactory.decodeByteArray( sp.getHinh(), 0, sp.getHinh().length );
         viewHolder.imgSP.setImageBitmap( bitmap );
         return view;

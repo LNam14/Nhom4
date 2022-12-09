@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 
 import com.example.andoirdduan.Database.SQLSever;
 import com.example.andoirdduan.GioHang.GioHang;
+import com.example.andoirdduan.GioHang.GioHang1;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.SanPham;
 
@@ -26,9 +27,9 @@ public class HoaDonAdapter_CT extends BaseAdapter {
     SQLSever sqlSever;
     private CTHD context;
     private int layout;
-    private List<GioHang> listSP;
-    List<GioHang> list;
-    public HoaDonAdapter_CT(CTHD context, int layout, List<GioHang> listSP) {
+    private List<GioHang1> listSP;
+    List<GioHang1> list;
+    public HoaDonAdapter_CT(CTHD context, int layout, List<GioHang1> listSP) {
         this.context = context;
         this.layout = layout;
         this.listSP = listSP;
@@ -61,7 +62,7 @@ public class HoaDonAdapter_CT extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         final ViewHolder viewHolder;
-        final GioHang sp = listSP.get( i );
+        final GioHang1 sp = listSP.get( i );
         if (view == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
@@ -75,10 +76,10 @@ public class HoaDonAdapter_CT extends BaseAdapter {
         } else {
             viewHolder =(ViewHolder) view.getTag();
         }
-        viewHolder.txtTenSP.setText( "Tên sản phẩm: "+sp.getTenSP() );
-        viewHolder.tvSize.setText( "Size: "+sp.getSize() );
-        viewHolder.txtSoLuong.setText( "x: "+sp.getSoLuong() );
-        viewHolder.txtPrice.setText( "Giá: "+ sp.getGia()* sp.getSoLuong()+"$");
+        viewHolder.txtTenSP.setText(sp.getTenSP() );
+        viewHolder.tvSize.setText(sp.getSize() );
+        viewHolder.txtSoLuong.setText( "x"+sp.getSoLuong() );
+        viewHolder.txtPrice.setText(sp.getGia()* sp.getSoLuong()+"$");
         Bitmap bitmap = BitmapFactory.decodeByteArray( sp.getHinh(), 0, sp.getHinh().length );
         viewHolder.imgSP.setImageBitmap( bitmap );
         return view;

@@ -25,6 +25,7 @@ import com.example.andoirdduan.Login.LoginActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
+import com.example.andoirdduan.Search.DSSP_User;
 import com.example.andoirdduan.UserManager.UserManagerActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -88,6 +89,9 @@ public class UserActivity extends AppCompatActivity {
                         startActivity(home);
                         break;
                     case R.id.search:
+                        Intent search = new Intent(getBaseContext(), DSSP_User.class);
+                        search.putExtra("dulieu", strUsername);
+                        startActivity(search);
                         break;
                     case R.id.fab:
                         Intent insert = new Intent(UserActivity.this, GioHangActivity.class);

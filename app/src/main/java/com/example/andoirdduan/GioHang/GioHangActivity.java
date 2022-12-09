@@ -52,13 +52,23 @@ public class GioHangActivity extends AppCompatActivity {
     String nhoMk = "mua";
     TextView tvTongTien;
     Button btnMuaHang;
+    int soLuong = 0;
+    int daBan = 0;
     int i;
+    String maSP = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
         getSupportActionBar().setCustomView( R.layout.tittle_giohang );
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageView btnBack = findViewById( R.id.btnBack );
+        Bundle bundle = getIntent().getExtras();
+        if(bundle !=  null){
+            strUsername = bundle.getString("dulieu");
+            maSP = bundle.getString("maSP");
+            soLuong = bundle.getInt( "soLuong" );
+            daBan = bundle.getInt( "daBan" );
+        }
         btnBack.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,20 +84,20 @@ public class GioHangActivity extends AppCompatActivity {
         btnMuaHang.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HoaDonActivity.class );
-                intent.putExtra("dulieu", strUsername);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity( intent );
+                try{
+                    Intent intent = new Intent(getApplicationContext(), HoaDonActivity.class );
+                    intent.putExtra("soLuong", soLuong);
+                    intent.putExtra("maSP", maSP);
+                    intent.putExtra( "dulieu",strUsername );
+                    intent.putExtra("daBan", daBan);
+                    intent.putExtra( "mua",arraySanPham_gioHang.get( i ).getSoLuong() );
+                    startActivity(intent);
+                }catch (Exception ex){
+                    Toast.makeText( GioHangActivity.this, "Vui lòng thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT ).show();
+                }
             }
         } );
         getDoanhThu();
-        Bundle bundle1 = getIntent().getExtras();
-        if(bundle1 !=  null){
-            strUsername = bundle1.getString("dulieu");
-            Toast.makeText(this, "Name: " +strUsername, Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this, "Chua dc", Toast.LENGTH_SHORT).show();
-        }
         loadData();
         GioHangAdapter adapter = new GioHangAdapter(GioHangActivity.this,R.layout.row_giohang, arraySanPham_gioHang);
         lvGioHang.setAdapter(adapter);
@@ -124,7 +134,7 @@ public class GioHangActivity extends AppCompatActivity {
     }
     public double getDoanhThu(){
         int doanhThu = 0;
-        Cursor data = LoadingScreenActivity.db.TruyVanTraVe( "SELECT SUM(soLuong*giaTien) FROM GioHang" );
+        Cursor data = LoadingScreenActivity.db.TruyVanTraVe( "SELECT SUM(soLuong*giaTien) FROM GioHang where user = '" +strUsername+"'");
         while (data.moveToNext()) {
             int tongTien = data.getInt( 0);
             doanhThu += tongTien ;

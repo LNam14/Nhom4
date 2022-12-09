@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManagerActivity extends AppCompatActivity {
-    TextView Name,Quyen,Vi,NapThe,DangXuat;
+    TextView Name,Quyen,Vi,NapThe,DangXuat,btnTaiKhoan;
     String account = "";
     int Tien = 0;
 
@@ -36,6 +36,7 @@ public class UserManagerActivity extends AppCompatActivity {
         Quyen = findViewById(R.id.edQuyen);
         NapThe = findViewById(R.id.btnNap);
         DangXuat = findViewById(R.id.btnDangXuat);
+        btnTaiKhoan = findViewById(R.id.btnTaiKhoan);
         Vi = findViewById(R.id.edViTien);
         final SQLSever sqlSever = new SQLSever(this);
         Bundle bundle1 = getIntent().getExtras();
@@ -55,6 +56,14 @@ public class UserManagerActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), NapTienActivity.class);
                 intent.putExtra("name_user", account);
                 intent.putExtra("Tien", Tien);
+                startActivity(intent);
+            }
+        });
+        btnTaiKhoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), EditUserActivity.class);
+                intent.putExtra("name",account);
                 startActivity(intent);
             }
         });

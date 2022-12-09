@@ -117,7 +117,20 @@ public class SQLSever extends SQLiteOpenHelper {
         }
         return 1;
     }
-
+    public int updateUser(String account,String newPass, String ten,String email,String NgaySinh) {
+        db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("password", newPass);
+        values.put("ten", ten);
+        values.put("email",email);
+        values.put("ngaysinh", NgaySinh);
+        int result = db.update(Table_Name1, values, "account=?", new
+                String[]{account});
+        if (result == 0) {
+            return -1;
+        }
+        return 1;
+    }
 
 
 }

@@ -1,8 +1,11 @@
 package com.example.andoirdduan.Home;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +15,8 @@ import android.widget.GridView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.example.andoirdduan.ChiTietSanPham.ChiTietSanPham;
 import com.example.andoirdduan.GioHang.GioHangActivity;
@@ -20,6 +25,7 @@ import com.example.andoirdduan.Login.LoginActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
+import com.example.andoirdduan.Search.DSSP_User;
 import com.example.andoirdduan.UserManager.UserManagerActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -66,6 +72,14 @@ public class UserActivity extends AppCompatActivity {
 
         }
         loadData();
+
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        notification();
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -75,6 +89,9 @@ public class UserActivity extends AppCompatActivity {
                         startActivity(home);
                         break;
                     case R.id.search:
+                        Intent search = new Intent(getBaseContext(), DSSP_User.class);
+                        search.putExtra("dulieu", strUsername);
+                        startActivity(search);
                         break;
                     case R.id.fab:
                         Intent insert = new Intent(UserActivity.this, GioHangActivity.class);
@@ -127,6 +144,16 @@ public class UserActivity extends AppCompatActivity {
         }
         return -1;
 
+    }
+    public void notification(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(UserActivity.this,"My Notification");
+        builder.setContentTitle("Đăng nhập thành công");
+        builder.setContentText("Chào user: "+strUsername);
+        builder.setSmallIcon(R.drawable.anh_user_lmao);
+        builder.setAutoCancel(true);
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(UserActivity.this);
+        managerCompat.notify(1,builder.build());
     }
 }
 

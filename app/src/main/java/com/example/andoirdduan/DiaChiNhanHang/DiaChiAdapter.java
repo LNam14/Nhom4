@@ -73,10 +73,10 @@ public class DiaChiAdapter extends BaseAdapter {
         } else {
             viewHolder =(ViewHolder) view.getTag();
         }
-        viewHolder.txtHoTen.setText( "Tên: "+sp.getHoTen() );
-        viewHolder.txtSDT.setText( "SDT: "+sp.getSdt() );
-        viewHolder.txtTHX.setText( "Tỉnh: "+sp.getTHX() );
-        viewHolder.txtSoNha.setText( "Số nhà: "+ sp.getSoNha());
+        viewHolder.txtHoTen.setText( sp.getHoTen() );
+        viewHolder.txtSDT.setText( "(+84)"+sp.getSdt() );
+        viewHolder.txtTHX.setText( sp.getTHX() );
+        viewHolder.txtSoNha.setText( sp.getSoNha());
         return view;
     }
 

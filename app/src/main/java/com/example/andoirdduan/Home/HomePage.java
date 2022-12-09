@@ -14,12 +14,14 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.andoirdduan.AdminManager.AdminManagerActivity;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.Login.LoginActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
 import com.example.andoirdduan.SanPham.SanPhamActivity;
+import com.example.andoirdduan.UserManager.UserManagerActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -69,6 +71,11 @@ public class HomePage extends AppCompatActivity {
                     case R.id.fab:
                         Intent insert = new Intent(getBaseContext(), SanPhamActivity.class);
                         startActivity(insert);
+                        break;
+                    case R.id.user:
+                        Intent user = new Intent(getBaseContext(), AdminManagerActivity.class);
+                        user.putExtra("name_user", strUsername);
+                        startActivity(user);
                         break;
                 }
                 return false;

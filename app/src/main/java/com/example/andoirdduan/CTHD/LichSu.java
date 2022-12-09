@@ -9,18 +9,18 @@ public class LichSu implements Serializable {
     String hoTen,diaChi,soNha,tenSP;
     int SDT;
     int donGia,soLuong,tongTien;
-    byte [] imgSP;
     String user;
     public LichSu() {
     }
 
-    public LichSu(int maHD, String hoTen, int SDT, String diaChi, String soNha, int tongTien) {
+    public LichSu(int maHD, String hoTen, int SDT, String diaChi, String soNha, int tongTien,String user) {
         this.maHD = maHD;
         this.hoTen = hoTen;
         this.SDT = SDT;
         this.diaChi = diaChi;
         this.soNha = soNha;
         this.tongTien = tongTien;
+        this.user = user;
     }
 
     public String getUser() {
@@ -101,13 +101,5 @@ public class LichSu implements Serializable {
 
     public void setTongTien(int tongTien) {
         this.tongTien = tongTien;
-    }
-
-    public byte[] getImgSP() {
-        return imgSP;
-    }
-
-    public void setImgSP(byte[] imgSP) {
-        this.imgSP = imgSP;
     }
 }

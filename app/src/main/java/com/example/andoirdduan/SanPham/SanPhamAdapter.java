@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 
 import com.example.andoirdduan.Home.HomePage;
 import com.example.andoirdduan.R;
+import com.example.andoirdduan.Search.SanPhamAdapter_User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,7 @@ public class SanPhamAdapter extends BaseAdapter {
     }
 
     public class ViewHolder {
-        TextView txtTenSP;
+        TextView txtTenSP,txtGia,txtSoLuong;
         ImageView imgSP;
     }
 
@@ -64,31 +65,21 @@ public class SanPhamAdapter extends BaseAdapter {
             LayoutInflater inflater=LayoutInflater.from(context);
             view=inflater.inflate(R.layout.row__listview, null);
             viewHolder.txtTenSP = view.findViewById( R.id.txtTenSP);
+            viewHolder.txtGia = view.findViewById( R.id.txtGiaSP);
+            viewHolder.txtSoLuong = view.findViewById( R.id.txtSoLuong);
             viewHolder.imgSP = view.findViewById(R.id.imgSanPham);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolder) view.getTag();
+            viewHolder = (ViewHolder)  view.getTag();
         }
         final SanPham sp = listSP.get(i);
         viewHolder.txtTenSP.setText(sp.getTenSP());
+        viewHolder.txtGia.setText(sp.getGia()+"$");;
+        viewHolder.txtSoLuong.setText(sp.getSoLuong()+" sản phẩm có sẵn");
         Bitmap bitmap= BitmapFactory.decodeByteArray(sp.getHinh(), 0, sp.getHinh().length);
         viewHolder.imgSP.setImageBitmap(bitmap);
 
         return view;
     }
-    public void Search(String text) {
-        list.clear();
-        if (text.length() == 0) {
-            listSP.addAll(list);
-        } else {
-            for (SanPham st : list) {
-                if (st.getTenSP().toLowerCase().contains(text.toLowerCase())) {
-                    listSP.add(st);
-                }
-                //ss
-                notifyDataSetChanged();
-            }
-        }
-    }
-
 }
+

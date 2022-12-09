@@ -1,5 +1,6 @@
 package com.example.andoirdduan.HoaDon;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -27,7 +28,9 @@ import com.example.andoirdduan.GioHang.GioHangActivity;
 import com.example.andoirdduan.Home.UserActivity;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
+import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
+import com.example.andoirdduan.SanPham.SanPhamAdapter;
 import com.example.andoirdduan.User;
 import com.example.andoirdduan.UserManager.UserManagerActivity;
 
@@ -40,6 +43,8 @@ public class HoaDonActivity extends AppCompatActivity {
     ArrayList<GioHang> arraySanPham_gioHang;
     ArrayList<DiaChi> list;
     ArrayList<LichSu> listHD;
+    ArrayList<GioHang> listGH;
+    ArrayList<SanPham> listSP;
     DiaChi dc = new DiaChi();
     ImageButton btnTheMDC;
     Button btnMuaHangHoaDon;
@@ -47,50 +52,71 @@ public class HoaDonActivity extends AppCompatActivity {
     int doanhThu = 0;
     int Tien = 0;
     int tienConLai = 0;
+    int soLuong = 0;
+    int soLuongAll = 0;
+    int daBan = 0;
+    String maSP = "";
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
+        getSupportActionBar().setCustomView( R.layout.tittle_xacnhan );
         setContentView(R.layout.activity_hoa_don);
         btnTheMDC = findViewById( R.id.btnTheMDC );
         lvSanPhamThanhToan = findViewById( R.id.lvSanPhamThanhToan );
         lvDCHD = findViewById( R.id.lvDCHD );
         tvTongTienHoaDon = findViewById( R.id.tvTongTienHoaDon );
         btnMuaHangHoaDon = findViewById( R.id.btnMuaHangHoaDon );
+        Bundle bundle1 = getIntent().getExtras();
+        if(bundle1 !=  null){
+            strUsername = bundle1.getString("dulieu");
+            maSP = bundle1.getString( "maSP" );
+            soLuong = bundle1.getInt( "mua" );
+            soLuongAll = bundle1.getInt( "soLuong" );
+            daBan = bundle1.getInt( "daBan" );
+            Toast.makeText( this, "ma"+maSP+"so"+soLuongAll+"u"+strUsername, Toast.LENGTH_SHORT ).show();
+        }
+        loadData();
+        getDoanhThu();
+        loadData1();
         btnMuaHangHoaDon.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 final SQLSever sqlSever = new SQLSever(getBaseContext());
-                GioHang gh = LoadingScreenActivity.db.getGH();
+                SanPham sanPham = (SanPham) getIntent().getSerializableExtra("chitiet");
                 DiaChi dc = LoadingScreenActivity.db.getDC();
                 User s = sqlSever.getUser(strUsername);
                 Tien = s.getVi();
                 tienConLai = Tien - doanhThu;
                 if(Tien>doanhThu){
                     if (sqlSever.updateNap(strUsername, String.valueOf(tienConLai)) > 0) {
-                            Toast.makeText(getApplicationContext(), "Mua thành công", Toast.LENGTH_SHORT).show();
-                            LoadingScreenActivity.db.InsertHD1(dc.getHoTen(),dc.getSdt(),dc.getTHX(),dc.getSoNha(),doanhThu);
-                            loadDataHD();
-                            Intent intent = new Intent(getApplicationContext(), LichSuHoaDon.class );
-                            startActivity(intent);
-
+                        if((soLuongAll-soLuong)>=0){
+                                Toast.makeText(getApplicationContext(), "Mua thành công"+soLuong, Toast.LENGTH_SHORT).show();
+                                LoadingScreenActivity.db.InsertHD(dc.getHoTen(),dc.getSdt(),dc.getTHX(),dc.getSoNha(),doanhThu,strUsername);
+                                loadDataHD();
+                                LoadingScreenActivity.db.TruyVan( "Update SanPham Set daBan = '"+ (soLuong+daBan) +"',soLuong = '"+(soLuongAll-soLuong)  +"'  where ID = '"+maSP+"'" );
+                                loadDataSP();
+                                LoadingScreenActivity.db.TruyVan( "DELETE FROM GioHang where user = '"+strUsername+"'" );
+                                loadData();
+                                Intent intent = new Intent(getApplicationContext(), LichSuHoaDon.class );
+                                intent.putExtra("dulieu", strUsername);
+                                startActivity(intent);
+                        }else{
+                            Toast.makeText( HoaDonActivity.this, "Sản phẩm không đđủ", Toast.LENGTH_SHORT ).show();
+                        }
                     }
                     Toast.makeText( HoaDonActivity.this, "đủ tiền" ,Toast.LENGTH_SHORT ).show();
                 }else{
                     Toast.makeText( HoaDonActivity.this, "k đủ tiền", Toast.LENGTH_SHORT ).show();
                 }
+                }catch (Exception ex){
+                    Toast.makeText( HoaDonActivity.this, "Vui lòng thêm địa chỉ", Toast.LENGTH_SHORT ).show();
+                }
             }
         } );
-        Bundle bundle1 = getIntent().getExtras();
-        if(bundle1 !=  null){
-            strUsername = bundle1.getString("dulieu");
-            Toast.makeText(this, "Name: " +strUsername, Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this, "Chua dc", Toast.LENGTH_SHORT).show();
-        }
-        loadData();
-        getDoanhThu();
-        loadData1();
+
         btnTheMDC.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,13 +146,12 @@ public class HoaDonActivity extends AppCompatActivity {
     }
 
     public double getDoanhThu(){
-
-        Cursor data = LoadingScreenActivity.db.TruyVanTraVe( "SELECT SUM(soLuong*giaTien) FROM GioHang" );
+        Cursor data = LoadingScreenActivity.db.TruyVanTraVe( "SELECT SUM(soLuong*giaTien) FROM GioHang where user ='" + strUsername + "'" );
         while (data.moveToNext()) {
             int tongTien = data.getInt( 0);
             doanhThu += tongTien ;
+            tvTongTienHoaDon.setText( doanhThu+"$" );
         }
-        tvTongTienHoaDon.setText(doanhThu+"$");
         return doanhThu;
     }
     public void loadData1(){
@@ -144,7 +169,7 @@ public class HoaDonActivity extends AppCompatActivity {
         lvDCHD.setAdapter(adapter);
     }
     public void loadDataHD() {
-        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from HoaDon1" );
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from HoaDon where user = '"+strUsername+"'" );
         listHD = new ArrayList<LichSu>();
         while (cursor.moveToNext()) {
             listHD.add( new LichSu(
@@ -153,7 +178,24 @@ public class HoaDonActivity extends AppCompatActivity {
                     cursor.getInt( 2 ),
                     cursor.getString( 3 ),
                     cursor.getString( 4 ),
-                    cursor.getInt( 5 )));
+                    cursor.getInt( 5 ),
+                    cursor.getString( 6 )));
         }
+    }
+    public void loadDataSP(){
+        Cursor cursor =  LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham");
+        listSP = new ArrayList<SanPham>();
+        while (cursor.moveToNext()) {
+            listSP.add(new SanPham(
+                    cursor.getString(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getInt(3),
+                    cursor.getInt(4),
+                    cursor.getString(5),
+                    cursor.getBlob(6),
+                    cursor.getInt( 7 )));
+        }
+
     }
 }

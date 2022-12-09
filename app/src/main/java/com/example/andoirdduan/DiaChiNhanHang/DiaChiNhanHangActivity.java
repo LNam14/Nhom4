@@ -50,6 +50,8 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
                 LoadingScreenActivity.db.TruyVan( "DELETE FROM DiaChi" );
                 LoadingScreenActivity.db.InsertDC( hoTen, Integer.parseInt( sdt ),THX,soNha, strUsername);
                 Toast.makeText( DiaChiNhanHangActivity.this, "Thêm thành công", Toast.LENGTH_SHORT ).show();
+                Intent intent = new Intent(getApplicationContext(), HoaDonActivity.class);
+                startActivity( intent );
                 loadData1();
             }
         } );

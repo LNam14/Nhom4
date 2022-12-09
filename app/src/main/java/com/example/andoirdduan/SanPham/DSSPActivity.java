@@ -46,7 +46,6 @@ public class DSSPActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lvSanPham);
         ImageView imgSP = findViewById(R.id.imageView_sua);
         loadData();
-        //cc
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {

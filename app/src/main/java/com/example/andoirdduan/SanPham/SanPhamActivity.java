@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -15,14 +18,23 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
+import com.facebook.CallbackManager;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareDialog;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SanPhamActivity extends AppCompatActivity {
     EditText edMaSP, edTenSP, edGiaSP,edPhanLoai,edSoLuong,edMoTa;
     Button btnThem,btnDanhSach;
     ImageView imgSP;
+    ShareDialog shareDialog;
+    CallbackManager callbackManager;
+    int SELECT_PICTURE = 200;
     public static ArrayList<SanPham> arraySanPham;
 
     int REQUEST_CODE =1;
@@ -41,12 +53,10 @@ public class SanPhamActivity extends AppCompatActivity {
         btnDanhSach = (Button) findViewById(R.id.btnXemDS);
         imgSP= (ImageView) findViewById(R.id.imageView);
 
-
         imgSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent( MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,REQUEST_CODE);
+                imageChooser();
             }
         });
         btnThem.setOnClickListener(new View.OnClickListener() {
@@ -72,13 +82,36 @@ public class SanPhamActivity extends AppCompatActivity {
         } );
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode==REQUEST_CODE&&resultCode==RESULT_OK)
-        {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imgSP.setImageBitmap(bitmap);
-        }
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+
+            // compare the resultCode with the
+            // SELECT_PICTURE constant
+            if (requestCode == SELECT_PICTURE) {
+                // Get the url of the image from data
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    // update the preview image in the layout
+                    Bitmap map = uriToBitmap(selectedImageUri);
+                    imgSP.setImageBitmap(map);
+                }
+            }
+        }
+    }
+    private Bitmap uriToBitmap(Uri selectedFileUri) {
+        try {
+            ParcelFileDescriptor parcelFileDescriptor =
+                    getContentResolver().openFileDescriptor(selectedFileUri, "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+            Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+
+            parcelFileDescriptor.close();
+            return image;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  null;
     }
     public byte[] ConverttoArrayByte(ImageView img)
     {
@@ -89,6 +122,10 @@ public class SanPhamActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
     }
-
-
+    void imageChooser() {
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+    }
 }

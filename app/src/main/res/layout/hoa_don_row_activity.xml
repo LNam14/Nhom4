@@ -34,7 +34,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:gravity="left|center"
+                android:padding="2dp"
+                android:textColor="@color/black_font"
                 android:text="Tên Sản Phẩm"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -44,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:padding="2dp"
                 android:layout_marginTop="5dp"
                 android:text="Phân loại: "
                 android:textSize="17dp" />
@@ -54,9 +58,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
+                android:padding="2dp"
                 android:text="$2500"
                 android:textColor="#FA0202"
-                android:textSize="17dp" />
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/tvSoLuong_HoaDon"

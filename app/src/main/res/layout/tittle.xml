@@ -10,5 +10,6 @@
         android:text="Trang chủ"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#fff"/>
+        android:fontFamily="monospace"
+        android:textColor="@color/white"/>
 </LinearLayout>

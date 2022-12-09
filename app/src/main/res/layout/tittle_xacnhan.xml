@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <ImageView
+        android:src="@drawable/arrow"
+        android:id="@+id/btnBack"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:text="Back"/>
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thanh toán"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:paddingRight="20dp"
+        android:textStyle="bold"
+        android:fontFamily="monospace"
+        android:textColor="@color/white"/>
+</LinearLayout>

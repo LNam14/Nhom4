@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.andoirdduan.GioHang.GioHang;
+import com.example.andoirdduan.GioHang.GioHang1;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.SanPham;
@@ -30,7 +31,7 @@ public class CTHD extends AppCompatActivity {
     Button btnThem;
     ListView listView;
     Spinner spinner;
-    List<GioHang> list;
+    List<GioHang1> list;
     String strUsername = "";
     @SuppressLint("MissingInflatedId")
     @Override
@@ -51,19 +52,19 @@ public class CTHD extends AppCompatActivity {
     }
     public void initData(){
         LichSu lichSu = (LichSu) getIntent().getSerializableExtra("chitiet");
-        txtMaHD.setText("Tên sản phẩm: "+lichSu.getMaHD());
-        txtHoTen.setText("Mô tả: "+lichSu.getHoTen());
-        txtSDT.setText("Thương hiệu: "+lichSu.getSDT());
-        txtTHX.setText("Giá: "+lichSu.getDiaChi()+"$");
-        txtSoNha.setText( lichSu.getSoNha()+" sản phẩm có sẵn");
-        txtTongTien.setText( lichSu.getTongTien()+" sản phẩm có sẵn");
+        txtMaHD.setText("Mã HD: "+lichSu.getMaHD());
+        txtHoTen.setText("Họ và tên: "+lichSu.getHoTen());
+        txtSDT.setText("(+84): "+lichSu.getSDT());
+        txtTHX.setText(lichSu.getDiaChi()+"$");
+        txtSoNha.setText( lichSu.getSoNha());
+        txtTongTien.setText("Tổng tiền: "+ lichSu.getTongTien()+"$");
        
     }
     public void loadData() {
-        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang" );
-        list = new ArrayList<GioHang>();
+        Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe( "Select * from GioHang1" );
+        list = new ArrayList<GioHang1>();
         while (cursor.moveToNext()) {
-            list.add( new GioHang(
+            list.add( new GioHang1(
                     cursor.getString( 0 ),
                     cursor.getString( 1 ),
                     cursor.getString( 2 ),

@@ -32,8 +32,6 @@
             android:id="@+id/lvSanPhamThanhToan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ine1"
-            android:layout_alignParentStart="true"
             android:layout_marginTop="0dp"
             tools:listitem="@layout/hoa_don_row_activity" />
     </LinearLayout>

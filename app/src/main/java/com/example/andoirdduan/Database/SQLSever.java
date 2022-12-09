@@ -4,10 +4,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.andoirdduan.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SQLSever extends SQLiteOpenHelper {
     private static final String DatabaseName = "user";
@@ -85,6 +87,28 @@ public class SQLSever extends SQLiteOpenHelper {
         db.close();
         return list;
     }
+    public List<User> getAllUser() {
+        List<User> dsSach = new ArrayList<>();
+        db = this.getWritableDatabase();
+        Cursor c = db.query(Table_Name1, null, null, null, null, null, null);
+        c.moveToFirst();
+        while (c.isAfterLast() == false) {
+            User s = new User();
+            s.setAccount(c.getString(0));
+            s.setGmail(c.getString(1));
+            s.setPassword(c.getString(2));
+            s.setTen(c.getString(3));
+            s.setVi(c.getInt(4));
+            s.setNgaySinh(c.getString(5));
+            dsSach.add(s);
+            Log.d("//=====", s.toString());
+            c.moveToNext();
+        }
+        c.close();
+        return dsSach;
+    }
+
+
     public User getUser(String account){
         db = this.getWritableDatabase();
         Cursor cursor = db.query(Table_Name1, new String[]{Account, Email, Password, Ten,Vi, NgaySinh},
@@ -104,6 +128,8 @@ public class SQLSever extends SQLiteOpenHelper {
         db.close();
         return s;
     }
+
+
 
 
     public int updateNap(String account, String s ) {
@@ -129,6 +155,13 @@ public class SQLSever extends SQLiteOpenHelper {
         if (result == 0) {
             return -1;
         }
+        return 1;
+    }
+    public int deleteSachByID(String maSach) {
+        db = this.getWritableDatabase();
+        int result = db.delete(Table_Name1, "account=?", new String[]{maSach});
+        if (result == 0)
+            return -1;
         return 1;
     }
 

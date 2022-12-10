@@ -57,13 +57,17 @@ public class NapTienActivity extends AppCompatActivity {
             tienNap = tien + tien2;
             System.out.println( "Tien2: " + tien2 );
             System.out.println( "Tien: " + tien );
-            if (sqlSever.updateNap( account, String.valueOf( tienNap ) ) > 0) {
-                Toast.makeText( getApplicationContext(), "Lưu thành công", Toast.LENGTH_SHORT ).show();
-                LoadingScreenActivity.db.InsertNT( account, time, tien2);
-                Intent intent = new Intent( getApplicationContext(), UserManagerActivity.class );
-                intent.putExtra( "name_user", account );
-                intent.putExtra( "Tien", tien );
-                startActivity( intent );
+            if(Tien.equals("")){
+                Tien.setError("Không được để trống");
+            }else {
+                if (sqlSever.updateNap(account, String.valueOf(tienNap)) > 0) {
+                    Toast.makeText(getApplicationContext(), "Nạp thành công", Toast.LENGTH_SHORT).show();
+                    LoadingScreenActivity.db.InsertNT(account, time, tien2);
+                    Intent intent = new Intent(getApplicationContext(), UserManagerActivity.class);
+                    intent.putExtra("name_user", account);
+                    intent.putExtra("Tien", tien);
+                    startActivity(intent);
+                }
             }
         }
     }

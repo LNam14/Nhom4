@@ -94,7 +94,7 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/edittext"
                 android:contentDescription="hinhAnh"
-                android:src="@drawable/account" />
+                android:src="@drawable/giay_10" />
         </LinearLayout>
 
     </LinearLayout>

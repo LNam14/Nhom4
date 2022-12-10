@@ -47,7 +47,7 @@ public class EditUserActivity extends AppCompatActivity {
         String NewPass = edNewPass.getText().toString();
         String Pass = edPass.getText().toString();
         if(Pass.equals("")){
-            Toast.makeText(getApplicationContext(), "Điền vào mật khẫu cũ", Toast.LENGTH_SHORT).show();
+            edPass.setError("Điền vào mật khẫu cũ");
         }else{
             User s = sqlSever.getUser(account);
             if (s != null) {
@@ -59,7 +59,7 @@ public class EditUserActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Sai mật khẫu", Toast.LENGTH_SHORT).show();
+                    edPass.setError("Sai mật khẫu");
                 }
             } else {
                 Toast.makeText(getApplicationContext(), "Edit thất bại", Toast.LENGTH_SHORT).show();

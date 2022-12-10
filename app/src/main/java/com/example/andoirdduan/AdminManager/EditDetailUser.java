@@ -47,7 +47,9 @@ public class EditDetailUser extends AppCompatActivity {
             String Ten = edTenEdit.getText().toString();
             String Pass = edNewPassEdit.getText().toString();
             String ngaySinh = edNgaySinhEdit.getText().toString();
-            if (sqlSever.updateUser(Account, Pass,Ten,Mail,ngaySinh) > 0) {
+            if(edNewPassEdit.equals("")){
+                edNewPassEdit.setError("Không được đễ trống");
+            } else if (sqlSever.updateUser(Account, Pass,Ten,Mail,ngaySinh) > 0) {
                 Toast.makeText(getApplicationContext(), "Edit thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), UserEditManagerActivity.class);
                 startActivity(intent);

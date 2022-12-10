@@ -127,7 +127,7 @@
             android:id="@+id/btnThemSP_sua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thêm sản phẩm"
+            android:text="Sửa sản phẩm"
             android:textSize="10dp"
             android:layout_margin="2dp"/>
 
@@ -135,9 +135,9 @@
             android:id="@+id/btnXemDS_sua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Xem danh sách"
-            android:textSize="10dp"
-            android:layout_margin="2dp"/>
+            android:layout_marginLeft="30dp"
+            android:text="Hủy"
+            android:textSize="10dp" />
     </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

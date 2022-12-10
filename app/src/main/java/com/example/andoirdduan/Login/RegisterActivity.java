@@ -46,7 +46,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if(Gmail.equals("")|| mk1.equals("") || acc.equals("") || ten.equals("") || ngaysinh.equals("")){
                     Toast.makeText(RegisterActivity.this, "Vui Lòng Điền Đủ Thông tin!!!", Toast.LENGTH_SHORT).show();
-                }else{
+                }else if(!isEmail(Gmail)){
+                    edEmail.setError("Sai định dạng email");
+                } else{
                     ArrayList<User> users= sqlSever.getArrayUser();
                     System.out.println("UserArray"+users);
                         boolean ketqua = true;
@@ -89,4 +91,10 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public Boolean isEmail(String str) {
+        String pattern = "\\w+@\\w+(\\.\\w+){1,2}";
+        return str.matches(pattern);
+    }
+
+
 }

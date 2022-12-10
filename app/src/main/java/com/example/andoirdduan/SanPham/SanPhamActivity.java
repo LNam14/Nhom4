@@ -52,7 +52,8 @@ public class SanPhamActivity extends AppCompatActivity {
         btnThem = (Button) findViewById(R.id.btnThemSP);
         btnDanhSach = (Button) findViewById(R.id.btnXemDS);
         imgSP= (ImageView) findViewById(R.id.imageView);
-
+        edSoLuong.setText(""+0);
+        edGiaSP.setText(""+0);
         imgSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,8 +70,24 @@ public class SanPhamActivity extends AppCompatActivity {
                 String moTa = edMoTa.getText().toString().trim();
                 int giaTien = Integer.parseInt( edGiaSP.getText().toString() );
                 int daBan = 0;
-                LoadingScreenActivity.db.Insert(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte(imgSP),daBan);
-                Toast.makeText( SanPhamActivity.this,"Thêm thành công"+maSP,Toast.LENGTH_SHORT).show();
+                if(maSP.equals("")){
+                    edMaSP.setError("Không được để trống");
+                }else if(tenSP.equals("")){
+                    edTenSP.setError("Không được để trống");
+                }else if(phanLoai.equals("")) {
+                    edPhanLoai.setError("Không được để trống");
+                }else if(moTa.equals("")){
+                    edMoTa.setError("Không được để trống");
+                }else if(soLuong==0){
+                    edMoTa.setError("Không được để trống");
+                }else if(giaTien==0){
+                    edMoTa.setError("Không được để trống");
+                } else{
+                    LoadingScreenActivity.db.Insert(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte(imgSP),daBan);
+                    Toast.makeText( SanPhamActivity.this,"Thêm thành công"+maSP,Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
         btnDanhSach.setOnClickListener( new View.OnClickListener() {

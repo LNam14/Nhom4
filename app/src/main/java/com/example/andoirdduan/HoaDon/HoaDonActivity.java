@@ -103,6 +103,8 @@ public class HoaDonActivity extends AppCompatActivity {
                                 Intent intent = new Intent(getApplicationContext(), LichSuHoaDon.class );
                                 intent.putExtra("dulieu", strUsername);
                                 startActivity(intent);
+//                            LoadingScreenActivity.db.TruyVan( "DELETE FROM HoaDon where user = '"+strUsername+"'" );
+//                            LoadingScreenActivity.db.TruyVan( "DELETE FROM GioHang1 where user = '"+strUsername+"'" );
                         }else{
                             Toast.makeText( HoaDonActivity.this, "Sản phẩm không đđủ", Toast.LENGTH_SHORT ).show();
                         }

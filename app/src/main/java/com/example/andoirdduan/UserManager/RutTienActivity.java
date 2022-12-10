@@ -53,16 +53,20 @@ public class RutTienActivity extends AppCompatActivity {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 String time = String.valueOf( LocalDateTime.now() );
                 tienNap = tien - tien2;
-                if(tienNap < 0){
-                    Toast.makeText( this, "Số dư không đủ", Toast.LENGTH_SHORT ).show();
+                if(Tien.equals("")){
+                    Tien.setError("Không được để trống");
                 }else{
-                    if (sqlSever.updateNap( account, String.valueOf( tienNap ) ) > 0) {
+                    if(tienNap < 0){
+                        Toast.makeText( this, "Số dư không đủ", Toast.LENGTH_SHORT ).show();
+                    }else{
+                        if (sqlSever.updateNap( account, String.valueOf( tienNap ) ) > 0) {
                         Toast.makeText( getApplicationContext(), "Lưu thành công", Toast.LENGTH_SHORT ).show();
                         LoadingScreenActivity.db.InsertRT( account, time, tien2 );
                         Intent intent = new Intent( getApplicationContext(), UserManagerActivity.class );
                         intent.putExtra( "name_user", account );
                         intent.putExtra( "Tien", tien );
                         startActivity( intent );
+                        }
                     }
                 }
             }

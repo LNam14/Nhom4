@@ -64,11 +64,13 @@ public class UserActivity extends AppCompatActivity {
 //            Intent intent = new Intent(UserActivity.this, LoginActivity.class);
 //            startActivity(intent);
             Toast.makeText(this,"Đăng nhập thành công",Toast.LENGTH_SHORT ).show();
+            notification();
 
         }else if(checkLoginRemember()>0){
             Toast.makeText(this,"Lưu mật khẫu thành công",Toast.LENGTH_SHORT ).show();
             System.out.println("USERNAME"+strUsername);
             tvUser.setText("Hello, "+ strUsername);
+            notification();
 
         }
         loadData();
@@ -79,7 +81,6 @@ public class UserActivity extends AppCompatActivity {
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
-        notification();
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

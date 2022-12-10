@@ -53,7 +53,7 @@ public class DSSPActivity extends AppCompatActivity {
                 final String maSP = sp.getMaSP();
                 final AlertDialog.Builder builder = new AlertDialog.Builder( DSSPActivity.this);
                 builder.setTitle("Thông Báo");
-                builder.setMessage("Bạn có muốn xóa khóa học này không?");
+                builder.setMessage("Bạn có muốn xóa sản phẩm này không?");
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

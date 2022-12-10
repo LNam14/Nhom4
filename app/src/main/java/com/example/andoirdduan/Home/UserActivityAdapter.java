@@ -136,6 +136,12 @@ public class UserActivityAdapter extends BaseAdapter {
                     LoadingScreenActivity.db.TruyVan("UPDATE GioHang SET soLuong = '" + (gh.getSoLuong()+1) + "' WHERE ID = '" + maSP + "' AND user='"+context.strUsername+"'");
                     loadData();
                     loadData1();
+                    Intent intent1 = new Intent(context, GioHangActivity.class);
+                    intent1.putExtra("soLuong", sp.getSoLuong());
+                    intent1.putExtra("maSP", maSP);
+                    intent1.putExtra("daBan", sp.getDaBan());
+                    intent1.putExtra("dulieu", context.strUsername);
+                    context.startActivity(intent1);
                 }
             }
         } );

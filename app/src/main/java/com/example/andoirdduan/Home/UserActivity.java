@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,11 +19,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.andoirdduan.ChiTietSanPham.ChiTietSanPham;
 import com.example.andoirdduan.GioHang.GioHangActivity;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.Login.LoginActivity;
+import com.example.andoirdduan.Photo;
+import com.example.andoirdduan.PhotoAdapter;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
@@ -31,10 +36,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class UserActivity extends AppCompatActivity {
     FloatingActionButton gioHang;
@@ -44,12 +54,28 @@ public class UserActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
     String strUsername = "";
     String nhoMk = "mua";
+    private ViewPager viewPager;
+    private CircleIndicator circleIndicator;
+    private PhotoAdapter photoAdapter;
+    private List<Photo> mListPhoto;
+    private Timer mTimer;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
         getSupportActionBar().setCustomView( R.layout.tittle );
         setContentView(R.layout.user_activity);
+
+        mListPhoto = getListPhoto();
+        viewPager = findViewById(R.id.viewPaper);
+        circleIndicator = findViewById(R.id.circle_indicator);
+        photoAdapter = new PhotoAdapter(this, mListPhoto);
+        viewPager.setAdapter(photoAdapter);
+        circleIndicator.setViewPager(viewPager);
+        photoAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
+        AutoSlideImager();
 
         gioHang = findViewById(R.id.fab);
         navigationView = findViewById(R.id.bottomNavigationView);
@@ -155,6 +181,51 @@ public class UserActivity extends AppCompatActivity {
 
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(UserActivity.this);
         managerCompat.notify(1,builder.build());
+    }
+    private List<Photo> getListPhoto(){
+        List<Photo> list = new ArrayList<>();
+        list.add(new Photo(R.drawable.giay_slide));
+        list.add(new Photo(R.drawable.giay_slide2));
+        list.add(new Photo(R.drawable.shoes_slide));
+        return list;
+    }
+
+    private void AutoSlideImager(){
+        if(mListPhoto == null || mListPhoto.isEmpty() || viewPager == null){
+            return;
+        }
+
+        //init timer
+        if(mTimer == null){
+            mTimer = new Timer();
+        }
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int currentItem = viewPager.getCurrentItem();
+                        int totalItem = mListPhoto.size() - 1;
+                        if(currentItem<totalItem){
+                            currentItem++;
+                            viewPager.setCurrentItem(currentItem);
+                        }else{
+                            viewPager.setCurrentItem(0);
+                        }
+                    }
+                });
+            }
+        },200,2000);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mTimer!=null){
+            mTimer.cancel();
+            mTimer=null;
+        }
     }
 }
 

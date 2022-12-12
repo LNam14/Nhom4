@@ -2,12 +2,15 @@ package com.example.andoirdduan.Home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
@@ -17,6 +20,8 @@ import android.widget.Toast;
 import com.example.andoirdduan.AdminManager.AdminManagerActivity;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.Login.LoginActivity;
+import com.example.andoirdduan.Photo;
+import com.example.andoirdduan.PhotoAdapter;
 import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.DSSPActivity;
 import com.example.andoirdduan.SanPham.SanPham;
@@ -26,6 +31,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class HomePage extends AppCompatActivity {
     TextView tvUser;
@@ -33,6 +43,11 @@ public class HomePage extends AppCompatActivity {
     ArrayList<SanPham> arraySanPham;
     GridView gridView;
     String strUsername = "";
+    private ViewPager viewPager;
+    private CircleIndicator circleIndicator;
+    private PhotoAdapter photoAdapter;
+    private List<Photo> mListPhoto;
+    private Timer mTimer;
     BottomNavigationView navigationView;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -43,6 +58,16 @@ public class HomePage extends AppCompatActivity {
         gridView = findViewById( R.id.gvSanPham );
         navigationView = findViewById( R.id.bottomNavigationView );
         tvUser = findViewById( R.id.tvUserName);
+
+
+        mListPhoto = getListPhoto();
+        viewPager = findViewById(R.id.viewPaper1);
+        circleIndicator = findViewById(R.id.circle_indicator1);
+        photoAdapter = new PhotoAdapter(this, mListPhoto);
+        viewPager.setAdapter(photoAdapter);
+        circleIndicator.setViewPager(viewPager);
+        photoAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
+        AutoSlideImager();
         Bundle bundle = getIntent().getExtras();
         if(bundle !=  null){
             strUsername = bundle.getString("hoten");
@@ -122,6 +147,51 @@ public class HomePage extends AppCompatActivity {
     public void chuyenTrang(){
         Intent intent = new Intent(getBaseContext(), DSSPActivity.class );
         startActivity( intent );
+    }
+    private List<Photo> getListPhoto(){
+        List<Photo> list = new ArrayList<>();
+        list.add(new Photo(R.drawable.giay_slide));
+        list.add(new Photo(R.drawable.giay_slide2));
+        list.add(new Photo(R.drawable.shoes_slide));
+        return list;
+    }
+
+    private void AutoSlideImager(){
+        if(mListPhoto == null || mListPhoto.isEmpty() || viewPager == null){
+            return;
+        }
+
+        //init timer
+        if(mTimer == null){
+            mTimer = new Timer();
+        }
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int currentItem = viewPager.getCurrentItem();
+                        int totalItem = mListPhoto.size() - 1;
+                        if(currentItem<totalItem){
+                            currentItem++;
+                            viewPager.setCurrentItem(currentItem);
+                        }else{
+                            viewPager.setCurrentItem(0);
+                        }
+                    }
+                });
+            }
+        },200,2000);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mTimer!=null){
+            mTimer.cancel();
+            mTimer=null;
+        }
     }
 
 }

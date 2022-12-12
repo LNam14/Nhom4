@@ -31,10 +31,20 @@
             android:textSize="33dp"
             android:textStyle="bold" />
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="234dp"
-            app:srcCompat="@drawable/shoes_slide" />
+            android:layout_height="wrap_content">
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPaper1"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"/>
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/circle_indicator1"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="170dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="30dp"/>
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"

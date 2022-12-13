@@ -1,5 +1,6 @@
 package com.example.andoirdduan.Home;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
@@ -60,7 +62,9 @@ public class UserActivity extends AppCompatActivity {
     private List<Photo> mListPhoto;
     private Timer mTimer;
 
+    Button btnAdidas,btnNike,btnBalenciaga,btnSupreme,btnConverse;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +85,117 @@ public class UserActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.bottomNavigationView);
         gvSanPham_user = findViewById(R.id.gvSanPham_user);
         tvUser = findViewById(R.id.tvUserName_userActivity);
+        btnAdidas = findViewById( R.id.btnADIDAS );
+        btnNike = findViewById( R.id.btnNike );
+        btnBalenciaga = findViewById( R.id.btnBalenciaga );
+        btnSupreme = findViewById( R.id.btnSupreme );
+        btnConverse = findViewById( R.id.btnConverse );
+
+        btnAdidas.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String adidas = "Adidas";
+                Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham where theLoai = '"+adidas+"'");
+                arraySanPham_user = new ArrayList<SanPham>();
+                while (cursor.moveToNext()) {
+                    arraySanPham_user.add(new SanPham(
+                            cursor.getString(0),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            cursor.getInt(3),
+                            cursor.getInt(4),
+                            cursor.getString(5),
+                            cursor.getBlob(6),
+                            cursor.getInt( 7 )));
+                }
+                UserActivityAdapter adapter = new UserActivityAdapter(UserActivity.this, R.layout.cardview_activity, arraySanPham_user);
+                gvSanPham_user.setAdapter(adapter);
+            }
+        } );
+        btnNike.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Nike = "Nike";
+                Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham where theLoai = '"+Nike+"'");
+                arraySanPham_user = new ArrayList<SanPham>();
+                while (cursor.moveToNext()) {
+                    arraySanPham_user.add(new SanPham(
+                            cursor.getString(0),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            cursor.getInt(3),
+                            cursor.getInt(4),
+                            cursor.getString(5),
+                            cursor.getBlob(6),
+                            cursor.getInt( 7 )));
+                }
+                UserActivityAdapter adapter = new UserActivityAdapter(UserActivity.this, R.layout.cardview_activity, arraySanPham_user);
+                gvSanPham_user.setAdapter(adapter);
+            }
+        } );
+        btnBalenciaga.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Balenciaga = "Balenciaga";
+                Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham where theLoai = '"+Balenciaga+"'");
+                arraySanPham_user = new ArrayList<SanPham>();
+                while (cursor.moveToNext()) {
+                    arraySanPham_user.add(new SanPham(
+                            cursor.getString(0),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            cursor.getInt(3),
+                            cursor.getInt(4),
+                            cursor.getString(5),
+                            cursor.getBlob(6),
+                            cursor.getInt( 7 )));
+                }
+                UserActivityAdapter adapter = new UserActivityAdapter(UserActivity.this, R.layout.cardview_activity, arraySanPham_user);
+                gvSanPham_user.setAdapter(adapter);
+            }
+        } );
+        btnSupreme.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Supreme = "Supreme";
+                Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham where theLoai = '"+Supreme+"'");
+                arraySanPham_user = new ArrayList<SanPham>();
+                while (cursor.moveToNext()) {
+                    arraySanPham_user.add(new SanPham(
+                            cursor.getString(0),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            cursor.getInt(3),
+                            cursor.getInt(4),
+                            cursor.getString(5),
+                            cursor.getBlob(6),
+                            cursor.getInt( 7 )));
+                }
+                UserActivityAdapter adapter = new UserActivityAdapter(UserActivity.this, R.layout.cardview_activity, arraySanPham_user);
+                gvSanPham_user.setAdapter(adapter);
+            }
+        } );
+        btnConverse.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Converse = "Converse";
+                Cursor cursor = LoadingScreenActivity.db.TruyVanTraVe("Select * from SanPham where theLoai = '"+Converse+"'");
+                arraySanPham_user = new ArrayList<SanPham>();
+                while (cursor.moveToNext()) {
+                    arraySanPham_user.add(new SanPham(
+                            cursor.getString(0),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            cursor.getInt(3),
+                            cursor.getInt(4),
+                            cursor.getString(5),
+                            cursor.getBlob(6),
+                            cursor.getInt( 7 )));
+                }
+                UserActivityAdapter adapter = new UserActivityAdapter(UserActivity.this, R.layout.cardview_activity, arraySanPham_user);
+                gvSanPham_user.setAdapter(adapter);
+            }
+        } );
         Bundle bundle = getIntent().getExtras();
         if(bundle !=  null){
             strUsername = bundle.getString("hoten");

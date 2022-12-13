@@ -84,7 +84,7 @@ public class YeuCauAdapter extends BaseAdapter {
                 int id = sp.getID();
                 Toast.makeText( context, "acount"+account + "tien"+tienNap+"tt"+s.getVi(), Toast.LENGTH_SHORT ).show();
                 if (context.sqlSever.updateNap(account, String.valueOf(tongTien1)) > 0) {
-                    Toast.makeText(context, "Nạp thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Đã xác nhận yêu cầu", Toast.LENGTH_SHORT).show();
                     LoadingScreenActivity.db.InsertNT(account, time, tienNap,trangThai);
                     LoadingScreenActivity.db.TruyVan( "DELETE FROM YeuCau where ID = '"+ id + "'");
                     context.loadData();
@@ -97,8 +97,12 @@ public class YeuCauAdapter extends BaseAdapter {
                 String account = sp.getUser();
                 String time = sp.getDate();
                 int tienNap = sp.getTien();
+                int id = sp.getID();
                 String trangThai = "Bị từ chối";
                 LoadingScreenActivity.db.InsertNT(account, time, tienNap,trangThai);
+                Toast.makeText(context, "Đã từ chối yêu cầu", Toast.LENGTH_SHORT).show();
+                LoadingScreenActivity.db.TruyVan( "DELETE FROM YeuCau where ID = '"+ id + "'");
+                context.loadData();
             }
         } );
         viewHolder.txtHoTen.setText( sp.getUser() );

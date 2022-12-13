@@ -100,7 +100,7 @@
             android:textColor="#424040"
             android:textSize="17sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/edNgaySinh_RegisterActivity"
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -109,10 +109,8 @@
             android:layout_margin="10dp"
             android:drawablePadding="10dp"
             android:elevation="10dp"
-            android:inputType="textPersonName"
             android:paddingStart="7dp"
             android:textColor="#424040"
-            android:textIsSelectable="true"
             android:textSize="17sp"
             android:background="@drawable/edit_text_login" />
     </LinearLayout>

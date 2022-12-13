@@ -1,9 +1,11 @@
 package com.example.andoirdduan.Login;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,11 +17,12 @@ import com.example.andoirdduan.Database.SQLSever;
 import com.example.andoirdduan.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity {
     Button btnDangKi,imageButtonNgaySinh;
-    EditText edTaiKhoang,edMatKhau,edEmail,edTen,edNgaySinh;
-    TextView login;
+    EditText edTaiKhoang,edMatKhau,edEmail,edTen;
+    TextView login,edNgaySinh;
     int vi = 0;
 
     @Override
@@ -35,6 +38,26 @@ public class RegisterActivity extends AppCompatActivity {
         login = findViewById(R.id.tvLogin_RegisterActivity);
         final SQLSever sqlSever = new SQLSever(this);
         final SQLSever sql_user = new SQLSever(this);
+        final Calendar cal = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener dateEvent = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                edNgaySinh.setText(i+"/"+i1+"/"+i2);
+            }
+        };
+        edNgaySinh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dialog = new DatePickerDialog(
+                        RegisterActivity.this, dateEvent,
+                        cal.get( Calendar.YEAR),
+                        cal.get(Calendar.MONTH)+1,
+                        cal.get(Calendar.DATE));
+                dialog.show();
+            }
+        });
+        String ngaySinh = edNgaySinh.getText().toString();
+
         btnDangKi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,9 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                 final String Gmail = edEmail.getText().toString();
                 final String mk1= edMatKhau.getText().toString();
                 final String ten= edTen.getText().toString();
-                final String ngaysinh= edNgaySinh.getText().toString();
-
-                if(Gmail.equals("")|| mk1.equals("") || acc.equals("") || ten.equals("") || ngaysinh.equals("")){
+                if(Gmail.equals("")|| mk1.equals("") || acc.equals("") || ten.equals("") || ngaySinh.equals("")){
                     Toast.makeText(RegisterActivity.this, "Vui Lòng Điền Đủ Thông tin!!!", Toast.LENGTH_SHORT).show();
                 }else if(!isEmail(Gmail)){
                     edEmail.setError("Sai định dạng email");
@@ -53,7 +74,8 @@ public class RegisterActivity extends AppCompatActivity {
                     System.out.println("UserArray"+users);
                         boolean ketqua = true;
                         if(ketqua == true){
-                            User s = new User(acc, Gmail, mk1, ten, ngaysinh,vi);
+
+                            User s = new User(acc, Gmail, mk1, ten, ngaySinh,vi);
                             sqlSever.AddUser(s);
                             if(s!=null){
                                 Toast.makeText(RegisterActivity.this, "Đăng Ký Thành Công ^.^", Toast.LENGTH_SHORT).show();

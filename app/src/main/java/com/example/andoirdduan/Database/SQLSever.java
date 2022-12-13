@@ -6,31 +6,32 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.andoirdduan.AdminManager.YeuCauAdapter;
 import com.example.andoirdduan.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SQLSever extends SQLiteOpenHelper {
-    private static final String DatabaseName = "user";
-    private static final String Table_Name1 = "users";
-    private static final String Account = "account";
-    private static final String Email = "email";
-    private static final String Password = "password";
-    private static final String Ten = "ten";
-    private static final String NgaySinh = "ngaysinh";
-    private static final String Vi = "vi";
-    private static int version = 1;
+    public static final String DatabaseName = "user";
+    public static final String Table_Name1 = "users";
+    public static final String Account = "account";
+    public static final String Email = "email";
+    public static final String Password = "password";
+    public static final String Ten = "ten";
+    public static final String NgaySinh = "ngaysinh";
+    public static final String Vi = "vi";
+    public static int version = 1;
 
     public SQLiteDatabase db;
-    private Context context;
-    private ContentValues values;
+    public Context context;
+    public YeuCauAdapter adapter;
+    public ContentValues values;
 
     public SQLSever(Context context) {
         super(context, DatabaseName, null, version);
         this.context = context;
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         String Create_Table_user = " CREATE TABLE " + Table_Name1 + " ( " +
@@ -128,7 +129,25 @@ public class SQLSever extends SQLiteOpenHelper {
         db.close();
         return s;
     }
-
+    public User getUser12(String account){
+        db = this.getWritableDatabase();
+        Cursor cursor = db.query(Table_Name1, new String[]{Account, Email, Password, Ten,Vi, NgaySinh},
+                Account + "=?", new String[]{account}, null, null, null,null);
+        User s = new User();
+        if(cursor.moveToFirst()){
+            s.setAccount(cursor.getString(0));
+            s.setGmail(cursor.getString(1));
+            s.setPassword(cursor.getString(2));
+            s.setTen(cursor.getString(3));
+            s.setVi(cursor.getInt(4));
+            s.setNgaySinh(cursor.getString(5));
+        }else{
+            s = null;
+        }
+        cursor.close();
+        db.close();
+        return s;
+    }
 
 
 

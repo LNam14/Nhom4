@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +64,14 @@ public class HoaDonActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
         getSupportActionBar().setCustomView( R.layout.tittle_xacnhan );
         setContentView(R.layout.activity_hoa_don);
+        ImageView btnBack = findViewById( R.id.btnBack_TT );
+        btnBack.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),GioHangActivity.class);
+                startActivity( intent );
+            }
+        } );
         btnTheMDC = findViewById( R.id.btnTheMDC );
         lvSanPhamThanhToan = findViewById( R.id.lvSanPhamThanhToan );
         lvDCHD = findViewById( R.id.lvDCHD );

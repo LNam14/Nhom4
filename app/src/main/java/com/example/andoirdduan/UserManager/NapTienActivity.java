@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.andoirdduan.AdminManager.XacNhanNapTien;
 import com.example.andoirdduan.Database.SQLSever;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
@@ -54,23 +55,47 @@ public class NapTienActivity extends AppCompatActivity {
         int tien2 = Integer.parseInt(Tien.getText().toString());
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             String time = String.valueOf( LocalDateTime.now() );
+            String phanUng = "";
             tienNap = tien + tien2;
             System.out.println( "Tien2: " + tien2 );
             System.out.println( "Tien: " + tien );
             if(Tien.equals("")){
-                Tien.setError("Không được để trống");
+                Tien.setError("Vui lòng nhập vào số tiền");
             }else {
-                if (sqlSever.updateNap(account, String.valueOf(tienNap)) > 0) {
-                    Toast.makeText(getApplicationContext(), "Nạp thành công", Toast.LENGTH_SHORT).show();
-                    LoadingScreenActivity.db.InsertNT(account, time, tien2);
-                    Intent intent = new Intent(getApplicationContext(), UserManagerActivity.class);
-                    intent.putExtra("name_user", account);
-                    intent.putExtra("Tien", tien);
-                    startActivity(intent);
-                }
+                LoadingScreenActivity.db.InsertYC(account, time, tien2,phanUng);
+                Intent intent = new Intent(getApplicationContext(), XacNhanNapTien.class);
+                intent.putExtra("name_user", account);
+                intent.putExtra("Tien", tien);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Đã gửi yêu cầu nạp tiền", Toast.LENGTH_SHORT).show();
             }
+            Intent intent = new Intent(getApplicationContext(), UserManagerActivity.class);
+            intent.putExtra("name_user", account);
+            intent.putExtra("Tien", tien);
+            startActivity( intent );
         }
     }
+//    public void Nap(View view) {
+//        int tien2 = Integer.parseInt(Tien.getText().toString());
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//            String time = String.valueOf( LocalDateTime.now() );
+//            tienNap = tien + tien2;
+//            System.out.println( "Tien2: " + tien2 );
+//            System.out.println( "Tien: " + tien );
+//            if(Tien.equals("")){
+//                Tien.setError("Không được để trống");
+//            }else {
+//                if (sqlSever.updateNap(account, String.valueOf(tienNap)) > 0) {
+//                    Toast.makeText(getApplicationContext(), "Nạp thành công", Toast.LENGTH_SHORT).show();
+//                    LoadingScreenActivity.db.InsertNT(account, time, tien2);
+//                    Intent intent = new Intent(getApplicationContext(), UserManagerActivity.class);
+//                    intent.putExtra("name_user", account);
+//                    intent.putExtra("Tien", tien);
+//                    startActivity(intent);
+//                }
+//            }
+//        }
+//    }
     public void loadData(){
         Cursor cursor =  LoadingScreenActivity.db.TruyVanTraVe("Select * from NapTien where user = '" + account + "'");
         list = new ArrayList<NapTien>();
@@ -78,7 +103,8 @@ public class NapTienActivity extends AppCompatActivity {
             list.add(new NapTien(
                     cursor.getString(0),
                     cursor.getString(1),
-                    cursor.getInt(2)));
+                    cursor.getInt(2),
+                    cursor.getString( 3 )));
         }
     }
 }

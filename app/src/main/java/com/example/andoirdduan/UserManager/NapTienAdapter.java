@@ -48,7 +48,7 @@ public class NapTienAdapter extends BaseAdapter {
     }
 
     public class ViewHolder {
-        TextView txtDate,txtTien;
+        TextView txtDate,txtTien, txtTrangThai_NT;
     }
     @NonNull
     @Override
@@ -61,12 +61,21 @@ public class NapTienAdapter extends BaseAdapter {
             view = inflater.inflate( R.layout.row_naptien, null );
             viewHolder.txtDate = view.findViewById( R.id.txtDate_NT );
             viewHolder.txtTien = view.findViewById( R.id.txtSoTien_NT );
+            viewHolder.txtTrangThai_NT = view.findViewById( R.id.txtTrangThai_NT );
             view.setTag( viewHolder );
         } else {
             viewHolder =(ViewHolder) view.getTag();
         }
-        viewHolder.txtDate.setText( sp.getDate() );
-        viewHolder.txtTien.setText( "+"+sp.getTien() +"$");
+        if(sp.getTrangThai().equals( "Bị từ chối" )){
+            viewHolder.txtDate.setText( sp.getDate() );
+            viewHolder.txtTien.setText( "!" + sp.getTien() +"$");
+            viewHolder.txtTrangThai_NT.setText( sp.getTrangThai() );
+        }else{
+            viewHolder.txtDate.setText( sp.getDate() );
+            viewHolder.txtTien.setText( "+"+sp.getTien() +"$");
+            viewHolder.txtTrangThai_NT.setText( sp.getTrangThai() );
+        }
+
         return view;
     }
 

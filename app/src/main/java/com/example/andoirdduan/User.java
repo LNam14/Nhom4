@@ -1,9 +1,8 @@
 package com.example.andoirdduan;
 
-public class
-User {
-    private String Account, Gmail, Password, Ten, NgaySinh;
-    private int Vi;
+public class User {
+    public String Account, Gmail, Password, Ten, NgaySinh;
+    public int Vi;
 
     public User() {
     }

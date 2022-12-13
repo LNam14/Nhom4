@@ -77,6 +77,7 @@ public class UserManagerActivity extends AppCompatActivity {
                 intent.putExtra("name_user", strUsername);
                 intent.putExtra("Tien", Tien);
                 startActivity(intent);
+                Toast.makeText( UserManagerActivity.this, "Name"+strUsername, Toast.LENGTH_SHORT ).show();
             }
         });
         btnTaiKhoan.setOnClickListener(new View.OnClickListener() {

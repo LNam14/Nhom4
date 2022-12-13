@@ -61,7 +61,8 @@ public class GioHangActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
         getSupportActionBar().setCustomView( R.layout.tittle_giohang );
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageView btnBack = findViewById( R.id.btnBack );
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        ImageView btnBack = findViewById( R.id.btnBack );
         Bundle bundle = getIntent().getExtras();
         if(bundle !=  null){
             strUsername = bundle.getString("dulieu");

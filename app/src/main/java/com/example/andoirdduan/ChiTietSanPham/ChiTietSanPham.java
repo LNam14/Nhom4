@@ -6,7 +6,9 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,6 +23,8 @@ import com.example.andoirdduan.R;
 import com.example.andoirdduan.SanPham.SanPham;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +35,8 @@ public class ChiTietSanPham extends AppCompatActivity {
     Spinner spinner;
     private List<SanPham> listSP;
     String strUsername = "";
+    private Uri selectedFileUri;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,31 +58,31 @@ public class ChiTietSanPham extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Chua dc", Toast.LENGTH_SHORT).show();
         }
-        btnThem.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SanPham sanPham = (SanPham) getIntent().getSerializableExtra("chitiet");
-                Bitmap bitmap = BitmapFactory.decodeByteArray( sanPham.getHinh(), 0, sanPham.getHinh().length );
-                imgSanPham.setImageBitmap( bitmap );
-                String maSP = sanPham.getMaSP();
-                String tenSP = sanPham.getTenSP();
-                String phanLoai = sanPham.getThuongHieu();
-                int soLuong = 1;
-                String size = "Size 37";
-                int giaTien = sanPham.getGia();
-                int tongTien = sanPham.getGia()*sanPham.getSoLuong();
-                String moTa = sanPham.getMoTa();
-                GioHang gh = LoadingScreenActivity.db.getDetail( maSP );
-                GioHang gh1 = LoadingScreenActivity.db.getUser( strUsername );
-                if(gh==null||gh1==null){
-                    LoadingScreenActivity.db.InsertGH(maSP,tenSP,phanLoai,size,soLuong,giaTien,moTa,ConverttoArrayByte( imgSanPham ),strUsername);
-                    System.out.println("Tien"+tongTien);
-                    Toast.makeText(getBaseContext(), "Them Thanh Cong", Toast.LENGTH_SHORT).show();
-                }else{
-                    LoadingScreenActivity.db.TruyVan("UPDATE GioHang SET soLuong = '" + (gh.getSoLuong()+1) + "' WHERE ID = '" + maSP + "' AND user='"+strUsername+"'");
-                }
-            }
-        } );
+//        btnThem.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SanPham sanPham = (SanPham) getIntent().getSerializableExtra("chitiet");
+//                Bitmap bitmap = BitmapFactory.decodeByteArray( sanPham.getHinh(), 0, sanPham.getHinh().length );
+//                imgSanPham.setImageBitmap( bitmap );
+//                String maSP = sanPham.getMaSP();
+//                String tenSP = sanPham.getTenSP();
+//                String phanLoai = sanPham.getThuongHieu();
+//                int soLuong = 1;
+//                String size = "Size 37";
+//                int giaTien = sanPham.getGia();
+//                int tongTien = sanPham.getGia()*sanPham.getSoLuong();
+//                String moTa = sanPham.getMoTa();
+//                GioHang gh = LoadingScreenActivity.db.getDetail( maSP );
+//                GioHang gh1 = LoadingScreenActivity.db.getUser( strUsername );
+//                if(gh==null||gh1==null){
+//                    LoadingScreenActivity.db.InsertGH(maSP,tenSP,phanLoai,size,soLuong,giaTien,moTa,ConverttoArrayByte( imgSanPham ),strUsername);
+//                    System.out.println("Tien"+tongTien);
+//                    Toast.makeText(getBaseContext(), "Them Thanh Cong", Toast.LENGTH_SHORT).show();
+//                }else{
+//                    LoadingScreenActivity.db.TruyVan("UPDATE GioHang SET soLuong = '" + (gh.getSoLuong()+1) + "' WHERE ID = '" + maSP + "' AND user='"+strUsername+"'");
+//                }
+//            }
+//        } );
     }
     public void initData(){
         SanPham sanPham = (SanPham) getIntent().getSerializableExtra("chitiet");
@@ -85,9 +91,10 @@ public class ChiTietSanPham extends AppCompatActivity {
         thuonghieu.setText(sanPham.getThuongHieu());
         giasp.setText(sanPham.getGia()+"$");
         txtDaBan.setText( "Đã bán "+sanPham.getDaBan() );
+
         Bitmap bitmap = BitmapFactory.decodeByteArray( sanPham.getHinh(), 0, sanPham.getHinh().length );
         imgSanPham.setImageBitmap( bitmap );
-       soluong.setText( sanPham.getSoLuong()+" sản phẩm có sẵn");
+        soluong.setText( sanPham.getSoLuong()+" sản phẩm có sẵn");
     }
     public byte[] ConverttoArrayByte(ImageView img) {
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();

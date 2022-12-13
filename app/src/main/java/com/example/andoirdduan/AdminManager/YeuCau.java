@@ -1,25 +1,36 @@
-package com.example.andoirdduan.UserManager;
+package com.example.andoirdduan.AdminManager;
 
-public class NapTien {
+public class YeuCau {
+    int ID;
     String user, date;
     int tien;
-    String trangThai;
-    public NapTien() {
+    String phanUng;
+
+    public YeuCau() {
     }
 
-    public NapTien(String user, String date, int tien, String trangThai) {
+    public YeuCau(int ID, String user, String date, int tien, String phanUng) {
+        this.ID = ID;
         this.user = user;
         this.date = date;
         this.tien = tien;
-        this.trangThai = trangThai;
+        this.phanUng = phanUng;
     }
 
-    public String getTrangThai() {
-        return trangThai;
+    public int getID() {
+        return ID;
     }
 
-    public void setTrangThai(String napTien) {
-        this.trangThai = napTien;
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getPhanUng() {
+        return phanUng;
+    }
+
+    public void setPhanUng(String phanUng) {
+        this.phanUng = phanUng;
     }
 
     public String getUser() {

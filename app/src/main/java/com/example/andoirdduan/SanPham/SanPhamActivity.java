@@ -63,30 +63,19 @@ public class SanPhamActivity extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String maSP = edMaSP.getText().toString().trim();
-                String tenSP = edTenSP.getText().toString().trim();
-                String phanLoai = edPhanLoai.getText().toString().trim();
-                int soLuong = Integer.parseInt( edSoLuong.getText().toString().trim() );
-                String moTa = edMoTa.getText().toString().trim();
-                int giaTien = Integer.parseInt( edGiaSP.getText().toString() );
-                int daBan = 0;
-                if(maSP.equals("")){
-                    edMaSP.setError("Không được để trống");
-                }else if(tenSP.equals("")){
-                    edTenSP.setError("Không được để trống");
-                }else if(phanLoai.equals("")) {
-                    edPhanLoai.setError("Không được để trống");
-                }else if(moTa.equals("")){
-                    edMoTa.setError("Không được để trống");
-                }else if(soLuong==0){
-                    edMoTa.setError("Không được để trống");
-                }else if(giaTien==0){
-                    edMoTa.setError("Không được để trống");
-                } else{
+                try{
+                    String maSP = edMaSP.getText().toString().trim();
+                    String tenSP = edTenSP.getText().toString().trim();
+                    String phanLoai = edPhanLoai.getText().toString().trim();
+                    int soLuong = Integer.parseInt( edSoLuong.getText().toString().trim() );
+                    String moTa = edMoTa.getText().toString().trim();
+                    int giaTien = Integer.parseInt( edGiaSP.getText().toString() );
+                    int daBan = 0;
                     LoadingScreenActivity.db.Insert(maSP,tenSP,phanLoai,soLuong,giaTien,moTa,ConverttoArrayByte(imgSP),daBan);
-                    Toast.makeText( SanPhamActivity.this,"Thêm thành công"+maSP,Toast.LENGTH_SHORT).show();
+                    Toast.makeText( SanPhamActivity.this,"Thêm thành công "+maSP,Toast.LENGTH_SHORT).show();
+                }catch (Exception ex){
+                    Toast.makeText( SanPhamActivity.this,"Mã sản  phẩm đã tồn tại",Toast.LENGTH_SHORT).show();
                 }
-
 
             }
         });

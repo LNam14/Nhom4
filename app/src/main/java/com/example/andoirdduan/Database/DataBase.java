@@ -58,14 +58,26 @@ public class DataBase extends SQLiteOpenHelper {
         statement.bindLong(8,daBan);
         statement.executeInsert();
     }
-    public void InsertNT(String user, String date, int tien) {
+    public void InsertNT(String user, String date, int tien, String trangThai) {
         SQLiteDatabase db=getWritableDatabase();
-        String sql= "Insert into NapTien values (?,?,?)";
+        String sql= "Insert into NapTien values (?,?,?,?)";
         SQLiteStatement statement=db.compileStatement(sql);
         statement.clearBindings();
         statement.bindString(1,user);
         statement.bindString(2,date);
         statement.bindLong(3,tien);
+        statement.bindString(4,trangThai);
+        statement.executeInsert();
+    }
+    public void InsertYC(String user, String date, int tien, String phanUng) {
+        SQLiteDatabase db=getWritableDatabase();
+        String sql= "Insert into YeuCau values (null,?,?,?,?)";
+        SQLiteStatement statement=db.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindString(1,user);
+        statement.bindString(2,date);
+        statement.bindLong(3,tien);
+        statement.bindString(4,phanUng);
         statement.executeInsert();
     }
     public void InsertRT(String user, String date, int tien) {

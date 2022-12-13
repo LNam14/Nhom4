@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andoirdduan.AdminManager.AdminManagerActivity;
+import com.example.andoirdduan.AdminManager.XacNhanNapTien;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.Login.LoginActivity;
 import com.example.andoirdduan.Photo;
@@ -92,6 +93,8 @@ public class HomePage extends AppCompatActivity {
                         startActivity(home);
                         break;
                     case R.id.search:
+                        Intent home1 = new Intent(getBaseContext(), XacNhanNapTien.class);
+                        startActivity(home1);
                         break;
                     case R.id.fab:
                         Intent insert = new Intent(getBaseContext(), SanPhamActivity.class);

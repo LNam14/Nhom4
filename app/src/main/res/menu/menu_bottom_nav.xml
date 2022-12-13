@@ -11,8 +11,8 @@
     <item />
     <item
         android:id="@+id/mot"
-        android:icon="@drawable/ic_baseline_share_24"
-        android:title="Share" />
+        android:icon="@drawable/ic_baseline_newspaper_24"
+        android:title="News" />
     <item
         android:id="@+id/user"
         android:icon="@drawable/ic_baseline_person_24"

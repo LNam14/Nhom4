@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -24,6 +26,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.andoirdduan.ChiTietSanPham.ChiTietSanPham;
+import com.example.andoirdduan.DocBao.DocBaoActivity;
 import com.example.andoirdduan.GioHang.GioHangActivity;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.Login.LoginActivity;
@@ -37,6 +40,11 @@ import com.example.andoirdduan.UserManager.UserManagerActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -64,6 +72,7 @@ public class UserActivity extends AppCompatActivity {
 
     Button btnAdidas,btnNike,btnBalenciaga,btnSupreme,btnConverse;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +89,9 @@ public class UserActivity extends AppCompatActivity {
         circleIndicator.setViewPager(viewPager);
         photoAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
         AutoSlideImager();
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            sendNontification("From Nguyen With Love", "Hello :))");
+        }
         gioHang = findViewById(R.id.fab);
         navigationView = findViewById(R.id.bottomNavigationView);
         gvSanPham_user = findViewById(R.id.gvSanPham_user);
@@ -205,13 +216,13 @@ public class UserActivity extends AppCompatActivity {
 //            Intent intent = new Intent(UserActivity.this, LoginActivity.class);
 //            startActivity(intent);
             Toast.makeText(this,"Đăng nhập thành công",Toast.LENGTH_SHORT ).show();
-            notification();
+//            notification();
 
         }else if(checkLoginRemember()>0){
             Toast.makeText(this,"Lưu mật khẫu thành công",Toast.LENGTH_SHORT ).show();
             System.out.println("USERNAME"+strUsername);
             tvUser.setText("Hello, "+ strUsername);
-            notification();
+//            notification();
 
         }
         loadData();
@@ -235,15 +246,22 @@ public class UserActivity extends AppCompatActivity {
                         search.putExtra("dulieu", strUsername);
                         startActivity(search);
                         break;
+                    case R.id.mot:
+                        Intent docbao = new Intent(getBaseContext(), DocBaoActivity.class);
+                        docbao.putExtra("name_user", strUsername);
+                        startActivity(docbao);
+                        break;
                     case R.id.fab:
                         Intent insert = new Intent(UserActivity.this, GioHangActivity.class);
                         startActivity(insert);
                         break;
+
                     case R.id.user:
                         Intent user = new Intent(getBaseContext(), UserManagerActivity.class);
                         user.putExtra("name_user", strUsername);
                         startActivity(user);
                         break;
+
                 }
                 return false;
             }
@@ -287,15 +305,19 @@ public class UserActivity extends AppCompatActivity {
         return -1;
 
     }
-    public void notification(){
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(UserActivity.this,"My Notification");
-        builder.setContentTitle("Đăng nhập thành công");
-        builder.setContentText("Chào user: "+strUsername);
-        builder.setSmallIcon(R.drawable.anh_user_lmao);
-        builder.setAutoCancel(true);
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void sendNontification(String title, String des){
+        NotificationChannel channel = new NotificationChannel("channel", "hello", NotificationManager.IMPORTANCE_HIGH);
+        NotificationManager manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager.createNotificationChannel(channel);
 
-        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(UserActivity.this);
-        managerCompat.notify(1,builder.build());
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "channel");
+        notification.setContentTitle(title);
+        notification.setContentText(des);
+        notification.setSmallIcon(R.drawable.ic_launcher_background);
+        manager.notify(121, notification.build());
+
+
     }
     private List<Photo> getListPhoto(){
         List<Photo> list = new ArrayList<>();
@@ -334,6 +356,7 @@ public class UserActivity extends AppCompatActivity {
         },200,2000);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -342,6 +365,10 @@ public class UserActivity extends AppCompatActivity {
             mTimer=null;
         }
     }
+
+
+
+
 }
 
 

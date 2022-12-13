@@ -41,5 +41,5 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'me.relex:circleindicator:2.1.6'
     implementation 'com.github.bumptech.glide:glide:4.14.2'
-
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }

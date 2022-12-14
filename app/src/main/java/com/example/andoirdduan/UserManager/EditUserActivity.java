@@ -1,11 +1,14 @@
 package com.example.andoirdduan.UserManager;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.andoirdduan.Database.SQLSever;
@@ -18,8 +21,12 @@ public class EditUserActivity extends AppCompatActivity {
     String account ="";
     SQLSever sqlSever;
     User user;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
+        getSupportActionBar().setCustomView( R.layout.tittle_giohang );
+        ImageView btnBack = findViewById( R.id.btnBack );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
         edMail = findViewById(R.id.edMail);
@@ -32,7 +39,14 @@ public class EditUserActivity extends AppCompatActivity {
         Bundle bundle1 = getIntent().getExtras();
         account = bundle1.getString("name");
 
-
+        btnBack.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditUserActivity.this, UserManagerActivity.class);
+                intent.putExtra("name_user", account);
+                startActivity( intent );
+            }
+        } );
         User user = sqlSever.getUser(account);
         edMail.setText(user.getGmail());
         edTen.setText(user.getTen());

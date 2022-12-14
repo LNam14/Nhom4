@@ -89,9 +89,7 @@ public class UserActivity extends AppCompatActivity {
         circleIndicator.setViewPager(viewPager);
         photoAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
         AutoSlideImager();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            sendNontification("From Nguyen With Love", "Hello :))");
-        }
+
         gioHang = findViewById(R.id.fab);
         navigationView = findViewById(R.id.bottomNavigationView);
         gvSanPham_user = findViewById(R.id.gvSanPham_user);
@@ -215,7 +213,7 @@ public class UserActivity extends AppCompatActivity {
         if(checkLoginRemember()<0){
 //            Intent intent = new Intent(UserActivity.this, LoginActivity.class);
 //            startActivity(intent);
-            Toast.makeText(this,"Đăng nhập thành công",Toast.LENGTH_SHORT ).show();
+//            Toast.makeText(this,"Đăng nhập thành công",Toast.LENGTH_SHORT ).show();
 //            notification();
 
         }else if(checkLoginRemember()>0){
@@ -226,13 +224,15 @@ public class UserActivity extends AppCompatActivity {
 
         }
         loadData();
-
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            sendNontification("From ShopGiay With Love", "Hello user: "+strUsername);
         }
+
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+//            NotificationManager manager = getSystemService(NotificationManager.class);
+//            manager.createNotificationChannel(channel);
+//        }
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

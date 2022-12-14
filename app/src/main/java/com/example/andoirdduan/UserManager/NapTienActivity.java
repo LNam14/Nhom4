@@ -1,7 +1,9 @@
 package com.example.andoirdduan.UserManager;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,10 +11,12 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.andoirdduan.AdminManager.XacNhanNapTien;
+import com.example.andoirdduan.CTHD.LichSuHoaDon;
 import com.example.andoirdduan.Database.SQLSever;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
@@ -34,9 +38,12 @@ public class NapTienActivity extends AppCompatActivity {
     Button btnNapTien;
     ListView listViewNapTien;
     List<NapTien> list = new ArrayList<>();
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
+        getSupportActionBar().setCustomView( R.layout.tittle_giohang );
+        ImageView btnBack = findViewById( R.id.btnBack );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nap_tien);
         Tien = findViewById(R.id.edTienNap);
@@ -46,6 +53,14 @@ public class NapTienActivity extends AppCompatActivity {
         Bundle bundle1 = getIntent().getExtras();
         account = bundle1.getString("name_user");
         tien = bundle1.getInt("Tien");
+        btnBack.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NapTienActivity.this, UserManagerActivity.class);
+                intent.putExtra("name_user", account);
+                startActivity( intent );
+            }
+        } );
         loadData();
         NapTienAdapter adapter = new NapTienAdapter( NapTienActivity.this,R.layout.row_naptien, list );
         listViewNapTien.setAdapter( adapter );

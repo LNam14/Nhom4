@@ -93,8 +93,8 @@ public class HomePage extends AppCompatActivity {
                         startActivity(home);
                         break;
                     case R.id.search:
-                        Intent home1 = new Intent(getBaseContext(), XacNhanNapTien.class);
-                        startActivity(home1);
+//                        Intent home1 = new Intent(getBaseContext(), XacNhanNapTien.class);
+//                        startActivity(home1);
                         break;
                     case R.id.fab:
                         Intent insert = new Intent(getBaseContext(), SanPhamActivity.class);

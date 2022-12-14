@@ -1,5 +1,6 @@
 package com.example.andoirdduan.SanPham;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -16,8 +17,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.andoirdduan.Home.HomePage;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
+import com.example.andoirdduan.UserManager.EditUserActivity;
+import com.example.andoirdduan.UserManager.UserManagerActivity;
 import com.facebook.CallbackManager;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
@@ -41,6 +46,9 @@ public class SanPhamActivity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
+        getSupportActionBar().setCustomView( R.layout.tittle_giohang );
+        ImageView btnBack = findViewById( R.id.btnBack );
         super.onCreate( savedInstanceState );
         setContentView( R.layout.sanpham_activity );
         edTenSP = (EditText) findViewById(R.id.edTenSP);
@@ -54,6 +62,14 @@ public class SanPhamActivity extends AppCompatActivity {
         imgSP= (ImageView) findViewById(R.id.imageView);
         edSoLuong.setText(""+0);
         edGiaSP.setText(""+0);
+        btnBack.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SanPhamActivity.this, HomePage.class);
+//                intent.putExtra("name_user", account);
+                startActivity( intent );
+            }
+        } );
         imgSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

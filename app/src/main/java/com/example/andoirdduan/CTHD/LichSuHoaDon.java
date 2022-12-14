@@ -1,9 +1,14 @@
 package com.example.andoirdduan.CTHD;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -11,8 +16,10 @@ import com.example.andoirdduan.DiaChiNhanHang.DiaChi;
 import com.example.andoirdduan.GioHang.GioHang;
 import com.example.andoirdduan.GioHang.GioHangActivity;
 import com.example.andoirdduan.GioHang.GioHangAdapter;
+import com.example.andoirdduan.Home.UserActivity;
 import com.example.andoirdduan.Login.LoadingScreenActivity;
 import com.example.andoirdduan.R;
+import com.example.andoirdduan.UserManager.UserManagerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +29,12 @@ public class LichSuHoaDon extends AppCompatActivity {
     List<LichSu> listDC;
     List<GioHang> list;
     String strUsername = "";
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
+        getSupportActionBar().setCustomView( R.layout.tittle_giohang );
+        ImageView btnBack = findViewById( R.id.btnBack );
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_lich_su_hoa_don );
         listView = findViewById( R.id.lvLSHD );
@@ -32,11 +43,19 @@ public class LichSuHoaDon extends AppCompatActivity {
         Bundle bundle1 = getIntent().getExtras();
         if(bundle1 !=  null){
             strUsername = bundle1.getString("dulieu");
-            Toast.makeText(this, "Name: " +strUsername, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Name: " +strUsername, Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this, "Chua dc", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Chua dc", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText( this, "name "+strUsername, Toast.LENGTH_SHORT ).show();
+        btnBack.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LichSuHoaDon.this, UserManagerActivity.class);
+                intent.putExtra("name_user", strUsername);
+                startActivity( intent );
+            }
+        } );
+//        Toast.makeText( this, "name "+strUsername, Toast.LENGTH_SHORT ).show();
         loadData1();
         DiaChiAdapter_LS adapter = new DiaChiAdapter_LS( this, R.layout.row_lshd, listDC );
         listView.setAdapter( adapter );

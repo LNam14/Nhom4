@@ -9,15 +9,4 @@
         android:layout_width="30dp"
         android:layout_height="match_parent"
         android:text="Back"/>
-    <TextView
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Giỏ hàng"
-        android:textAlignment="center"
-        android:paddingRight="20dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:fontFamily="monospace"
-        android:textColor="@color/white"/>
 </LinearLayout>

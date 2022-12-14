@@ -184,7 +184,13 @@ public class SQLSever extends SQLiteOpenHelper {
         return 1;
     }
 
-
+    public boolean ktraEmail(String email){
+        ArrayList<User> list = new ArrayList<>();
+        for(int i = 0;i<list.size();i++)
+            if(list.get(i).getGmail().equalsIgnoreCase(email))
+                return true;
+        return false;
+    }
 }
 
 

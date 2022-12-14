@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.andoirdduan.Database.SQLSever;
@@ -33,6 +35,9 @@ public class RutTienActivity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setDisplayOptions( ActionBar.DISPLAY_SHOW_CUSTOM );
+        getSupportActionBar().setCustomView( R.layout.tittle_giohang );
+        ImageView btnBack = findViewById( R.id.btnBack );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rut_tien);
         Tien = findViewById(R.id.edTienRut);
@@ -42,6 +47,14 @@ public class RutTienActivity extends AppCompatActivity {
         Bundle bundle1 = getIntent().getExtras();
         account = bundle1.getString("name_user");
         tien = bundle1.getInt("Tien");
+        btnBack.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RutTienActivity.this, UserManagerActivity.class);
+                intent.putExtra("name_user", account);
+                startActivity( intent );
+            }
+        } );
         loadData();
         RutTienAdapter adapter = new RutTienAdapter( RutTienActivity.this,R.layout.row_naptien, list );
         listViewNapTien.setAdapter( adapter );

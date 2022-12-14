@@ -21,10 +21,10 @@ import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity {
     Button btnDangKi,imageButtonNgaySinh;
-    EditText edTaiKhoang,edMatKhau,edEmail,edTen;
-    TextView login,edNgaySinh;
+    EditText edTaiKhoang,edMatKhau,edEmail,edNgaySinh,edTen;
+    TextView login;
     int vi = 0;
-
+    ArrayList<User> users;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
         final DatePickerDialog.OnDateSetListener dateEvent = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                edNgaySinh.setText(i+"/"+i1+"/"+i2);
+                int t = i1 + 1;
+                edNgaySinh.setText(i2+"/"+t+"/"+i);
             }
         };
         edNgaySinh.setOnClickListener(new View.OnClickListener() {
@@ -50,17 +51,18 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 DatePickerDialog dialog = new DatePickerDialog(
                         RegisterActivity.this, dateEvent,
-                        cal.get( Calendar.YEAR),
-                        cal.get(Calendar.MONTH)+1,
+                        cal.get(Calendar.YEAR),
+                        cal.get(Calendar.MONTH),
                         cal.get(Calendar.DATE));
                 dialog.show();
             }
         });
-        String ngaySinh = edNgaySinh.getText().toString();
+
 
         btnDangKi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final String ngaySinh = edNgaySinh.getText().toString();
                 final String acc= edTaiKhoang.getText().toString();
                 final String Gmail = edEmail.getText().toString();
                 final String mk1= edMatKhau.getText().toString();
@@ -69,7 +71,9 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Vui Lòng Điền Đủ Thông tin!!!", Toast.LENGTH_SHORT).show();
                 }else if(!isEmail(Gmail)){
                     edEmail.setError("Sai định dạng email");
-                } else{
+                } else if(!sqlSever.ktraEmail(Gmail)){
+                    edEmail.setError("Email đã tồn tại");
+                }else{
                     ArrayList<User> users= sqlSever.getArrayUser();
                     System.out.println("UserArray"+users);
                         boolean ketqua = true;
@@ -117,6 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
         String pattern = "\\w+@\\w+(\\.\\w+){1,2}";
         return str.matches(pattern);
     }
+
 
 
 }

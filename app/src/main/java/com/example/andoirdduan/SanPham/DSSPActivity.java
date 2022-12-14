@@ -66,7 +66,7 @@ public class DSSPActivity extends AppCompatActivity {
                 builder.setNeutralButton( "Sửa", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final Dialog dialog1 = new Dialog( DSSPActivity.this, android.R.style.Theme_Material_Light_Panel);
+                        final Dialog dialog1 = new Dialog( DSSPActivity.this, android.R.style.Theme);
                         dialog1.requestWindowFeature( Window.FEATURE_NO_TITLE);
                         dialog1.setContentView(R.layout.sanpham_sua);
                         dialog1.setCanceledOnTouchOutside(false);
